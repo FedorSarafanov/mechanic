@@ -1,4 +1,4 @@
-\documentclass[a5paper,12pt]{article}
+\documentclass[a5paper,10pt]{article}
  
 \usepackage{extsizes}
 \usepackage{cmap}
@@ -107,15 +107,55 @@
 	\draw[axis,<->] (0,0) -- node[left] {$h$} (a);
 	\draw[axis,<->] (7,0) -- node[right] {$\frac{h}{2}$} ++(0,1.5);
 
-	% \path[fill=orange] (0,3) .. controls (2,3) and (3,0) .. (5,0) -- (0,0) --cycle;
+    \draw[axis] (0,1.5) -- (7,1.5);
 
+    \draw[axis,fill] (5,1.5) -- ++(41:1.5) coordinate (m) circle(3pt);
+
+
+    \draw[axis] (5,1.5) -- ++(41:1.5);
+    \path[draw,->] (5,1.5) ++ (0.7,0) arc(0:41:0.7);
+
+    \path[] (5,1.5) -- ++ (30:0.5) node[right, xshift=5pt, scale=1] {$\phi$};
+
+   \draw[force,->] (m) -- ++(41:0.7) node[below] {$\vec{P}$};
+    \draw[force,->] (m) -- ++(41:-0.7) node[above, yshift=5pt] {$\vec{N}$};
+    \draw[force,->] (m) -- ++(90:-1.4) node[below, xshift=-5pt] {$m\vec{g}$};
 
 \\
 };
 \end{tikzpicture}
-\vspace{-2em}
+% \vspace{-2em}
 \end{figure}
 
+\begin{equation*}
+    \begin{aligned}[c]
+        m\vec{a}=\vec{N}+m\vec{g}\\
+        -ma_n=-N-mg\sin{\phi}\\
+        N=m{}\frac{u^2}{R}-mg\sin\phi
+    \end{aligned}
+        \qquad\qquad
+    \begin{aligned}[c]
+        \text{Условие отрыва: $P=N=0$}\\
+        m{}\frac{u^2}{R}=mg\sin\phi\\
+        \frac{mu^2}{2}=0.5mgR\sin\phi\\
+    \end{aligned}
+\end{equation*}
 
+ЗСЭ:
+\begin{gather*}
+    mg2R=mg(R+R\sin\phi)+\frac{mu^2}{2}\\
+    mgR=\frac{3}{2}mgR\sin\phi\\
+    \sin\phi=\frac{2}{3}
+\end{gather*}
+Тогда скорость в момент отрыва $u$
+\begin{gather*}
+    u=\sqrt{\frac{2}{3}gR}
+\end{gather*}
+Далее в наивысшей точке траектории вертикальная составляющая скорости будет равна нулю, а горизонтальная не меняется -- нет никаких сил, действующих на тело, которые существовали бы в горизонтальной проекции в полете.
+
+Значит, скорость в наивысшей точке траетории полета равна горизонтальной составляющей скорости на момент отрыва.
+\begin{equation*}
+    v_{max}=u\sin\phi=\frac{2}{3}u=2\sqrt{\frac{gH}{27}}
+\end{equation*}
 
 \end{document}
