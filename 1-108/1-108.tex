@@ -1,0 +1,196 @@
+\documentclass[a5paper,10pt]{article}
+ 
+% \usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage[portrait]{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{№1.108 -- Иродов} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usepackage{etoolbox}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+\makeatletter
+\newif\if@gather@prefix 
+\preto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\gdisplaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\preto\place@tag{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\newcommand*{\beforetext}[1]{% 
+  \ifmeasuring@\else
+  \gdef\gather@prefix{#1}% 
+  \global\@gather@prefixtrue 
+  \fi
+} 
+\makeatother
+% \begin{document}
+\def\iangle{60} % Angle of the inclined plane
+
+\def\down{-90}
+\def\arcr{0.5cm} % Radius of the arc used to indicate angles
+\def\FIN{\vec{F}_{in}^\text{пост}}
+% \hspace{-2em}
+
+\usepackage{tikz-3dplot}
+\tikzset{
+	MyPersp/.style={scale=1.8,x={(-0.8cm,-0.3cm)},y={(0.8cm,-0.3cm)},
+    z={(0cm,1cm)}},
+    coord/.style={scale=3,x={(1cm,0cm)}, y={(0cm,1cm)}, z={(-0cm,-0.4cm)}},
+ % MyPersp/.style={scale=1.5,x={(0cm,0cm)},y={(1cm,0cm)},
+   % z={(0cm,1cm)}}, % uncomment the two lines to get a lateral view
+	MyPoints/.style={fill=white,draw=black,thick}
+		}
+\usetikzlibrary{3d}
+ \tikzset{zxplane/.style={canvas is zx plane at y=#1}}
+ \tikzset{yxplane/.style={canvas is yx plane at z=#1}}
+ \tikzset{zyplane/.style={canvas is zy plane at x=#1}}
+
+\def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+    { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); }
+\begin{document}
+
+\begin{tikzpicture}[coord,font=\large,
+    axis/.style={densely dashed,black!60,font=\small},
+    force/.style={>=latex,draw=blue,fill=blue},
+    % m/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum size=0.5cm},
+    m/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum size=0.5cm},
+    interface/.style={draw=gray!60,
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},
+    plane/.style={draw=black!30, very thick, fill=blue!5},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+]
+
+    \begin{scope}[zxplane=0]
+    \def\angl{30}
+     \draw [fill=black!5] (0,0) circle (1cm);
+     \draw[force, ->] (\angl:0.3) -- node[above]{$\vec{v'}$}(\angl:0.9);
+     \draw[axis, ->] (0,0) -- (\angl:2) node[left]{$+x$};
+	\draw[dashed, thick, fill=black] (0,0) -- node[above]{$\vec{r}$}(\angl:0.3) circle(0.6pt);
+	% \draw[force, ->] (\angl:0.3) -- node[anchor=south west, yshift=0.5em]{$\vec{F_{kor}^{in}}$}++(90+\angl:0.9);
+
+     % \draw (-1,0) -- (1,0) (0,-1) -- (0,1);
+   \end{scope}
+	\draw[force, ->] (0,0,0) -- (0,0,-3) node[right] {$\vec{\omega}$};
+	
+\end{tikzpicture}
+\begin{tikzpicture}[font=\large,
+    axis/.style={densely dashed,black!60,font=\small},
+    force/.style={>=latex,draw=blue,fill=blue},
+    % m/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum size=0.5cm},
+    m/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum size=0.5cm},
+    interface/.style={draw=gray!60,
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},
+    plane/.style={draw=black!30, very thick, fill=blue!5},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+]
+     \xdef\rp{3pt}
+     {[force]
+          \draw (0,0)  circle (\rp) node[anchor=south east, pos=1.3] {$\vec{F_{kor}^{in}}$};
+        \draw [thick] (0,0) +(-135:\rp)--+(45:\rp);
+        \draw [thick] (0,0) +(135:\rp)--+(-45:\rp);
+     }
+
+	\draw[white] (-3,0) --(2,0);
+	\draw[white] (0,0) --(0,-2.5);
+	\draw[interface] (-1,0) --(1,0);
+	\draw[force, ->] (0,0) --(0,1) node[above] {$\vec{N}$};
+	\draw[force, ->] (0,0) --(-2,0) node[above] {$\vec{f_R}$};
+	% \draw[force, ->] (0,0) --(-2,0) node[above] {$\vec{f_R}$};
+	\draw[force, ->] (0,0) --(2,0) node[above] {$\vec{F_{post}^{in}}$};
+     \draw[axis, ->] (0,0) -- (3,0) node[above]{$+x$};
+
+	\draw[force, ->] (0,0) --(0,-1) node[below] {$m\vec{g}$};
+\end{tikzpicture}
+
+Рассмотрим НИСО тела.
+\begin{gather}
+    \beforetext{Запишем ан. II з. Н.:} m\vec{a}=\vec{f_R}+\vec{N}+\vec{F_{post}^{in}}+\vec{F_{kor}^{in}}+m\vec{g}\\%
+    \beforetext{Пусть} \vec{Q}=\vec{N}+\vec{F_{post}^{in}}+\vec{F_{kor}^{in}}\\
+    \beforetext{Тогда} Q=\sqrt{(mg)^2+(m\omega^2{R})^2+(2mv'\omega)^2}=\\
+    =m\sqrt{g^2+\omega^4{R}^2+4v'^2\omega^2}
+\end{gather}
+
+Но $\vec{Q}$ -- это сумма всех сил, действующих на тело. Тогда на диск со стороны тела действует $\vec{F}=-\vec{Q}$, $F=Q$.
+
+Тогда
+
+\begin{equation}
+	F=m\sqrt{g^2+\omega^4{R}^2+4v'^2\omega^2}\approx8\text{Н}
+\end{equation}
+\end{document}

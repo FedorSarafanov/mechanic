@@ -1,0 +1,217 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{№1.67 -- Иродов И.Е.} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+\newcommand{\ddt}{$\ \pm\ 0.2\ \text{с}$}
+\newcommand{\ddtv}{$\ \pm\ 0.8\ \text{с}$}
+\newcommand{\ddh}{$\ \pm\ 0.1\ \text{см}$}
+
+\usepackage{amsthm}
+\newtheorem{define}{Определение}
+\newtheorem{theorem}{Теорема}
+\newtheorem{problem}{Задача}
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+}
+\begin{document}
+
+\def\iangle{35} % Angle of the inclined plane
+
+\def\down{-90}
+\def\arcr{0.5cm} % Radius of the arc used to indicate angles
+
+\def\boardHeight{0.5}
+\def\boardHeight{0.5}
+\def\boardWidth{1.5}
+\def\interfaceWidth{2.5}   
+\def\fLen{2}
+\def\RmM{\vec{f}_{R_{mM}}}
+\def\RMm{\vec{f}_{R_{Mm}}}
+\begin{figure}[tb]
+	\centering
+    \vspace{-2em}
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},%, line width=1pt},
+    axis/.style={densely dashed,black!60,font=\small},
+    m/.style={rectangle,draw,fill=blue!6,minimum size=0.5cm,thin},
+    % m/.style={rectangle,draw=black,fill=lightgray,minimum size=0.3cm,thin},
+    plane/.style={draw=black,fill=blue!10},
+    string/.style={draw=black, thick},
+    base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    board/.style={draw=black!30, very thick, fill=blue!2, line width=1pt},
+    pulley/.style={thick},
+    interface/.style={draw=gray!60,
+        % The border decoration is a path replacing decorator. 
+        % For the interface style we want to draw the original path.
+        % The postaction option is therefore used to ensure that the
+        % border decoration is drawn *after* the original path.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},
+    % scale=1.5,
+]
+\matrix[column sep=1cm] { % несколько рисунков в стоблцы.
+    %% Sketch
+    % \draw[plane] (0,-1) coordinate (base)
+    %                  -- coordinate[pos=0.5] (mid) ++(\iangle:3) coordinate (top)
+    %                  |- (base) -- cycle;
+
+    % \path (mid) node[M,rotate=\iangle,yshift=0.25cm] (M) {};
+    % \draw[pulley] (top) -- ++(\iangle:0.25) circle (0.25cm)
+    %                ++ (90-\iangle:0.5) coordinate (pulley);
+    % \draw[string] (M.east) -- ++(\iangle:1.5cm) arc (90+\iangle:0:0.25)
+    %               -- ++(0,-1) node[m]  {};
+
+    % \draw[->] (base)++(\arcr,0) arc (0:\iangle:\arcr);
+    % \path (base)++(\iangle*0.5:\arcr+5pt) node {$\alpha$};
+    %%
+
+    \draw[interface] (0,0)--(\interfaceWidth,0); 
+
+    \coordinate (zero) at (0,0);
+    \coordinate (mid) at ($(0,0)!0.5!(\interfaceWidth,0)$);
+    \coordinate (A) at ($(mid)-(\boardWidth/2, 0)$);
+    \coordinate (B) at ($(mid)+(\boardWidth/2, 0)$);
+    \coordinate (C) at ($(A)+(0,\boardHeight)$);
+    \coordinate (D) at ($(A)+(\boardWidth,\boardHeight)$);
+
+    \draw[base]  (A)-- (B);
+
+    \coordinate (A') at ($(A)+(\boardWidth/4,\boardHeight)$);
+    \coordinate (B') at ($(B)-(\boardWidth/4,-\boardHeight)$);
+    \coordinate (C') at ($(C)+(\boardWidth/4,\boardHeight)$);
+    \coordinate (D') at ($(D)-(\boardWidth/4,-\boardHeight)$);    
+    % \draw[] ($(A)-(C)$)
+
+    \coordinate (center cargo) at ($(A')!0.5!(B')$);
+    \coordinate (center board right) at ($(B)!0.5!(D)$);
+    \coordinate (center cargo right) at ($(B')!0.5!(D')$);
+    \coordinate (center board) at ($(C)!0.5!(D)$);
+
+    \draw[board]  (A')--(C')--(D')--(B') -- node[above,align=center,midway, ] {${m}$} cycle;
+
+    \draw[board]  (A)--(C)-- (D)--(B) -- cycle node[above,align=center,midway, ] {${M}$};
+
+    % \draw[force, ->] (center board right) -- +(1.2,0) node[above] {$\vec{f}$};
+&
+
+        \draw[axis,->]  (center cargo) -- ++(0,2.5) node[left] {$+y$};
+        \draw[axis,->]  (center cargo) -- ++(1.5,0) node[below] {$+x$};
+
+        \draw[board]  (A')--(C')--(D')--(B') -- node[above,align=center,midway, pos=0.7] {} cycle;
+        \filldraw[fill=black!100,draw=black!50] ($(center cargo)+(0pt,\boardHeight/2)$)  circle(1pt);       
+
+
+        \draw[force, ->] (center cargo) -- +(-1,0) node[below] {$\RmM$};
+        \draw[force, ->] (center cargo) -- +(0,1.5) node[left] {$\vec{N}$};
+        \draw[force, ->] ($(A')!0.5!(D')$) -- +(0,-1.5) node[left] {$m\vec{g}$};
+        \draw[force, ->] ($(A')!0.5!(D')$) -- +(1.1,0) node[above] {$\vec{f}$};
+        % \draw[force, ->, double distance=1pt, line width=0.75pt] ($(center cargo)+(0pt,\boardHeight/2)$) -- +(-1.5,0) node[above, pos=1.3] {$\vec{F_{in}^\text{пост}}$};        
+
+&
+        \draw[axis,->]  (0,0) -- ++(0,2) node[left] {$+y'$};
+        \draw[axis,->]  (0,0) -- ++(2.5,0) node[below] {$+x'$};
+
+        \draw[board]  (A)--(C)-- (D)--(B) -- cycle node[above,align=center,midway, pos=0.7] {};
+ 
+        \draw[force, ->] (center board) -- +(0,-1) node[left] {$\vec{P}$};    
+        \draw[force, ->] (center board) -- +(1,0) node[above, pos=0.4] {$\RMm$};    
+        \draw[force, ->] ($(A)!0.5!(D)$) -- +(0,-1.5) node[left] {$M\vec{g}$};
+
+\\
+};
+\end{tikzpicture}	
+\vspace{-2em}
+\end{figure}
+\def\N{\vec{N}}
+\def\T{\vec{T}}
+\def\F{\vec{F}}
+\def\A{\vec{a}_\text{д}}
+\def\a{\vec{a}_\text{б}}
+\def\P{\vec{P}}
+\def\mg{m\vec{g}}
+\def\Mg{M\vec{g}}
+\def\f{\vec{f}}
+
+Задачу следует решать с оговоркой, что мы рассматриваем движение в тех пределах, пока они являются системой (брусок не слетает с доски).
+
+\textbf{Случай I}. Cила $f$ больше $\f_{R_\text{покоя}}.$
+Учтем, что
+\begin{gather}
+    |f_{R_{mM}}|=|f_{R_{Mm}}|=\mu{}|N|=\mu{}|P|=\mu{}mg
+\end{gather}
+
+Движение доски в лабораторной СО:
+\begin{gather}
+    % \sum\F_{re}=M\a,     \Longrightarrow 
+    m\A=\Mg+\P+\RMm\\
+    \text{в проеции на $x$: }%
+    \label{eq:a_d1} Ma_\text{д}=\mu{}mg \Longrightarrow  a_\text{д}=\mu{}g\frac{m}{M}
+\end{gather}
+
+Движение бруска  в лабораторной СО:
+\begin{gather}
+    % \sum\F_{re}=M\a,     \Longrightarrow 
+    m\a=\mg+\N+\f+\RmM\\
+    \text{в проеции на $x'$: }%
+     ma_\text{б}=f-\mu{}mg%
+    \Longrightarrow  a_\text{б}=\frac{1}{m}(f-\mu{}mg) 
+\end{gather}
+
+\textbf{Случай II}. Cила $f$ меньше $\f_{R_\text{покоя}}$, система тел движется как МТ.
+\begin{gather}
+a_\text{б}=a_\text{д},\\
+(m+M)\a=\f\\
+\text{в проеции на $x'$: }%
+\label{eq:a_d2}(m+M)a_\text{б}=\f \Longrightarrow a_\text{б}=a_\text{д}=\frac{f}{m+M}
+\end{gather}
+
+\textbf{Переход I--II}. В переходный момент времени $t^*$ можем приравнять (\ref{eq:a_d1}) и (\ref{eq:a_d2}), учитывая, что по условию $f=\alpha{t}$:
+\begin{gather}
+\mu{}g\frac{m}{M}=\frac{f}{m+M} \Longrightarrow t^*=\mu{}g\frac{m(m+M)}{\alpha{M}}
+\end{gather}
+
+\end{document}

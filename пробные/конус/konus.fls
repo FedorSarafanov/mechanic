@@ -1,0 +1,12 @@
+PWD /home/lab/tex-expr
+INPUT /usr/share/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT konus.tex
+OUTPUT konus.log
+INPUT konus.aux
+INPUT konus.aux
+OUTPUT konus.aux
+OUTPUT konus.pdf
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT konus.aux
+INPUT /usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk

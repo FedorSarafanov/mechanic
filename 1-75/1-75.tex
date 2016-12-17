@@ -1,0 +1,207 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{№1.75 -- Иродов И.Е.} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    interface/.style={draw=gray!60,
+        % The border decoration is a path replacing decorator. 
+        % For the interface style we want to draw the original path.
+        % The postaction option is therefore used to ensure that the
+        % border decoration is drawn *after* the original path.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},
+]
+\def\height{1.5cm}
+\def\width{3cm}
+\def\Ti{\vec{T}_1}
+\def\Tii{\vec{T}_2}
+\def\FINii{\vec{F}_{in\,2}^\text{пост}}
+\def\FINi{\vec{F}_{in\,1}^\text{пост}}
+\def\radius{0.35cm}    
+\matrix[column sep=1cm, row sep=0cm] {
+
+% \draw[use as bounding box] (0,0) rectangle (1,1);
+
+\begin{scope}%
+            [scale=1.2, transform shape]
+    \coordinate (base left) at (-\width/2,-\height/2);
+    \coordinate (top left) at (-\width/2,\height/2);
+    \coordinate (top right) at (\width/2,\height/2);
+    \coordinate (base right) at (\width/2,-\height/2);
+    \coordinate (top mid) at ($(top left)!0.5!(top right)$);
+
+    \draw[axis,->] (base left)  -- ($(base right)+(0.3,0)$) node[right] {$+y'$};
+    \draw[axis,->] (base left)  -- ($(top left)+(0,0.3)$) node[right] {$+x'$};
+
+    \draw[plane]  (base left) -- (base right) --  (top right)  -- (top left) -- cycle;
+    \draw[interface]  ($(base left)-(0.3,0)$) -- ($(base right)+(0.3,0)$);
+
+    \path (top mid) node[m1, yshift=0.35cm] (m1) {$m_1$};
+
+    \path ($(base left)!0.5!(top right)$) node[yshift=0cm] (A) {$A$};
+
+    \draw[->,>=open triangle 60] (0,2) -- node[above,pos=0.5] {$\vec{a_0}$} (1,2);
+
+    \draw[pulley] ($(top right)-(0,\radius)$) arc (-90:180:\radius) coordinate (pulley);
+    \filldraw[fill=black] (top right) circle(0.05cm);
+
+    \draw[string] (m1.east) -- ++(1.15,0) arc (90:0:\radius)
+                  -- ++(0,-1) node[m2] {$m_2$};       
+\end{scope} 
+&
+\begin{scope}[scale=1.2, transform shape]
+    
+   \node[m1,transform shape] (m1) {};
+
+    {[axis,->]
+        \draw (0,-1) -- (0,2) node[right] {$+y'$};
+        \draw (m1.south) -- ++(2,0) node[right] {$+x'$};
+    }
+
+    % Forces
+    {
+        \draw[force,->] (m1.south) -- ++(0,1.5) node[above right] {$\vec{N}_1$};
+        \draw[force,->](m1.south) -- ++(-1,0) node[below] {$\vec{f}_{R_{1A}}$};
+        \draw[force,->] (m1.east) -- ++(1,0) node[above] {$\vec{T}_1$};
+        \draw[force,double equal sign distance=2pt,->] (m1.west) -- ++(-1,0) node[above] {$\FINi$};
+    }
+
+    \draw[force,->] (m1.center) -- ++(0,-1) node[below] {$m_1\vec{g}$};
+ \end{scope}
+\\
+\node[draw=none,text width=5cm, line width=0mm] at (0,0.5) {
+Возьмем НИСО, связанную с блоком $A$. 
+\begin{gather}
+    \nonumber \text{Нить идеальная. По III з.Н.:}\\
+    \Ti=-\Tii\\
+    \nonumber \text{Инерциальные силы:}\\
+    \FINi=-m_1\vec{a}_0\\
+    \FINii=-m_2\vec{a}_0
+\end{gather}
+
+};
+&
+\begin{scope}[scale=1.2, transform shape]
+
+    \node[m2,transform shape] (m2) {};
+    % Draw axes and help lines
+
+    {[axis,->]
+        \draw (0,-1) -- (0,2) node[right] {$+y'$};
+        \draw (m2.south) -- ++(2,0) node[right] {$+x'$};
+    }
+
+    % Forces
+    {
+        \draw[force,->] (m2.center) -- ++(0,1) node[above right] {$\vec{T}_2$};
+        \draw[force,->](m2.west) -- ++(0,1) node[left] {$\vec{f}_{R_{2A}}$};
+        \draw[force,->](m2.west) -- ++(1.5,0) node[right] {$\vec{N}_2$};
+        \draw[force,double equal sign distance=2pt,->] (m2.west) -- ++(-1,0) node[below] {$\FINii$};
+        \draw[force,->] (m2.center) -- ++(0,-1) node[below] {$m_2\vec{g}$};
+    }
+ \end{scope}
+ \\
+ %
+};
+\end{tikzpicture}
+\vspace{-3em}
+\end{figure}
+\begin{flalign}
+\label{eq:m1x} \text{Блок $m_1$, проекция на x:} && 0=-m_1a_0+T_1-\mu{}gm_1 &&\\
+\label{eq:m1y}    \text{y:} && 0=N_1-m_1g \hspace{4.7em}& \\
+\label{eq:m2x} \text{Блок $m_2$, проекция на x:} && 0=-m_2a_0+N_2  \hspace{1.2cm} &&\\
+\label{eq:m2y}      \text{y:} && 0=-m_2g+T_2-\mu{}m_2a_0 &%
+\vspace{-1em}
+\end{flalign}
+(Условие неподвижности - $a'_{1x}=a'_{2y}=0$). Можем найти $a_0$:
+\begin{flalign}
+\label{eq:m} \text{Сложим (\ref{eq:m1x}) и (\ref{eq:m2y}):} && 0=-a_0(m_1+\mu{}m_2)-g(\mu{}m_1-m_2) \hspace{1.1em}
+\end{flalign}
+\begin{gather}
+     a_0(m_1+\mu{}m_2)=g(m_2-\mu{}m_1)\\
+    a_0=g\frac{m_2-\mu{}m_1}{m_1+\mu{}m_2}   
+\end{gather}
+Учитывая, что в данной задаче $m_1=m_2$, можем записать ответ:
+\begin{gather}
+    a_0=g\frac{1-\mu{}}{1+\mu}
+\end{gather}
+
+% \begin{gather}
+%     0=-m_1a_0+T-\mu{}gm_1\\
+%     0=-m_2g-T-\mu{}m_2a_0\\
+%     0=-a_0(m_1+\mu{}m_2)-g(\mu{}m_1-m_2)\\
+%     a_0(m_1+\mu{}m_2)=g(m_2-\mu{}m_1)\\
+%     a_0=g\frac{m_2-\mu{}m_1}{m_1+\mu{}m_2}
+% \end{gather}
+
+% Учитывая, что $m_1=m_2$:
+% \begin{gather}
+%     a_0=g\frac{1-\mu{}}{1+\mu}
+% \end{gather}
+\end{document}
