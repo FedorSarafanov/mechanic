@@ -1,0 +1,162 @@
+\documentclass[a5paper,12pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{Иродов 1.47 } 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    through,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    % interface/.style={draw=gray!60,
+    %     % The border decoration is a path replacing decorator. 
+    %     % For the interface style we want to draw the original path.
+    %     % The postaction option is therefore used to ensure that the
+    %     % border decoration is drawn *after* the original path.
+    %     postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+    %                 amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }
+]
+    % \draw[force,double equal sign distance=2pt,->] (c) -- ++(0,-2) node[below] {$\vec{a}_0$};
+\matrix[column sep=0cm, row sep=0cm] {
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\draw[->, line width=0.5mm] (0,-3) arc (-90:0:3cm);
+	\draw (0,0) circle (3cm);
+	\coordinate (B) at (3,0);
+
+	\draw[axis,->, thick] (3,-3) --(3,3) node[right, black, scale=1.5] {$\tau$};
+	\draw[axis,->, thick] (0,0) --(5,0) node[right, black, scale=1.5] {$n$};	
+	\def\t{2}
+	\def\n{-2}
+	\draw[force,->,>=open triangle 60] (B) -- ++(0,\t) node[right, scale=1.5] {$\vec{a}_\tau$};
+	\draw[force,->,>=open triangle 60] (B) -- ++(\n,0) node[below, scale=1.5] {$\vec{a}_n$};
+
+	\draw[force,->,>=open triangle 60] (B) -- ++(\n,\t) node[above, scale=1.5] {$\vec{a}$};
+
+    \draw[solid,shorten >=0.5pt, ->] (3,1)
+                arc(90:135:1);	
+
+    \path[] (3,0) -- ++ (120:1) node[above, scale=1] {$\phi$};
+
+\\
+};
+\end{tikzpicture}
+\vspace{-2em}
+\end{figure}
+
+\begin{equation*}
+	\begin{aligned}[c]
+		\vec{a}=\vec{a}_n+\vec{a}_\tau\\
+		a_\tau=\beta{R}\\
+		a_n=\omega^2{R}
+	\end{aligned}
+		% \qquad\Longrightarrow\qquad
+		\qquad\qquad
+	\begin{aligned}[c]
+		\vec{v} \parallel \vec{a}_\tau
+	\end{aligned}
+		\qquad\qquad
+	\begin{aligned}[c]
+		\vec{v}=\vec{\omega}\times\vec{R}\\
+		v=v_\tau=\omega{R}
+	\end{aligned}	
+\end{equation*}
+$\beta$ дано и $\beta=\alpha{t}$. Не трудно найти $\omega{t}$:
+\begin{gather*}
+	\xdef\d{\mathrm{d}}
+	\beta=\frac{\d\omega}{\d{t}}\\
+	\int\d\omega=\int\alpha{t}\d{t}\\
+	\omega=\frac{\alpha{t}^2}{2}
+\end{gather*}
+\begin{equation*}
+	\phi=\vec{v}\ \widehat{\ }\ \vec{a} = \vec{a}_\tau\ \widehat{\ }\ \vec{a}
+\end{equation*}
+\begin{gather*}
+	\tg{\phi}=\frac{a_n}{a_\tau}=\frac{\omega^2{R}}{\beta{R}}=\frac{\omega^2}{\beta}=%
+			 =\frac{\alpha^2t^4}{4\alpha{t}}=\frac{\alpha{t^3}}{4}\\
+	t=\sqrt[3]{\frac{4\tg{\phi}}{\alpha}}=7\text{ с}\\
+\end{gather*}
+
+
+\end{document}
