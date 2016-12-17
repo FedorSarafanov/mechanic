@@ -1,0 +1,244 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{Яковлев 41} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    % interface/.style={draw=gray!60,
+    %     % The border decoration is a path replacing decorator. 
+    %     % For the interface style we want to draw the original path.
+    %     % The postaction option is therefore used to ensure that the
+    %     % border decoration is drawn *after* the original path.
+    %     postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+    %                 amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }
+]
+    % \draw[force,double equal sign distance=2pt,->] (c) -- ++(0,-2) node[below] {$\vec{a}_0$};
+\matrix[column sep=0cm, row sep=0cm] {
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\coordinate (step) at (0,40mm);
+	\path (-4,0) coordinate (A) -- ++(step) coordinate (A') -- (4,0) coordinate (B) -- ++(step) coordinate (B');
+
+	\draw[thick] (A) -- (B);
+	\draw[thick] (A') -- (B');
+
+	\foreach \i in {2,4,...,20}{
+		\pgfmathsetmacro{\I}{42 + \i*\i/30}%
+        \draw[force, ->] (40 mm,\i mm) -- (\I mm,\i mm);
+    }
+	\foreach \i in {2,4,...,20}{
+		\pgfmathsetmacro{\I}{42 + \i*\i/30}%
+        \draw[force, ->] (40 mm, 40 mm - \i mm) -- (\I mm, 40 mm -\i mm);
+    }
+
+	\foreach \i in {2,4,...,40}{
+        \draw[axis, blue, opacity=0.2] (-40 mm, \i mm) -- (40 mm, \i mm);
+    }
+
+    \node [] at (60mm,20mm) {$\vec{u}$};
+
+   
+    \draw [axis, black, <->] (-45mm,0) -- node[left] {$d$} (-45mm, 40mm);
+
+    \draw [axis, black, <->] (0mm,45mm) -- node[above] {$h$} (40mm, 45mm);
+
+    \draw [axis, ->] (0mm,0mm) -- (0mm, 50mm) node[right] {$\perp$};
+    \draw [axis, ->] (0,0) -- (55mm, 0mm) node[right] {$+\parallel$};
+
+
+
+    \draw[fill] (0,0) circle (2pt) node[below, yshift=-1em] {лодка};
+    \draw[force,->] (0,0) -- ++ (0,1) node[above] {$\vec{v}$};
+
+	\draw[ very thick,domain=0:9,samples=200,smooth,variable=\x,red] plot ({\x/4},{\x^(1/3)});  
+	\draw[ very thick,rotate=180, samples=200, xshift=-4cm, yshift=-4cm, domain=0:9,smooth,variable=\x,red] plot ({\x/4},{\x^(1/3)});    
+\\
+};
+\end{tikzpicture}
+\vspace{-2em}
+\end{figure}
+
+Так как траектория симметрична, то чтобы найти весь снос $h$, достаточно найти снос до середины реки $h/2$.
+До середины реки:
+\begin{equation}
+	v_\parallel(y)=u(y)=ky^2
+\end{equation}
+Но
+\begin{equation}
+	y=v_\perp{t}\Longrightarrow{}v_\parallel(t)=kv^2_\perp{t^2}
+\end{equation}
+А время движения до середины реки
+\begin{equation}
+	t^*=\frac{d}{2v_\perp}
+\end{equation}
+Тогда
+\begin{equation}
+	\frac{h}{2}=\int_0^{t^*} v_\parallel(t)dt=kv^2_\perp{\frac{t^3}{3}}\bigg|_0^{t^*}=\frac{kd^3}{24v_\perp}
+\end{equation}
+И
+\begin{equation}
+	h=\frac{kd^3}{12v_\perp}
+\end{equation}
+Траекторию легко найти
+\begin{gather}
+	x(t)=\int_0^t v_\parallel(t)dt=kv^2_\perp{\frac{t^3}{3}} \Longrightarrow t=\sqrt[3]{\frac{3x}{2kv_\perp^2}}
+\end{gather}
+Тогда
+\begin{equation}
+	y(x)=v_\perp\cdot{t}=\sqrt[3]{\frac{3v_\perp{}x}{2k}}
+\end{equation}
+% До отрыва груза от доски система доска-груз движется так, будто дело происходит в потенциальном поле единственной силы $\vec{F}=m\vec{a_0}$.
+
+% Тогда по теореме о изменении кинетической энергии можем найти скорость в момент отрыва $v$:
+% \begin{equation*}
+% \xdef\mv{\frac{mv^2}{2}}%
+% \xdef\mvn{\frac{0^{2}}{2}}%
+% 	\begin{aligned}[c]
+% 		\mv-\mvn&=A_\text{мех}\\
+% 		A_\text{мех}&=\int_0^\Delta{ma_0}\cdot{dx}\\
+% 	\end{aligned}
+% 		\qquad\Longrightarrow\qquad
+% 	\begin{aligned}[c]
+% 		\mv&=ma_0\Delta\\
+% 		% y&=v/w\\
+% 	\end{aligned}
+% \end{equation*}
+% Но движение этой же системы до отрыва можно описать вторым законом Нюьтона:
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		&m\vec{a_0}=\vec{f_e}+m\vec{g}\\
+% 		\text{x: }&ma_0=mg-k\Delta{}\\
+% 	\end{aligned}
+% 		\qquad\Longrightarrow\qquad
+% 	\begin{aligned}[c]
+% 		\Delta{}=\frac{m}{k}(g-a_0)\\
+% 		% y&=v/w\\
+% 	\end{aligned}
+% \end{equation*}
+% Тогда по теореме о изменении кинетической энергии можем записать работу сил упругости:
+% \begin{equation*}
+%     \mvn-\mv=\int_{\Delta{}}^{\delta{}} [mg-kx]\cdot{}dx
+% \end{equation*}
+% \begin{equation*}
+%     -\mv=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}\\
+% \end{equation*}
+% \begin{equation*}
+%     -\mv=-ma_0\Delta{}=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}
+% \end{equation*}
+% \begin{equation*}
+% 	\frac{k}{2}\delta^2-mg\delta+\Delta(m(g-a_0)-\frac{k}{2}\Delta)=0
+% \end{equation*}
+% И найти удлинение пружины $\delta$:
+% \begin{equation*}
+% 	\frac{k}{2}\delta^2-mg\delta+\frac{m^2}{2k}(g-a_0)^2=0
+% \end{equation*}
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		&a=\frac{k}{2}\\
+% 		&b=-mg\\
+% 		&c=\frac{m^2}{2k}(g-a_0)^2
+% 	\end{aligned}
+% 		\qquad\Longrightarrow\qquad
+% 	\begin{aligned}[c]
+% 		D&=b^2-4ac\\
+% 		\sqrt{D}&=m\sqrt{2ga_0-a_o^2}
+% 		% y&=v/w\\
+% 	\end{aligned}
+% \end{equation*}
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		\delta_1=\frac{mg+{}m\sqrt{2ga_0-a_o^2}}{k}
+% 	\end{aligned}
+% 		\qquad\qquad
+% 	\begin{aligned}[c]
+% 		\delta_2=\frac{mg-{}m\sqrt{2ga_0-a_o^2}}{k}
+% 	\end{aligned}
+% \end{equation*}
+
+% Так как требуется найти $\delta_{max}$, подходит корень $\delta_1$, $\delta_1>\delta_2$.
+
+\end{document}
