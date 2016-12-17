@@ -1,5 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1481913589 "доска.tex" "other/доска.pdf" "доска" 1481913590
+["pdflatex"] 1481977578 "доска.tex" "other/доска.pdf" "доска" 1481977579
+  "/home/osabio/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0500.tfm" 1465291810 3252 bc0f8cc163ba94bbce20e59f671a255d ""
+  "/home/osabio/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0700.tfm" 1467578633 3256 b15a2ce2310c0038b96c5235b038f0eb ""
   "/home/osabio/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0900.tfm" 1465291809 3244 8db84377f89b8850acd19c9879de82e7 ""
   "/home/osabio/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm1000.tfm" 1467578628 3220 0e417eaf233b160335902e97259a6c77 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1479649807 3141 82d5616418ed8d5de703b3951bedecb4 ""
@@ -28,6 +30,7 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1479649808 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1479649808 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1479649808 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb" 1479649808 154599 ded6d7c21788a8930eadc7fef7518942 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb" 1479649808 138258 6525c253f16cededa14c7fd0da7f67b2 ""
   "/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1479649822 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texmf-dist/tex/generic/babel-english/english.ldf" 1479649818 6963 2e0cb3d93aa64508bdb0db58ae900d97 ""
@@ -173,9 +176,9 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1479649825 31669 df537245012f3e5f05bdc55644b7a3df ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1481225096 336744 fd5ac6f874f4d067f6328200f77d57fa ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1481225074 7252863 8ce2a19f00abdc35b4f9a7698ddcf19e ""
-  "other/доска.aux" 1481913590 186 d84bf62585b18c5b92804f4b0a9189f3 ""
-  "доска.tex" 1481913589 7634 bfd5e40c45de2c72847e156f7839564a ""
+  "other/доска.aux" 1481977579 186 d84bf62585b18c5b92804f4b0a9189f3 ""
+  "доска.tex" 1481977578 9096 d2ce740c2c5a91cac0e4c7a8241fce3d ""
   (generated)
   "other/доска.pdf"
-  "other/доска.log"
   "other/доска.aux"
+  "other/доска.log"

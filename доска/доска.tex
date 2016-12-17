@@ -145,12 +145,14 @@
     \draw[-] ($(-0.5,5-3.25)-(0.2,0)$) -- ++ (0.4,0);
 
     \draw[axis,<->] (-0.5,5) -- node[left, black] {$l_0$} ++(0,-3.25);
-    \draw[axis,<->] (-0.5,5-3.25) -- node[left, black] {$\Delta{}$} ++(0,-1) coordinate (temp);
-    \draw[axis,<->] (temp) -- node[left, black] {$\delta{}$} ($(a.south)-(1.5,0)$);
+    % \draw[axis,<->] (-0.5,5-3.25) -- node[left, black] {$\Delta{}$} ++(0,-1) coordinate (temp);
+    % \draw[axis,<->] (temp) -- node[left, black] {$\delta{}$} ($(a.south)-(1.5,0)$);
+    \draw[axis,<->] (-0.5,5-3.25) -- node[left, black] {$\delta{}$} ($(a.south)-(1.5,0)$);
+
     \draw[axis] ($(a.south)-(1.5,0)$) --  ($(a.south)+(1.5,0)$);
     \draw[-] ($(a.south)-(1.7,0)$) -- ++ (0.4,0);
 
-    \draw[-] ($(-0.5,5-3.25-1)-(0.2,0)$) -- ++ (0.4,0);
+    % \draw[-] ($(-0.5,5-3.25-1)-(0.2,0)$) -- ++ (0.4,0);
 
     \node[below] (c) at (plank.south) {};
 
@@ -158,38 +160,77 @@
 \\
 };
 \end{tikzpicture}
-\vspace{-3em}
+\vspace{-2em}
 \end{figure}
-1
-\begin{gather}
-    \xdef\mv{\frac{mv^2}{2}}%
-    \xdef\mvn{\frac{0^{2}}{2}}%
-    m\vec{a_0}=\vec{f_e}+m\vec{g}\\
-    x: ma_0=mg-k\Delta{}\\
-    \Delta{}=\frac{m}{k}(g-a_0)\\
-    \mv-\mvn=\int_0^{\Delta{}} [mg-k\Delta{}]\cdot{}d[\Delta{}]\\
-    \mv=mg\Delta{}-k \frac{\Delta{}^2}{2}
-\end{gather}
-\begin{gather}
-    \mvn-\mv=\int_0^{\delta{}} [mg-k(\Delta{}+\delta{})]\cdot{}d[\delta{}]\\
-    -\mv=mg\delta{}-k\Delta{}\delta{}-k \frac{\delta{}^2}{2}\\
-    k \frac{\Delta{}^2}{2}-mg\Delta{}=mg\delta{}-k\Delta{}\delta{}-k \frac{\delta{}^2}{2}
-\end{gather}
-% Учитывая, что в данной задаче $m_1=m_2$, можем записать ответ:
-% \begin{gather}
-%     a_0=g\frac{1-\mu{}}{1+\mu}
-% \end{gather}
 
-% \begin{gather}
-%     0=-m_1a_0+T-\mu{}gm_1\\
-%     0=-m_2g-T-\mu{}m_2a_0\\
-%     0=-a_0(m_1+\mu{}m_2)-g(\mu{}m_1-m_2)\\
-%     a_0(m_1+\mu{}m_2)=g(m_2-\mu{}m_1)\\
-%     a_0=g\frac{m_2-\mu{}m_1}{m_1+\mu{}m_2}
-% \end{gather}
+До отрыва груза от доски система доска-груз движется так, будто дело происходит в потенциальном поле единственной силы $\vec{F}=m\vec{a_0}$.
 
-% Учитывая, что $m_1=m_2$:
-% \begin{gather}
-%     a_0=g\frac{1-\mu{}}{1+\mu}
-% \end{gather}
+Тогда по теореме о изменении кинетической энергии можем найти скорость в момент отрыва $v$:
+\begin{equation*}
+\xdef\mv{\frac{mv^2}{2}}%
+\xdef\mvn{\frac{0^{2}}{2}}%
+	\begin{aligned}[c]
+		\mv-\mvn&=A_\text{мех}\\
+		A_\text{мех}&=\int_0^\Delta{ma_0}\cdot{dx}\\
+	\end{aligned}
+		\qquad\Longrightarrow\qquad
+	\begin{aligned}[c]
+		\mv&=ma_0\Delta\\
+		% y&=v/w\\
+	\end{aligned}
+\end{equation*}
+Но движение этой же системы до отрыва можно описать вторым законом Нюьтона:
+\begin{equation*}
+	\begin{aligned}[c]
+		&m\vec{a_0}=\vec{f_e}+m\vec{g}\\
+		\text{x: }&ma_0=mg-k\Delta{}\\
+	\end{aligned}
+		\qquad\Longrightarrow\qquad
+	\begin{aligned}[c]
+		\Delta{}=\frac{m}{k}(g-a_0)\\
+		% y&=v/w\\
+	\end{aligned}
+\end{equation*}
+Тогда по теореме о изменении кинетической энергии можем записать работу сил упругости:
+\begin{equation*}
+    \mvn-\mv=\int_{\Delta{}}^{\delta{}} [mg-kx]\cdot{}dx
+\end{equation*}
+\begin{equation*}
+    -\mv=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}\\
+\end{equation*}
+\begin{equation*}
+    -\mv=-ma_0\Delta{}=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}
+\end{equation*}
+\begin{equation*}
+	\frac{k}{2}\delta^2-mg\delta+\Delta(m(g-a_0)-\frac{k}{2}\Delta)=0
+\end{equation*}
+И найти удлинение пружины $\delta$:
+\begin{equation*}
+	\frac{k}{2}\delta^2-mg\delta+\frac{m^2}{2k}(g-a_0)^2=0
+\end{equation*}
+\begin{equation*}
+	\begin{aligned}[c]
+		&a=\frac{k}{2}\\
+		&b=-mg\\
+		&c=\frac{m^2}{2k}(g-a_0)^2
+	\end{aligned}
+		\qquad\Longrightarrow\qquad
+	\begin{aligned}[c]
+		D&=b^2-4ac\\
+		\sqrt{D}&=m\sqrt{2ga_0-a_o^2}
+		% y&=v/w\\
+	\end{aligned}
+\end{equation*}
+\begin{equation*}
+	\begin{aligned}[c]
+		\delta_1=\frac{mg+{}m\sqrt{2ga_0-a_o^2}}{k}
+	\end{aligned}
+		\qquad\qquad
+	\begin{aligned}[c]
+		\delta_2=\frac{mg-{}m\sqrt{2ga_0-a_o^2}}{k}
+	\end{aligned}
+\end{equation*}
+
+Так как требуется найти $\delta_{max}$, подходит корень $\delta_1$, $\delta_1>\delta_2$.
+
 \end{document}
