@@ -1,0 +1,153 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{Задача под запись -- <<катушка>>} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    through,%
+    % arrows.spaced,%
+}
+\newcommand{\vangle}{\mathop{\mathstrut^\wedge}\nolimits}
+\newcommand{\average}[1]{\langle{#1}\rangle}
+\usepackage{wrapfig}
+\newcommand{\RN}[1]{%
+  \textup{\tiny\uppercase\expandafter{\romannumeral#1}}%
+}
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    interface1/.style={draw=gray!60,
+        % The border decoration is a path replacing decorator. 
+        % For the interface style we want to draw the original path.
+        % The postaction option is therefore used to ensure that the
+        % border decoration is drawn *after* the original path.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }
+]
+	\draw (0,2) circle (2); 
+	\draw (0,2) circle (0.5); 
+	\draw[interface] (-4,-0.25) rectangle (4,0);
+	\draw[thick] (-4,0) --(4,0);
+
+	\draw (0,1.5) -- ++(3,0);
+	\draw[force,->] (0,1.5) ++(3,0) -- ++ (1,0) 
+					node[right] {$\vec{u}$};
+
+	\draw (0,2) -- ++ (45:0.5)
+		node[right, yshift=3pt] {$r$};
+
+	\draw (0,2) -- node[left, xshift=-2pt] {$R$} ++ (135:2);
+
+	\draw[fill] (0,4) circle (2pt) node[above] {$B$} ;
+
+
+	% \draw (0,0) ++ (2,0) arc(0:180:2cm);
+	% \draw[axis] (-180:2) coordinate (II) -- (0:2) coordinate (I);
+	% \draw (0,0) circle (1pt) -- node[above] {$R$} (I) circle (1pt);
+	% \draw[force,->,>=open triangle 60] (I) -- ++ (0,1) node[above] {$\vec{a_\tau}$};
+
+	% \draw[force,->,>=open triangle 60] (II) -- ++ (0,-1.5) node[below] {$\vec{a_\tau}$};
+
+	% \draw[force,->] (II) -- ++ (0,-0.8) node[left] {$\vec{v_\RN{2}}$};
+
+
+\end{tikzpicture}
+\end{figure}
+
+\begin{gather*}
+	\average{v}=\frac{{S}}{{t}}=\frac{\pi{R}}{\tau}=
+	\frac{3.14\cdot{1.6}}{10}=0.5\text{ m/s}\\
+	|\average{\vec{v}}|=|\frac{\Delta{\vec{r}}}{\Delta{t}}|=\frac{2R}{\tau}=
+	\frac{2\cdot{1.6}}{10}=0.32\text{ m/s}\\
+	|\average{\vec{a}}|=|\frac{\Delta{\vec{v}}}{\Delta{t}}|=\frac{v_{\RN{2}_\tau}}{\tau}
+\end{gather*}
+
+\begin{gather*}
+	v_\tau=a_\tau\cdot{t}\\
+	S=\pi{R}=\int_0^\tau a_\tau{t}\,dt=\frac{a\tau^2}{2}\\
+	a_\tau=\frac{2\pi{R}}{\tau^2}\\
+	v_{\RN{2}_\tau}=a_\tau\cdot{\tau}=\frac{2\pi{R}}{\tau}\\
+	|\average{\vec{a}}|=\frac{v_{\RN{2}_\tau}}{\tau}=\frac{2\pi{R}}{\tau^2}=
+	\frac{2\cdot{}3.14\cdot{1.6}}{100}=0.1\text{ m/s$^2$}\\
+\end{gather*}
+
+\end{document}
