@@ -60,6 +60,8 @@
 \newcommand{\RN}[1]{%
   \textup{\tiny\uppercase\expandafter{\romannumeral#1}}%
 }
+\usepackage{framed,color}
+	\definecolor{shadecolor}{rgb}{1,1,1}
 \begin{document}
 
 \begin{figure}[H]
@@ -103,8 +105,8 @@
         inner sep=2.5mm,
     }
 ]
-	\draw (0,2) circle (2); 
-	\draw (0,2) circle (0.5); 
+	\draw (0,2) coordinate (o) circle (2); 
+	\draw (o) circle (0.5); 
 	\draw[interface] (-4,-0.25) rectangle (4,0);
 	\draw[thick] (-4,0) --(4,0);
 
@@ -112,42 +114,50 @@
 	\draw[force,->] (0,1.5) ++(3,0) -- ++ (1,0) 
 					node[right] {$\vec{u}$};
 
-	\draw (0,2) -- ++ (45:0.5)
+	\draw (o) -- ++ (45:0.5)
 		node[right, yshift=3pt] {$r$};
 
-	\draw (0,2) -- node[left, xshift=-2pt] {$R$} ++ (135:2);
+	\draw (o) -- node[left, xshift=-2pt] {$R$} ++ (135:2);
 
-	\draw[fill] (0,4) circle (2pt) node[above] {$B$} ;
+	\draw[fill] (0,4) coordinate (A) circle (2pt) node[above] {$A$};
+
+	\draw[fill] (0,0) coordinate (0) circle (2pt) node[below, yshift=-6pt] {МЦС};
 
 
-	% \draw (0,0) ++ (2,0) arc(0:180:2cm);
-	% \draw[axis] (-180:2) coordinate (II) -- (0:2) coordinate (I);
-	% \draw (0,0) circle (1pt) -- node[above] {$R$} (I) circle (1pt);
-	% \draw[force,->,>=open triangle 60] (I) -- ++ (0,1) node[above] {$\vec{a_\tau}$};
+	\draw[force,->] (o) -- ++(1,0)
+					node[right] {$\vec{v}_0$};
 
-	% \draw[force,->,>=open triangle 60] (II) -- ++ (0,-1.5) node[below] {$\vec{a_\tau}$};
+	\draw[force,->] (A) -- ++(2,0)
+					node[right] {$\vec{v}_A$};
 
-	% \draw[force,->] (II) -- ++ (0,-0.8) node[left] {$\vec{v_\RN{2}}$};
-
+	\draw[axis] (0,0) -- (2,4);
 
 \end{tikzpicture}
 \end{figure}
 
+Частота вращения вокруг МЦС --- $\omega$:
 \begin{gather*}
-	\average{v}=\frac{{S}}{{t}}=\frac{\pi{R}}{\tau}=
-	\frac{3.14\cdot{1.6}}{10}=0.5\text{ m/s}\\
-	|\average{\vec{v}}|=|\frac{\Delta{\vec{r}}}{\Delta{t}}|=\frac{2R}{\tau}=
-	\frac{2\cdot{1.6}}{10}=0.32\text{ m/s}\\
-	|\average{\vec{a}}|=|\frac{\Delta{\vec{v}}}{\Delta{t}}|=\frac{v_{\RN{2}_\tau}}{\tau}
+	\omega=\frac{u}{R-r}
 \end{gather*}
-
+Тогда
+\begin{equation*}
+	v_0=\omega{R}=u \frac{R}{R-r}, \hspace{5ex} v_A=\omega{2R}=2v_0
+\end{equation*}
+Так как скорость в точке $A$ постоянна, $a=a_n$:
 \begin{gather*}
-	v_\tau=a_\tau\cdot{t}\\
-	S=\pi{R}=\int_0^\tau a_\tau{t}\,dt=\frac{a\tau^2}{2}\\
-	a_\tau=\frac{2\pi{R}}{\tau^2}\\
-	v_{\RN{2}_\tau}=a_\tau\cdot{\tau}=\frac{2\pi{R}}{\tau}\\
-	|\average{\vec{a}}|=\frac{v_{\RN{2}_\tau}}{\tau}=\frac{2\pi{R}}{\tau^2}=
-	\frac{2\cdot{}3.14\cdot{1.6}}{100}=0.1\text{ m/s$^2$}\\
+	a_n=\frac{v^2}{R}
+\end{gather*}
+Где $v$ -- <<собственная>> скорость точки (скорость берез пересносной скорости) $A$, $v=v_A-v_0$
+\begin{gather*}
+	v=v_A-v_0=v_0\\
+	a_A=\frac{v_0^2}{R}=\frac{u^2R}{(R-r)^2}
+\end{gather*}
+Кстати, отсюда следует, что радиус кривизны $\rho$ в высшей точке равен $4R$:
+\begin{gather*}
+	a_A=\frac{v_A^2}{\rho}=
+	\frac{4v_0^2}{\rho}=\frac{4u^2R}{\rho(R-r)^2}\\
+	\frac{4u^2R}{\rho(R-r)^2}=\frac{u^2R}{(R-r)^2}\\
+	\rho=4R
 \end{gather*}
 
 \end{document}
