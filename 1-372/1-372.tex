@@ -1,0 +1,148 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}\usepackage{extsizes,cmap,graphicx,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through,positioning,shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.} 
+\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов - 1.372} 
+\fancyfoot{}
+\renewcommand{\labelenumii}{\theenumii)}
+\tikzset{
+	force/.style={>=latex,draw=blue,fill=blue,>=triangle 45},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface1/.style={draw=gray!60,.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+        amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }	
+}
+
+\definecolor{clock0}{cmyk}{1,0,0,0} % cyan
+\definecolor{clock1}{cmyk}{0.75,0.25,0,0}
+\definecolor{clock2}{cmyk}{0.5,0.5,0,0}
+\definecolor{clock3}{cmyk}{0.25,0.75,0,0}
+\definecolor{clock4}{cmyk}{0,1,0,0} % magenta
+\definecolor{clock5}{cmyk}{0,0.75,0.25,0}
+\definecolor{clock6}{cmyk}{0,0,5,0.5,0}
+\definecolor{clock7}{cmyk}{0,0.25,0.75,0}
+\definecolor{clock8}{cmyk}{0,0,1,0} % yellow
+\definecolor{clock9}{cmyk}{0.25,0,0.75,0}
+\definecolor{clock10}{cmyk}{0.5,0,0.5,0}
+\definecolor{clock11}{cmyk}{0.75,0,0.25,0}
+
+\begin{document}
+\newcommand{\clock}[3]{%
+  \begin{scope}[xshift=#1cm,yshift=#2cm, scale=0.3]
+  \shadedraw [inner color=white, outer color=white, 
+    line width=1.1pt] (0,0) circle (1cm); 
+  \foreach \angle in {0, 30, ..., 330} 
+    \draw[line width=0.5pt] (\angle:0.62cm) -- (\angle:1cm);
+  \foreach \angle in {0,90,180,270}
+    \draw[line width=1.3pt] (\angle:0.75cm) -- (\angle:1cm);
+  \draw[line width=1.6pt] (0,0) -- (90-30*#3:0.6cm); 
+  \end{scope}
+}
+
+\begin{figure}[H]
+    % \centering
+\begin{tikzpicture}
+\matrix[column sep=1cm, row sep=0cm] {
+	\draw[->, >=triangle 60] (0,0) coordinate (K) -- node [left, xshift=-1em, draw=black,circle] {\,$K$\,} ++ (0,3); 
+    \draw[->, >=triangle 60] (K) -- ++ (4,0); 
+
+    \draw[->, >=triangle 60] (1,2) coordinate (K') -- node [left, xshift=-1em, draw=black,circle] {$K'$} ++ (0,3); 
+    \draw[force,->, >=latex] ($(K')+(0,2)$) -- ++ (1,0) node [right] {$\vec{u}$};
+    \draw[->, >=triangle 60] (K') - ++ (3,0); 
+    \draw[line width=5pt] (K')--++(2,0);
+    \draw (0,0) rectangle (3.5,0.5);
+
+    \foreach \x in {0,0.4,...,3.5}{
+         \draw (\x,0.20) -- (\x,0.5);
+    }
+    \foreach \x in {0,0.1,...,3.5}{
+        \draw (\x,0.35) -- (\x,0.5);
+    }
+
+&
+    \draw[->, >=triangle 60] (0,0) coordinate (K) -- node [left, xshift=-1em, draw=black,circle] {\,$K$\,} ++ (0,3); 
+    \draw[->, >=triangle 60] (K) -- ++ (4,0); 
+
+    \draw[->, >=triangle 60] (1,2) coordinate (K') -- node [left, xshift=-1em, draw=black,circle] {$K'$} ++ (0,3); 
+    \draw[force,->, >=latex] ($(K)+(0,2.5)$) -- ++ (-1,0) node [left] {$\vec{u}$};
+    \draw[->, >=triangle 60] (K') - ++ (3,0); 
+    \draw[line width=5pt] (K')--++(2,0);
+    \draw (0,0) rectangle (3.5,0.5);
+
+    \foreach \x in {0,0.8,...,3.5}{
+      \draw (\x,0.20) -- (\x,0.5);
+    }
+    \foreach \x in {0,0.2,...,3.5}{
+        \draw (\x,0.35) -- (\x,0.5);
+    }
+
+\\
+};
+\end{tikzpicture}
+\end{figure}
+
+\def\g{\sqrt{1-u^2/c^2}}%
+Учитывая, что в $K$ -- системе
+\begin{gather*}
+    \xdef\dx{\Delta{x_1}}%
+    \xdef\dxx{\Delta{x_2}}%
+    \dx=l_0\g
+\end{gather*}
+Поменяем фиксированную систему с движущейся. Тогда легко найдем масштаб линейки, $e$ -- единичный отрезок линейки в $K$ (или, что тоже самое):
+\begin{gather*}
+    e=e_0\g
+\end{gather*}
+Тогда длина стержня в $K'$ по линейке из $K$, учитывая изменение масштаба линейки (сокращение линейки):
+\begin{gather*}
+    \dxx=l_0\frac{e_0}{e}=l_0\frac{1}{\g}
+\end{gather*}
+Отсюда выражается скорость стержня относительно линейки $u$:
+\begin{gather*}
+    \frac{\dx}{\dxx}=1-u^2/c^2\\
+    u=c\sqrt{1-\frac{\dx}{\dxx}}=2.23\cdot10^8\text{ m/s}
+\end{gather*}
+Тогда 
+\begin{equation*}
+    l_0=\dxx\g=6\text{ m}
+\end{equation*}
+% \begin{equation*}
+%     \begin{aligned}[c]
+% 		m\vec{a}=\vec{f}_R\\
+% 		\text{x: }ma=-mg\mu\\
+% 		\int_{v_0}^{v(t)}dv=\int_0^t -g\mu dt\\
+% 		v(t)=v_0-\mu{gt}\\
+% 		\int_{0}^{x}dx=\int_0^t [v_0-\mu{gt}] dt\\
+% 		x(t)=v_0{t}-\mu{g}\frac{t^2}{2}
+%     \end{aligned}
+%         \qquad\qquad
+%     \begin{aligned}[c]
+%     \text{Условие остановки $v=0$ при $t=t^*$:}\\
+%     v_\text{ост}=0=v_0-g\mu{}t^*\\
+%     t^*=\frac{v_0}{g\mu}\\
+%     \text{Тогда пройденное до остановки $R$:}\\
+%     R=v_0\cdot{t^*}-\mu{g}\frac{{t^*}^2}{2}\\
+%     R=\frac{v_0^2}{2g\mu}
+%     \end{aligned}
+% \end{equation*}
+
+
+\end{document}
+
