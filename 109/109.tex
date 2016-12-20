@@ -32,7 +32,7 @@
 }
 \begin{document}
 
-\begin{figure}[H]
+\begin{wrapfigure}[19]{l}{0.5\textwidth}
     % \centering
 \begin{tikzpicture}
 	\def\angle{50}
@@ -46,13 +46,17 @@
         (2.85,6) rectangle (3.15,4);
 
     \def\rr{0.8}
+    \draw[axis] (1.2,-3.15) --(1.20,4);
+    \draw[axis, <-] (4.8,-3.15) node[below] {$x$} --(4.8,4);
+
+    \draw[axis] (3,4) ++ (1.8,0) arc (0:180:1.8);
+    
     \draw[fill=white] (3,4) circle (\rr);
     \path (3,4) -- +(-\rr,0) coordinate (Cl) + (\rr,0) coordinate (Cr);
     \draw[fill=black] (3,4) circle (3pt);
-
     \draw[black!70] (Cr) -- ++ (0,-3) coordinate (B);
     \draw[black!70] (Cl) -- ++ (0,-1) coordinate (2m);
-
+    \draw[force,->] (2m)-- node[left] {$\vec{u}$} ++(0,1);
     \draw[] (B) circle (\rr);
     \path (B) -- +(-\rr,0) coordinate (Bl) + (\rr,0) coordinate (Br);
     \draw[fill=black] (B) circle (3pt);
@@ -61,52 +65,60 @@
 
     \draw[black!70] (Br) -- ++ (0,-3) coordinate (o);
     \draw[black!70] (Bl) -- ++ (0,-2) coordinate (m);
+    \draw[force,->] (m)-- node[anchor=north east] {$\vec{u}$} ++(0,-1.5);
 
     \draw[fill=black] (m) rectangle ++(0.1,-0.6) rectangle ++(-0.2,0.6) node[left] {$m$};
 
+    \draw[force,->] ($(o)-(0.2,0)$)--node[left] {$\vec{v}$} ($(o)-(0.2,-1.2)$);
     \node[inner sep=0pt, scale=0.2, xshift=-2em] (russell) at (o)
     {\includegraphics[width=.25\textwidth]{img/monkey.png}}; 
-
     \node[right, xshift=1em] at (o) {$m$};
 
+    % \draw[force,->] ($(o)-(0.7,1.2)$)--node[left] {$\vec{v}$} ($(o)-(0.7,-1.2)$);
+
+
 \end{tikzpicture}
-\end{figure}
-\textbf{Случай $I$.} Рассмотрим движение с торможением без поворота:
-\begin{equation*}
-    \begin{aligned}[c]
-		m\vec{a}=\vec{f}_R\\
-		\text{x: }ma=-mg\mu\\
-		\int_{v_0}^{v(t)}dv=\int_0^t -g\mu dt\\
-		v(t)=v_0-\mu{gt}\\
-		\int_{0}^{x}dx=\int_0^t [v_0-\mu{gt}] dt\\
-		x(t)=v_0{t}-\mu{g}\frac{t^2}{2}
-    \end{aligned}
-        \qquad\qquad
-    \begin{aligned}[c]
-    \text{Условие остановки $v=0$ при $t=t^*$:}\\
-    v_\text{ост}=0=v_0-g\mu{}t^*\\
-    t^*=\frac{v_0}{g\mu}\\
-    \text{Тогда пройденное до остановки $R$:}\\
-    R=v_0\cdot{t^*}-\mu{g}\frac{{t^*}^2}{2}\\
-    R=\frac{v_0^2}{2g\mu}
-    \end{aligned}
-\end{equation*}
+\end{wrapfigure}
+В начальный момент система уравновешена (внешние силы равны нулю) и все скорости равны нулю, следовательно, момент импульса системы $\vec{P}=0$.
 
-\textbf{Случай $II$.} Поворот без торможения.
-\begin{equation*}
-    \begin{aligned}[c]
-	m\vec{a}=\vec{f}_R\\
-	v_\tau=const \Longrightarrow a_\tau=0 \\ a=a_n\\
-    \end{aligned}
-        \qquad\qquad
-    \begin{aligned}[c]
-	\text{n: } ma_n=-mg\mu\\
-	\frac{v_0^2}{R}=g\mu\\
-	R=\frac{v_0^2}{g\mu}
-    \end{aligned}
-\end{equation*}
+Введем такую ось $x$, на которой сумма проекций внешних сил равна нулю в любой момент времени. Тогда можно сказать, что проекция импульса системы на ось сохраняется.
 
-\textbf{Вывод.} Путь до остановки с торможением без поворота  вдвое короче, чем при повороте без торможения.
+
+Так как при выбирании обезяной нити силы, действующие на неё и её противовес, не меняются и равны по модулю, то груз $m$, второй блок и веревку, прокинутую через второй блок, можно считать неподвижными относительно друг друга, а вместе -- движущейся относительно неподвижной СО скоростью $\vec{u}$ системой отсчета. 
+
+% \begin{gather*}
+В согласии с преобразованием Галлилея, скорость обезьяны в проекции на ось (неподвижная СО) будет складываться из скорости движущейся системы (второго блока) $\vec{u}$ и собственной в ней $\vec{v}$.
+
+% \end{gather*}
+
+\begin{align*}
+    0&=m(\vec{u}+\vec{v})+m\vec{u}+2m\vec{u}\\
+    \text{x: \ \ }0&=m(u-v)+mu+2mu\\
+    4mu&=mv\\
+    u&=\frac{v}{4}
+\end{align*}
+
+% \textbf{Случай $I$.} Рассмотрим движение с торможением без поворота:
+% \begin{equation*}
+%     \begin{aligned}[c]
+% 		m\vec{a}=\vec{f}_R\\
+% 		\text{x: }ma=-mg\mu\\
+% 		\int_{v_0}^{v(t)}dv=\int_0^t -g\mu dt\\
+% 		v(t)=v_0-\mu{gt}\\
+% 		\int_{0}^{x}dx=\int_0^t [v_0-\mu{gt}] dt\\
+% 		x(t)=v_0{t}-\mu{g}\frac{t^2}{2}
+%     \end{aligned}
+%         \qquad\qquad
+%     \begin{aligned}[c]
+%     \text{Условие остановки $v=0$ при $t=t^*$:}\\
+%     v_\text{ост}=0=v_0-g\mu{}t^*\\
+%     t^*=\frac{v_0}{g\mu}\\
+%     \text{Тогда пройденное до остановки $R$:}\\
+%     R=v_0\cdot{t^*}-\mu{g}\frac{{t^*}^2}{2}\\
+%     R=\frac{v_0^2}{2g\mu}
+%     \end{aligned}
+% \end{equation*}
+
 
 \end{document}
 
