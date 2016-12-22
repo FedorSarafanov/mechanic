@@ -1,0 +1,204 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{Яковлев -- №578} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    % interface/.style={draw=gray!60,
+    %     % The border decoration is a path replacing decorator. 
+    %     % For the interface style we want to draw the original path.
+    %     % The postaction option is therefore used to ensure that the
+    %     % border decoration is drawn *after* the original path.
+    %     postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+    %                 amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }
+]
+
+    \node[cargo] (b) at (0,0) {} node[right of=b, xshift=-0.5cm] {$m$};
+    \node[plank, below of=b, anchor=north] (plank) {};
+
+    \draw[axis, ->] (-2,2) -- ++(0,-4) node[below] {$x$};
+    \draw[black!60] (-2.2,-0.35) node[left, black] {$0$} -- ++(0.4,0) ;
+
+    \node[below] (c) at (plank.south) {};
+    \draw[force,->] (b.center) -- ++(0,-1) node[left] {$m\vec{g}$};
+    \draw[force,->] (b.south) ++(0.05,0) -- ++(0,1) node[above] {$\vec{N}$};
+
+    \draw[force,->] (b.south) ++(0.05,0) -- ++(0,-1) node[right] {$\vec{P}$};
+
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+
+Груз еще будет покоится на доске, когда его вес станет равен нулю, но начнет начнет подскакивать, когда после этого амплитуда станет больше на сколь угодно малую величину.
+
+Доска совершает гармонические колебания по закону
+\begin{equation*}
+     a=\frac{d^2x}{dt^2}=\omega^2x=\frac{4\pi^2}{T^2}x
+ \end{equation*} 
+
+Запишем второй закон Ньютона для груза:
+\begin{equation*}
+	\begin{aligned}[c]
+		m\vec{a}&=m\vec{g}+\vec{N}\\
+        \text{x: }ma&=mg-N=mg-P\\
+	\end{aligned}
+		\qquad\Longrightarrow\qquad
+	\begin{aligned}[c]
+		P&=m(g-a)\\
+        P&=m(g-\frac{4\pi^2}{T^2}x)
+	\end{aligned}
+\end{equation*}
+Тогда $P=0$ тогда, когда 
+\begin{gather*}
+    {}m(g-\frac{4\pi^2}{T^2}x)\leq{0}\\
+    g\leq{\frac{4\pi^2}{T^2}x}
+\end{gather*}
+Так как $A$ здесь и есть максимальное $|x|$, то 
+\begin{gather*}
+    A>{g\frac{T^2}{4\pi^2}}\approx6.2\text{ см}
+\end{gather*}
+При 
+\begin{gather*}
+    A={g\frac{T^2}{4\pi^2}}
+\end{gather*}
+будет предельное значение амплитуды, при увеличении которой начнется подскакивание.
+% Но движение этой же системы до отрыва можно описать вторым законом Нюьтона:
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		&m\vec{a_0}=\vec{f_e}+m\vec{g}\\
+% 		\text{x: }&ma_0=mg-k\Delta{}\\
+% 	\end{aligned}
+% 		\qquad\Longrightarrow\qquad
+% 	\begin{aligned}[c]
+% 		\Delta{}=\frac{m}{k}(g-a_0)\\
+% 		% y&=v/w\\
+% 	\end{aligned}
+% \end{equation*}
+% Тогда по теореме о изменении кинетической энергии можем записать работу сил упругости:
+% \begin{equation*}
+%     \mvn-\mv=\int_{\Delta{}}^{\delta{}} [mg-kx]\cdot{}dx
+% \end{equation*}
+% \begin{equation*}
+%     -\mv=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}\\
+% \end{equation*}
+% \begin{equation*}
+%     -\mv=-ma_0\Delta{}=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}
+% \end{equation*}
+% \begin{equation*}
+% 	\frac{k}{2}\delta^2-mg\delta+\Delta(m(g-a_0)-\frac{k}{2}\Delta)=0
+% \end{equation*}
+% И найти удлинение пружины $\delta$:
+% \begin{equation*}
+% 	\frac{k}{2}\delta^2-mg\delta+\frac{m^2}{2k}(g-a_0)^2=0
+% \end{equation*}
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		&a=\frac{k}{2}\\
+% 		&b=-mg\\
+% 		&c=\frac{m^2}{2k}(g-a_0)^2
+% 	\end{aligned}
+% 		\qquad\Longrightarrow\qquad
+% 	\begin{aligned}[c]
+% 		D&=b^2-4ac\\
+% 		\sqrt{D}&=m\sqrt{2ga_0-a_o^2}
+% 		% y&=v/w\\
+% 	\end{aligned}
+% \end{equation*}
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		\delta_1=\frac{mg+{}m\sqrt{2ga_0-a_o^2}}{k}
+% 	\end{aligned}
+% 		\qquad\qquad
+% 	\begin{aligned}[c]
+% 		\delta_2=\frac{mg-{}m\sqrt{2ga_0-a_o^2}}{k}
+% 	\end{aligned}
+% \end{equation*}
+
+% Так как требуется найти $\delta_{max}$, подходит корень $\delta_1$, $\delta_1>\delta_2$.
+
+\end{document}
