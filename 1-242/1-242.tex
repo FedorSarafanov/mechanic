@@ -36,7 +36,7 @@
 \fancyhead{} %очистим хидер на всякий случай
 \fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
 \fancyhead[C]{Механика}
-\fancyhead[L]{Иродов 1.88} 
+\fancyhead[L]{Иродов 1.242} 
 \fancyfoot{} %футер будет пустой
 % \fancyfoot[CO,CE]{\thepage}
 \renewcommand{\labelenumii}{\theenumii)}
@@ -104,73 +104,56 @@
 		inner sep=2.5mm,
 	}
 ]
-	\draw (0,0) arc(-90:90:3cm);
-	\draw[dotted](0,0) arc(-90:-270:3cm);
-	\draw (0,0) -- +(-5,0);
-	\draw[dotted] (0,0) -- +(5,0);
-
-	\coordinate (0) at (0,0);
-	\coordinate (I) at (3,3);
-	\coordinate (II) at (0,6);
-	\coordinate (c) at (0,3);
-
-	\draw[fill=black] (c) circle (1.25pt) (I) circle (1.25pt) (II) circle (1.25pt) (0) circle (1.25pt);
-	\draw[axis] (c) -- (I) (c) -- (II) (c) -- (0);
-
-	\draw[force,->] (0) -- ++(1,0) node[below] {$\vec{v}$};
-	\draw[force,->] (I) -- ++(0,1) node[right] {$\vec{v}$};
-	\draw[force,->] (II) -- ++(-1,0) node[above] {$\vec{v}$};
-
-	\draw[force,->] (0) -- ++(0,-0.5) node[right] {$m\vec{g}$};
-	\draw[force,->] (I) -- ++(0,-0.5) node[left] {$m\vec{g}$};
-	\draw[force,->] (II) -- ++(0,-0.5) node[right] {$m\vec{g}$};
-
-	\draw[force,->] (0) -- ++(0,1) node[right] {$\vec{N}_1$};
-	\draw[force,axis,->] (I) -- ++(-1,0) node[below] {$\vec{N}_{2n}$};
-	\draw[force,axis,->] (I) -- ++(0,0.5) node[right] {$\vec{N}_{2\tau}$};
-	\draw[force,axis,->] (I) -- ++(-1,0.5) node[above] {$\vec{N}_{2}$};
-	\draw[force,->] (II) -- ++(0,-1) node[right] {$\vec{N}_3$};
-
-	% \draw[force, axis, ->] (0) -- ++(0,0.5) node[left] {$\vec{Q}_1$};
-	% \draw[force, axis, ->] (I) -- ++(-1,-0.5) node[below] {$\vec{Q}_2$};
-	% \draw[force, axis, ->] (II) -- ++(0,-1.5) node[right] {$\vec{Q}_3$};
-
-	\draw[force, axis, ->] (0) -- ++(0,-1.5) node[left] {$\vec{P}_1$};
-	\draw[force, axis, ->] (I) -- ++(1,-0.5) node[above] {$\vec{P}_2$};
-	\draw[force, axis, ->] (II) -- ++(0,0.5) node[right] {$\vec{P}_3$};
-
+    % \node {\includegraphics[scale=.092]{earth.png}};    
+	\draw[fill=black!10] (0,0) circle(1cm);
+	\draw[axis] (0,0) circle(2cm);
+	\node[left] at (-2.1,0) {Запад};
+	\node[left] at (3.4,0) {Восток};
+	\coordinate (s) at (0,2);
+	\draw[fill=black] (s) circle (2pt);
+	\draw[force,->] (s) -- ++(1,0) node[above] {$\vec{v}$};
+	\draw[force,->] (s) -- ++(0,-0.5) node[left] {$\vec{F}_g$};
+	\draw[axis,->] (s) -- (0,0);% node[below] {$\vec{N}_{2n}$};
 
 \end{tikzpicture}
 \end{figure}
-Введем мгновенные нормальную ось $n$, направленную к центру окружности, и тангенциальную ось $\tau$.
-\begin{equation*}
-	v=const \Longrightarrow a=a_n=\frac{v^2}{R}
-\end{equation*}
-\begin{equation*}
-	\begin{aligned}[c]
-		\textbf{I.  }
-		m\vec{a}=\vec{N}_3+m\vec{g}\\
-		\text{n: }ma_n=N_3+mg\\
-		P_3=N_3\\
-		P_3=ma_n-mg=\\
-		=m(\frac{v^2}{R}-g)=700\text{\,H}
-	\end{aligned}
-		% \qquad\Longrightarrow\qquad
-		\qquad\qquad
-	\begin{aligned}[c]
-	\textbf{II.  }
-	m\vec{a}=\vec{N}_2+m\vec{g}\\
-	\text{n: }ma_n=N_{2n}\\
-	\text{$\tau$: }mg=N_{2\tau}\\
-	P_2=N_2=\sqrt{N_{2n}^2+N_{2\tau}^2}=\\
-	m\sqrt{\frac{v^4}{R^2}+g^2}=1565\text{\,H}
-	\end{aligned}
-\end{equation*}
+Земля вращается с запада на восток. Линейная скорость неподвижной точки на экваторе $v_\text{з}$:
 \begin{gather*}
-	\textbf{III.  }
-	m\vec{a}=\vec{N}_1+m\vec{g}\\
-	\text{n: }ma_n=N_{1n}-mg\\
-	P_1=|N_{1n}|=ma_n+mg=m(\frac{v^2}{R}+g)=2100\text{\,H}
+	T=\frac{2\pi}{\omega}=\frac{2\pi{R}}{v_\text{з}}\\
+	v_\text{з}=\frac{2\pi{R}}{T}
 \end{gather*}
+Тогда можно найти собственную скорость спутника $v$:
+\begin{gather*}
+	v'=v-v_\text{з}\\
+	v'=\frac{2\pi{R}}{\tau}\\
+	v=\frac{2\pi{R}}{T}+\frac{2\pi{R}}{\tau}=2\pi{R}(\frac{\tau+T}{\tau{T}})
+\end{gather*}
+Введем нормальную ось $n$, направленную к центру Земли.
+\begin{gather*}
+	v=const\Longrightarrow a=a_n=\frac{v^2}{R}=\frac{4\pi^2R}{T^2}(1+\frac{T}{\tau})^2\\
+	m\vec{a}=\vec{F}_g\\
+	\text{n: }ma_n=G\frac{Mm}{R^2}\\
+	M=\frac{a_n\cdot{R^2}}{G}=\frac{4\pi^2R^3}{G\tau^2}(1+\frac{T}{\tau})^2=6\cdot10^{24}\text{ кг}\\
+\end{gather*}
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		\textbf{I.  }
+% 		m\vec{a}=\vec{N}_3+m\vec{g}\\
+% 		\text{n: }ma_n=N_3+mg\\
+% 		P_3=N_3\\
+% 		P_3=ma_n-mg=\\
+% 		=m(\frac{v^2}{R}-g)=700\text{\,H}
+% 	\end{aligned}
+% 		% \qquad\Longrightarrow\qquad
+% 		\qquad\qquad
+% 	\begin{aligned}[c]
+% 	\textbf{II.  }
+% 	m\vec{a}=\vec{N}_2+m\vec{g}\\
+% 	\text{n: }ma_n=N_{2n}\\
+% 	\text{$\tau$: }mg=N_{2\tau}\\
+% 	P_2=N_2=\sqrt{N_{2n}^2+N_{2\tau}^2}=\\
+% 	m\sqrt{\frac{v^4}{R^2}+g^2}=1565\text{\,H}
+% 	\end{aligned}
+% \end{equation*}
 
 \end{document}
