@@ -35,9 +35,9 @@
 \usepackage{fancyhdr} %загрузим пакет
 \pagestyle{fancy} %применим колонтитул
 \fancyhead{} %очистим хидер на всякий случай
-\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
-\fancyhead[CO, CE]{Механика}
-\fancyhead[LO,RE]{Яковлев -- №114} 
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.84} 
 \fancyfoot{} %футер будет пустой
 % \fancyfoot[CO,CE]{\thepage}
 \renewcommand{\labelenumii}{\theenumii)}
@@ -116,96 +116,58 @@
     }
 ]
 
-
-    % \draw[force,->] (0,0) ++(0.05,0) -- ++(0,1) node[above] {$\vec{N}$};
-
-    % \draw[force,->] (0,0) ++(0.05,0) -- ++(0,-1) node[right] {$\vec{P}$};
-    \draw[axis,->] (-3,1) -- ++(0,-5) node[below] {${x}$};
-
-
-    \draw[axis] (1,1) -- ++(0,-5);
-    \draw[axis] (-1,1) -- ++(0,-5);
-    \draw [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=0pt] (-3,-2) -- (-3,-1) node [black,midway,xshift=-2cm] {$l(t)=x_2(t)-x_1(t)$};
-
-    \draw[axis] (1,-2) -- ++(-4,0);
-    \draw[axis] (-1,-1) -- ++(-2,0);
-
-    \node[cloud, fill=white, cloud puffs=12.7, cloud ignores aspect, minimum width=4cm,   minimum height=2cm, align=center, draw] (cloud) at (0cm, 0cm) {};%{Облако};
-
-    \draw[force,->] (1,-2.35) -- ++(0,-1) node[below] {$m\vec{g}$};
-    \draw[force,->] (1,-2.35) -- ++(0,1) node[above] {$\vec{f}_R$};
-    \draw (1,-2) pic[scale=2] {raindrop};
-
-    \draw[force,->] (-1,-1.35) -- ++(0,-1) node[below] {$m\vec{g}$};
-    \draw[force,->] (-1,-1.35) -- ++(0,1) node[above] {$\vec{f}_R$};
-    \draw (-1,-1) pic[scale=2] {raindrop};
-
+    \draw[axis,->] (0,0) -- ++(5,0) node [right] {$x$};
+    \draw[force,->] (0,0) -- ++(1,0) node[above] {$\vec{v}_0$};
+    \draw[force,->] (0,0) -- ++(-1,0) node[above] {$\vec{f}_R$};
+    \draw[fill=white] (0,0) ++(-0.2,0.2) rectangle ++(0.4,-0.4);
 
 
 \end{tikzpicture}
 % \vspace{-2em}
 \end{figure}
 
-\textbf{Движение без сопротивления.}
-Запишем второй закон Ньютона и последовательным интегрированием найдем зависимость координат шариков от времени, и соответственно, и $l(t)$:
-\begin{equation*}
-    \begin{aligned}[c]
-        ma_1&=mg\\
-        m\,dv_1&=mg\,dt\\
-        \int_0^{v_1(t)}\,dv_1&=\int_0^{t-\tau} g\,dt\\   
-        v_1(t)&=g(t-\tau)\\
-        \int_0^{x_1(t)}\,dx_1&=\int_0^{t-\tau} gt\,dt\\ 
-        x_1(t)&=g\frac{(t-\tau)^2}{2}
-    \end{aligned}
-        \qquad\qquad
-    \begin{aligned}[c]
-        ma_2&=mg\\
-        m\,dv_2&=mg\,dt\\
-        \int_0^{v_2(t)}\,dv_2&=\int_0^t g\,dt\\   
-        v_2(t)&=gt\\
-        \int_0^{x_2(t)}\,dx_2&=\int_0^t gt\,dt\\ 
-        x_2(t)&=\frac{gt^2}{2}
-    \end{aligned}
-\end{equation*}
-
-\begin{equation*}
-     l(t)=g\frac{(t-\tau)^2}{2}-\frac{gt^2}{2}=\frac{g}{2}(2\tau{t}+t^2)=gt(\tau+ \frac{t}{2} )
-\end{equation*}
-
-\textbf{Движение с сопротивлением.}
+Введем ось $x$, сонаправленную с вектором начальной скорости.
+Запишем второй закон Ньютона:
 \begin{equation*}
     \xdef\km{\frac{k}{m}}\xdef\mk{\frac{m}{k}}\xdef\mgk{\frac{mg}{k}}%
     \begin{aligned}[c]
-        m\vec{a}&=m\vec{g}-k\vec{v}\\
-        \text{x: } ma&=mg-kv\\
+        m\vec{a}&=-k\vec{v}\\
+        \text{x: } ma&=-kv\\
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
-        \frac{dv}{dt}=g-\km{}v\\
-        \frac{dv}{g-\km{}v}=dt\\
+        \frac{dv}{dt}=-\km{}v\\
+        -\mk\frac{dv}{v}=dt\\
     \end{aligned}
 \end{equation*}
-Сделаем замену переменной $c=g-\km{}v$ под интегралом, соотвественно новые пределы будут $c[v=0]=g$ и $c[v=v(t)]=g-\km{}v(t)$, а дифференциал $dv=-\mk{}dc$. Тогда можем найти $v(t)$:
+Можем найти $v(t)$:
 \begin{equation*}
     \begin{aligned}[c]
-        \int_0^{t}dt=-\mk\int_g^{g-\km{}v(t)}\frac{dc}{c}\\
-        t=-\mk{\ln{(1-\frac{kv(t)}{mg})}}\\
+        \int_0^{t}dt=-\mk\int_{v_0}^{v(t)}\frac{dv}{v}\\
+        t=-\mk{\ln{(\frac{v(t)}{v_0})}}\\
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
-        1-\frac{kv(t)}{mg}=e^{-\km{t}}\\
-        v(t)=\mgk(1-e^{-\km{t}})\\
+        \frac{v(t)}{v_0}=e^{-\km{t}}\\
+        v(t)=v_0e^{-\km{t}}\\
     \end{aligned}
 \end{equation*}
-Проинтегрировав еще раз, найдем $x(t)$:
+Заметим, что скорость равна нулю при $t\rightarrow\infty$.
+Проинтегрировав еще раз, найдем $S(t)$, учитывая, что $v(t)$ всегда неотрицательна:
 \begin{gather*}
-    \int_0^{x(t)} dx = \int_0^t \mgk(1-e^{-\km{t}}) dt\\
-    x(t)=\mgk(t+\mk{}[e^{-\km{t}}-1])\\
+    \int_0^{x(t)} dx = \int_0^t v_0e^{-\km{t}} dt\\
+    S=x(t)=v_0\mk{}[1-e^{-\km{t}}]
 \end{gather*}
-Тогда, зная, что движения шариков подобны и отличаются только временем начала движения, найдем $l(t)$:
+Можем выразить функцию времени через функцию пути:
 \begin{gather*}
-    l(t)=x(t+\tau)-x(t)=\mgk(\tau+\mk{}[e^{-\km{t}}-1]-\mk{}[e^{-\km{t}}\cdot{}e^{-\km{\tau}}-1])=\\=\mgk(\tau+\mk{e^{-\km{t}}}-\mk-\mk{e^{-\km{t}}\cdot{}e^{-\km{\tau}}}+\mk)=\\
-    =\mgk(\tau+\mk{e^{-\km{t}}}[1-e^{-\km{\tau}}])    
+    e^{-\km{t}}=1-\frac{kS}{v_0m}\\
+    v(S)=v_0e^{-\km{t}}=v_0-\frac{kS}{m}
+\end{gather*}
+Тогда можем найти полный путь до остановки, т.к. в момент остановки $v=0$:
+\begin{gather*}
+    v(S)=0\\
+    \frac{kS}{m}=v_0\\
+    S=\frac{mv_0}{k}  
 \end{gather*}
 
 
