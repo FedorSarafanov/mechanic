@@ -1,0 +1,39 @@
+\makeatletter
+\newif\if@gather@prefix 
+\preto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\gdisplaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\preto\place@tag{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\newcommand*{\beforetext}[1]{% 
+  \ifmeasuring@\else
+  \gdef\gather@prefix{#1}% 
+  \global\@gather@prefixtrue 
+  \fi
+} 
+\makeatother

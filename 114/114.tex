@@ -28,6 +28,7 @@
 \geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
 \usepackage{titlesec}
 \usepackage{float}
+% \input{bt}
 % \definecolor{black}{rgb}{0,0,0}
 % \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
 % \usepackage[unicode]{hyperref} %ссылки
@@ -140,7 +141,8 @@
 % \vspace{-2em}
 \end{figure}
 
-\textbf{Движение без сопротивления}
+\textbf{Движение без сопротивления.}
+Запишем второй закон Ньютона и последовательным интегрированием найдем зависимость координат шариков от времени, и соответственно, и $l(t)$:
 \begin{equation*}
     \begin{aligned}[c]
         ma_1&=mg\\
@@ -165,81 +167,42 @@
      l(t)=g\frac{(t-\tau)^2}{2}-\frac{gt^2}{2}=\frac{g}{2}(2\tau{t}+t^2)=gt(\tau+ \frac{t}{2} )
 \end{equation*}
 
-\textbf{Движение с сопротивлением}
-
-Доска совершает гармонические колебания по закону
+\textbf{Движение с сопротивлением.}
 \begin{equation*}
-     a=\frac{d^2x}{dt^2}=\omega^2x=\frac{4\pi^2}{T^2}x
- \end{equation*} 
-
-Запишем второй закон Ньютона для груза:
-
-Тогда $P=0$ тогда, когда 
+    \xdef\km{\frac{k}{m}}\xdef\mk{\frac{m}{k}}\xdef\mgk{\frac{mg}{k}}%
+    \begin{aligned}[c]
+        m\vec{a}&=m\vec{g}-k\vec{v}\\
+        \text{x: } ma&=mg-kv\\
+    \end{aligned}
+        \qquad\qquad
+    \begin{aligned}[c]
+        \frac{dv}{dt}=g-\km{}v\\
+        \frac{dv}{g-\km{}v}=dt\\
+    \end{aligned}
+\end{equation*}
+Сделаем замену переменной $c=g-\km{}v$ под интегралом, соотвественно новые пределы будут $c[v=0]=g$ и $c[v=v(t)]=g-\km{}v(t)$, а дифференциал $dv=-\mk{}dc$. Тогда можем найти $v(t)$:
+\begin{equation*}
+    \begin{aligned}[c]
+        \int_0^{t}dt=-\mk\int_g^{g-\km{}v(t)}\frac{dc}{c}\\
+        t=-\mk{\ln{(1-\frac{kv(t)}{mg})}}\\
+    \end{aligned}
+        \qquad\qquad
+    \begin{aligned}[c]
+        1-\frac{kv(t)}{mg}=e^{-\km{t}}\\
+        v(t)=\mgk(1-e^{-\km{t}})\\
+    \end{aligned}
+\end{equation*}
+Проинтегрировав еще раз, найдем $x(t)$:
 \begin{gather*}
-    {}m(g-\frac{4\pi^2}{T^2}x)\leq{0}\\
-    g\leq{\frac{4\pi^2}{T^2}x}
+    \int_0^{x(t)} dx = \int_0^t \mgk(1-e^{-\km{t}}) dt\\
+    x(t)=\mgk(t+\mk{}[e^{-\km{t}}-1])\\
 \end{gather*}
-Так как $A$ здесь и есть максимальное $|x|$, то 
+Тогда, зная, что движения шариков подобны и отличаются только временем начала движения, найдем $l(t)$:
 \begin{gather*}
-    A>{g\frac{T^2}{4\pi^2}}\approx6.2\text{ см}
+    l(t)=x(t+\tau)-x(t)=\mgk(\tau+\mk{}[e^{-\km{t}}-1]-\mk{}[e^{-\km{t}}\cdot{}e^{-\km{\tau}}-1])=\\=\mgk(\tau+\mk{e^{-\km{t}}}-\mk-\mk{e^{-\km{t}}\cdot{}e^{-\km{\tau}}}+\mk)=\\
+    =\mgk(\tau+\mk{e^{-\km{t}}}[1-e^{-\km{\tau}}])    
 \end{gather*}
-При 
-\begin{gather*}
-    A={g\frac{T^2}{4\pi^2}}
-\end{gather*}
-будет предельное значение амплитуды, при увеличении которой начнется подскакивание.
-% Но движение этой же системы до отрыва можно описать вторым законом Нюьтона:
-% \begin{equation*}
-% 	\begin{aligned}[c]
-% 		&m\vec{a_0}=\vec{f_e}+m\vec{g}\\
-% 		\text{x: }&ma_0=mg-k\Delta{}\\
-% 	\end{aligned}
-% 		\qquad\Longrightarrow\qquad
-% 	\begin{aligned}[c]
-% 		\Delta{}=\frac{m}{k}(g-a_0)\\
-% 		% y&=v/w\\
-% 	\end{aligned}
-% \end{equation*}
-% Тогда по теореме о изменении кинетической энергии можем записать работу сил упругости:
-% \begin{equation*}
-%     \mvn-\mv=\int_{\Delta{}}^{\delta{}} [mg-kx]\cdot{}dx
-% \end{equation*}
-% \begin{equation*}
-%     -\mv=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}\\
-% \end{equation*}
-% \begin{equation*}
-%     -\mv=-ma_0\Delta{}=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}
-% \end{equation*}
-% \begin{equation*}
-% 	\frac{k}{2}\delta^2-mg\delta+\Delta(m(g-a_0)-\frac{k}{2}\Delta)=0
-% \end{equation*}
-% И найти удлинение пружины $\delta$:
-% \begin{equation*}
-% 	\frac{k}{2}\delta^2-mg\delta+\frac{m^2}{2k}(g-a_0)^2=0
-% \end{equation*}
-% \begin{equation*}
-% 	\begin{aligned}[c]
-% 		&a=\frac{k}{2}\\
-% 		&b=-mg\\
-% 		&c=\frac{m^2}{2k}(g-a_0)^2
-% 	\end{aligned}
-% 		\qquad\Longrightarrow\qquad
-% 	\begin{aligned}[c]
-% 		D&=b^2-4ac\\
-% 		\sqrt{D}&=m\sqrt{2ga_0-a_o^2}
-% 		% y&=v/w\\
-% 	\end{aligned}
-% \end{equation*}
-% \begin{equation*}
-% 	\begin{aligned}[c]
-% 		\delta_1=\frac{mg+{}m\sqrt{2ga_0-a_o^2}}{k}
-% 	\end{aligned}
-% 		\qquad\qquad
-% 	\begin{aligned}[c]
-% 		\delta_2=\frac{mg-{}m\sqrt{2ga_0-a_o^2}}{k}
-% 	\end{aligned}
-% \end{equation*}
 
-% Так как требуется найти $\delta_{max}$, подходит корень $\delta_1$, $\delta_1>\delta_2$.
+
 
 \end{document}
