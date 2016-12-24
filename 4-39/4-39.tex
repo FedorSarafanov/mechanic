@@ -1,0 +1,182 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов - №4.39} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    % interface/.style={draw=gray!60,
+    %     % The border decoration is a path replacing decorator. 
+    %     % For the interface style we want to draw the original path.
+    %     % The postaction option is therefore used to ensure that the
+    %     % border decoration is drawn *after* the original path.
+    %     postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+    %                 amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!10,
+        draw=black,              
+        inner sep=2.88mm,
+    }
+]
+    % \draw[force,double equal sign distance=2pt,->] (c) -- ++(0,-2) node[below] {$\vec{a}_0$};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % \begin{scope}[opacity=0.4]
+    % \node[cargo] (II) at (4,0) {} node[yshift=-1.3em] {};
+    % \draw[draw=black!30,decoration={aspect=0.3, segment length=3.2mm, amplitude=0.91mm,coil},decorate] (0,0) -- node[above, black, pos=0.2, yshift=1em] {} (II); 
+
+    % \draw[force,->] (II.center) -- ++(1,0) node[above, black] {$\vec{F}$};
+    % \draw[force,->] (II.center) -- ++(-1,0) node[above, black] {$\vec{f}_e$};
+    % \draw[fill=black] (II.center) circle (1pt);
+        
+    % \end{scope}
+
+    \node[cargo] (b) at (4,0) {} node[above of=b, yshift=-1.3em] {$m$};
+
+    \draw[axis,->] (0,-1) -- ++(5,0) node[right, black] {$x$};
+    \draw[] (4,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$0$};
+    % \draw[] (4,-1.1) -- ++(0,0.2) node[below, yshift=-7pt, black] {$x$};
+
+
+    \draw[draw=black!30,decoration={aspect=0.3, segment length=1.5mm, amplitude=0.91mm,coil},decorate] (1,0) -- node[above, black, pos=0.5, yshift=1em] {$k$} (b); 
+
+    \draw[] (1,0mm) circle (1pt);
+
+    \draw[force,->] (1,0mm) -- ++(1,0) node[above, black] {$\vec{v}$};
+    \draw[force,->] (b.center) -- ++(1,0) node[above, black] {$\vec{f}_e$};
+% 
+
+   % \draw[interface] (-0.2,-2) rectangle (0,2);
+   \draw[interface] (0,-0.3) rectangle (5,-0.5);
+        % \draw[thick] (0,-2) -- (0,2);   
+        \draw[thick] (0,-0.3) -- (5,-0.3);   
+
+
+\end{tikzpicture}
+\vspace{-1em}
+\end{figure}
+Перейдем в ИСО, связанную со свободным концом пружины. Запишем второй закон Ньютона:
+\begin{equation*}
+	\begin{aligned}[c]
+        m\vec{a}&=\vec{f}_e\\
+        \text{x: } ma'&=-kx'\\
+        \ddot{x}'&+\frac{k}{m}x'=0
+	\end{aligned}
+		\qquad\Rightarrow\qquad
+    \begin{aligned}[c]
+        \omega^2&=\frac{k}{m}\\
+        x'&=A\cdot\cos{(\omega{t}+\phi_0)}\\
+        v'&=-\omega{A}\sin{(\omega{t}+\phi_0)}
+	\end{aligned}
+\end{equation*}
+Начальные условия $x(t=0)=0$, \ $v'(t=0)=-v_0$:
+\begin{equation*}
+\left\{\begin{aligned}
+    0 &= A\cdot\cos{\phi_0}\\
+    v_0 &= \omega{A}\sin{\phi_0}
+    \end{aligned}\right. \qquad\Rightarrow\qquad\left\{
+    \begin{aligned}[c]
+        \phi_0=\frac\pi2\\
+        A=\frac{v_0}{\omega}
+    \end{aligned}\right.
+\end{equation*}
+Условие остановки $v=0$.
+Перейдем в лабораторную ИСО. Согласно преобразованием Галлилея, $v=v_0+v'$. Тогда условие остановки будет $v(t_{stop})=0$ и отсюда $v'(t_{stop})=-v_0$, а чтобы брусок после остановки не возобновил движение, нулевым должно быть также и его ускорение:
+\begin{gather*}
+    \left\{\begin{aligned}
+        {v_0}\cos{\omega{t_{stop}}}=-v_0\\
+        \omega{v_0}\sin{\omega{t_{stop}}}=0
+    \end{aligned}\right. \qquad\Rightarrow\qquad\left\{
+    \begin{aligned}[c]
+        \cos\omega{t_{stop}}=1\\
+        \sin\omega{t_{stop}}=0\\
+    \end{aligned}\right.\qquad\Rightarrow\qquad
+    t_{stop}=\frac{2\pi}\omega=2\pi\sqrt\frac{m}{k}
+\end{gather*}
+% Тогда решением этих уравнений будет
+% \begin{gather*}
+%     t_{stop}=\frac{\pi}{\omega}=\pi\sqrt\frac{m}{k}\\
+%     S=x(t=t_{stop})=\frac{2F}{k}
+% \end{gather*}
+
+\end{document}
