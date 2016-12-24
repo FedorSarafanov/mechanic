@@ -1,0 +1,147 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев - №178} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    % interface/.style={draw=gray!60,
+    %     % The border decoration is a path replacing decorator. 
+    %     % For the interface style we want to draw the original path.
+    %     % The postaction option is therefore used to ensure that the
+    %     % border decoration is drawn *after* the original path.
+    %     postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+    %                 amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!10,
+        draw=black,              
+        inner sep=2.88mm,
+    }
+]
+    % \draw[force,double equal sign distance=2pt,->] (c) -- ++(0,-2) node[below] {$\vec{a}_0$};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   % \draw[interface,fill=white!40, draw=black] (0,0.1) rectangle ++(5,-0.2);
+    \draw[draw=black!80,decoration={aspect=0.3, segment length=1mm, amplitude=2mm,coil},decorate] (0,-1) -- node[above, black, pos=0.5, yshift=1em] {} ++(2,0); 
+    \draw[fill=black!40] (0,0) circle (1pt) ++(4,0) circle (1pt);
+        
+
+    \draw[draw=black!80,decoration={aspect=0.3, segment length=2mm, amplitude=2mm,coil},decorate] (0,0) -- node[above, black, pos=0.5, yshift=1em] {} ++(4,0); 
+    \draw[fill=black!40] (0,-1) circle (1pt) ++(2,0) circle (1pt);
+    
+    \draw[force,->] (2,-1) -- ++ (1,0) node[right] {$\vec{f}_e$};
+
+    % \draw[] (0,-2.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$0$};
+    \draw[] (2,-2.1) -- ++(0,0.2) coordinate (c) node[below, yshift=-5pt, black] {$x$} node[below of=c, black] {$W_{p_2}$};
+    \draw[] (4,-2.1) -- ++(0,0.2) coordinate (c) node[below, yshift=-5pt, black] {$0$} node[below of=c, black] {$W_{p_1}=0$};
+
+    % \draw [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=0pt] (2,-2) -- node [black,above, yshift=0.5em] {$\delta$} (4,-2);
+
+    \draw[axis,<-] (0,-2) node[left, black] {$x$} -- ++(5,0) ;
+    % \draw[force,->, very thick] (b.center) -- ++(-1,0) node[above, yshift=0.5em, black] {$\vec{f}_e$};
+
+    % \node[left] at (-0.4,-0.4) {$\bigotimes\vec\omega$}; 
+
+
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+По определению, 
+\begin{equation*}
+    A=-\Delta{W_p}
+\end{equation*}
+Тогда
+\begin{gather*}
+    \xdef\wpp{W_{p_2}}\xdef\fex{f_{e_x}}%
+    A=-(\wpp-W_{p_1})=-\wpp\\
+    \wpp=-A=-\int_0^x \fex dx\\
+\end{gather*}
+И можем найти функцию потенциальной энергии сжатой пружины от величины деформации $x$:
+\begin{gather*}
+    f_e=\beta{x^3}\\
+    \fex=-\beta{x^3}\\
+    \wpp=\int_0^x \beta{x^3} dx\\
+    \wpp=\frac{\beta{x^4}}{4}
+\end{gather*}
+
+\end{document}
