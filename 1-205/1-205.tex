@@ -1,0 +1,268 @@
+\documentclass[a5paper,10pt]{article}
+ 
+% \usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.205} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    arrows.meta,%
+    % arrows.spaced,%
+}
+
+\tikzset{
+    MyPersp/.style={scale=1.8,x={(1.1cm,-0cm)},y={(0.5cm,1cm)}, z={(0cm,0.8cm)}},
+ % MyPersp/.style={scale=1.5,x={(0cm,0cm)},y={(1cm,0cm)}, z={(0cm,1cm)}}, 
+ % MyPersp/.style={scale=1.5,x={(1cm,0cm)},y={(0cm,1cm)}, z={(0cm,0cm)}}, 
+    MyPoints/.style={fill=black,draw=black},
+    force/.style={>=latex,draw=blue,fill=blue},
+    % angular/.style={-{Stealth[open, angle=30:5pt,line width=1pt]}, draw=magenta},
+    angular/.style={-{Latex[length=3mm, line width=0.4pt,open,magenta, fill=white]}, draw=magenta},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }
+}
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[MyPersp, scale=1.5, font=\Large]
+
+    \def\aphi{15}
+    \def\R{2}
+
+    \pgfmathparse{\R*cos(\aphi)}\let\az\pgfmathresult
+    \pgfmathparse{\R*sin(\aphi)}\let\d\pgfmathresult
+    \pgfmathparse{\R*sqrt(cos(\aphi))/sqrt(2)}\let\r\pgfmathresult
+    \pgfmathparse{45-\aphi/2}\let\abeta\pgfmathresult
+
+    \pgfmathparse{\az/(2*\r}\let\sinbeta\pgfmathresult
+    \pgfmathparse{sqrt(1-\sinbeta^2))}\let\cosbeta\pgfmathresult
+
+    \pgfmathparse{\r*\cosbeta-\d}\let\bx\pgfmathresult
+    \pgfmathparse{\r*\sinbeta}\let\bz\pgfmathresult
+
+    \pgfmathparse{2*\r*\cosbeta-\d}\let\dx\pgfmathresult
+    \pgfmathparse{\bz/(\bx+\d)}\let\tgbeta\pgfmathresult
+
+    \coordinate (A) at (0,0,\az);
+    \coordinate (B) at (\bx,0,\bz);
+    \coordinate (C) at (-\d,0,0);
+    \coordinate (D) at (\dx,0,\az); 
+    
+
+    \fill[magenta!5,draw=black!90,dashed,opacity=1]
+     (C) % elliptical section
+        \foreach \t in {1,2,...,360}
+            {--({-cos(\t)*(\bx+\d)+\bx},{sin(\t)*(\bx+\d)},{-\tgbeta*cos(\t)+\bz})}--cycle;
+    
+    \draw[->, >=latex] (A) -- node [black,pos=0.5,left] {$\vec{r}_1$} (C);
+    \draw[->, >=latex] (A) -- node [black,pos=0.5,above] {$\vec{r}_2$} (D);
+
+    \draw[MyPoints]  (A) node [above] {$O$} circle (0.5pt);
+
+    \xdef\hh{-0.2}
+    % \draw[axis,->] (0,0,\hh) -- ++(0,0,2*\r) node [black,above] {$z$};
+    % \draw[axis,->] (-2,0,\hh) -- ++(4,0,0) node [black,right] {$x$};
+    % \draw[axis,->] (0,-1,\hh) -- ++(0,1.5,0) node [black,above right] {$y$};
+
+    \draw[axis,<-] (0,0,-1) node [black,below] {$x$} -- ++(0,0,2*\r);
+    \draw[axis,->] (-2,0,\hh) -- ++(4,0,0) node [black,right] {$z$};
+    \draw[axis,->] (0,-1,\hh) -- ++(0,1.5,0) node [black,above right] {$y$};
+
+    \draw[force,->] (C) -- ++(0,0.5,0) node [black,pos=1,right] {$\vec{v}_1$};
+    \draw[force,->] (D) -- ++(0,-0.5,0) node [black,pos=1,below] {$\vec{v}_2$};
+
+    \draw[force,->] (C) -- ++(0,0,-1) node [black,pos=1,below] {$m\vec{g}$};
+    \draw[force,->] (D) -- ++(0,0,-1) node [black,pos=1,below] {$m\vec{g}$};
+
+    \draw (C) node[left] {$I$};
+    \draw (D) node[right] {$II$};
+
+
+    \draw[axis] (A) -- ++(-1,0) node[left] {$W_p=0$};
+
+    % \draw[axis,force,->] (B) -- node[above, pos=0.4] {$\vec{r}_1$} (C);
+    % \draw[axis,force,->] (B) -- node[above, pos=0.4] {$\vec{r}_2$} (D);
+
+    % \fill[MyPoints] (B) circle (0.5pt) node[below] {$O$};
+
+    \fill[MyPoints] (C) circle (0.5pt);
+    \fill[MyPoints] (D) circle (0.5pt);
+
+    \begin{scope}[canvas is xz plane at y=0]
+        \draw[->] (0,\az)++(0,-1) node[above, xshift=-0.56em] {$\phi$} arc (270:255:1cm);
+
+    % \draw[angular,->, >=open triangle 60] (C) -- ++(115:0.8) node [black,above] {$\vec{N}_{1_O}$};
+
+    % \draw[angular,->, >=open triangle 60] (D) -- ++(-65:0.8) node [black,below] {$\vec{N}_{2_O}$};
+
+    \draw[angular] (C) -- ++(-25:0.3) node [black,below] {$\vec{N}_{1}$};
+
+    \draw[angular] (D) -- ++(-90:0.3) node [black,below, right] {$\vec{N}_{2}$};
+
+
+    \end{scope}
+
+\end{tikzpicture}
+\end{figure}
+Запишем моменты сил, действующих на шарик, в проеции на $x$.
+\begin{equation*}
+    \begin{aligned}[c]
+        [\vec{M}]_x=[\vec{r}_1]_x\times [m\vec{g}]_x\\
+        \frac{dN_x}{dt}=0
+    \end{aligned}
+        \qquad\Longrightarrow\qquad
+    \begin{aligned}[c]
+        N_x=const
+    \end{aligned}
+\end{equation*}
+Тогда
+\begin{equation*}
+\left\{
+    \begin{aligned}[c]
+        N_x={mv_1}l\sin\phi\\
+        N_x={mv_2}l
+    \end{aligned}\right.
+        \qquad\Longrightarrow\qquad
+    \begin{aligned}[c]
+        v_2=v_1\sin\phi
+    \end{aligned}
+\end{equation*}
+Можно записать З.С.М.Э., выбрав ноль потенциальной энергии
+\begin{equation*}
+\xdef\mv{\frac{mv_1^2}{2}}%
+\xdef\mvv{\frac{mv_2^2}{2}}%
+	\begin{aligned}[c]
+        \mv-mgl\cos{\phi}=\mvv\\
+        \mv-\mvv=mgl\cos{\phi}\\
+	\end{aligned}
+		\qquad\Longrightarrow\qquad
+	\begin{aligned}[c]
+        \frac{v_1^2}{2}(1-\sin^2\phi)=gl\cos\phi\\
+        v_1^2=\frac{2gl}{\cos\phi}
+	\end{aligned}
+\end{equation*}
+\begin{equation*}
+    v_1=\sqrt\frac{2gl}{\cos\phi}
+\end{equation*}
+% Но движение этой же системы до отрыва можно описать вторым законом Нюьтона:
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		&m\vec{a_0}=\vec{f_e}+m\vec{g}\\
+% 		\text{x: }&ma_0=mg-k\Delta{}\\
+% 	\end{aligned}
+% 		\qquad\Longrightarrow\qquad
+% 	\begin{aligned}[c]
+% 		\Delta{}=\frac{m}{k}(g-a_0)\\
+% 		% y&=v/w\\
+% 	\end{aligned}
+% \end{equation*}
+% Тогда по теореме о изменении кинетической энергии можем записать работу сил упругости:
+% \begin{equation*}
+%     \mvn-\mv=\int_{\Delta{}}^{\delta{}} [mg-kx]\cdot{}dx
+% \end{equation*}
+% \begin{equation*}
+%     -\mv=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}\\
+% \end{equation*}
+% \begin{equation*}
+%     -\mv=-ma_0\Delta{}=mg(\delta{}-\Delta{})+\frac{k\Delta{}^2}{2}-\frac{k\delta{}^2}{2}
+% \end{equation*}
+% \begin{equation*}
+% 	\frac{k}{2}\delta^2-mg\delta+\Delta(m(g-a_0)-\frac{k}{2}\Delta)=0
+% \end{equation*}
+% И найти удлинение пружины $\delta$:
+% \begin{equation*}
+% 	\frac{k}{2}\delta^2-mg\delta+\frac{m^2}{2k}(g-a_0)^2=0
+% \end{equation*}
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		&a=\frac{k}{2}\\
+% 		&b=-mg\\
+% 		&c=\frac{m^2}{2k}(g-a_0)^2
+% 	\end{aligned}
+% 		\qquad\Longrightarrow\qquad
+% 	\begin{aligned}[c]
+% 		D&=b^2-4ac\\
+% 		\sqrt{D}&=m\sqrt{2ga_0-a_o^2}
+% 		% y&=v/w\\
+% 	\end{aligned}
+% \end{equation*}
+% \begin{equation*}
+% 	\begin{aligned}[c]
+% 		\delta_1=\frac{mg+{}m\sqrt{2ga_0-a_o^2}}{k}
+% 	\end{aligned}
+% 		\qquad\qquad
+% 	\begin{aligned}[c]
+% 		\delta_2=\frac{mg-{}m\sqrt{2ga_0-a_o^2}}{k}
+% 	\end{aligned}
+% \end{equation*}
+
+% Так как требуется найти $\delta_{max}$, подходит корень $\delta_1$, $\delta_1>\delta_2$.
+
+\end{document}

@@ -1,0 +1,68 @@
+% Plane Sections of the Cylinder - Dandelin Spheres
+% Author: Hugues Vermeiren
+\documentclass{article}
+\usepackage{tikz}
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{10pt}%
+%%%>
+\begin{comment}
+:Title: Plane Sections of the Cylinder - Dandelin Spheres
+:Tags: 3D;mathematical engine;geometry;mathematics
+:Author: Hugues Vermeiren
+:Slug: dandelin-spheres
+\end{comment}
+\tikzset{
+	MyPersp/.style={scale=1.8,x={(1cm,-0cm)},y={(-0.5cm,-1cm)}, z={(0cm,0.8cm)}},
+ % MyPersp/.style={scale=1.5,x={(0cm,0cm)},y={(1cm,0cm)}, z={(0cm,1cm)}}, 
+ % MyPersp/.style={scale=1.5,x={(1cm,0cm)},y={(0cm,1cm)}, z={(0cm,0cm)}}, 
+	MyPoints/.style={fill=white,draw=black,thick}
+		}
+\begin{document}
+
+\begin{tikzpicture}[MyPersp,font=\large]
+	% the base circle is the unit circle in plane Oxy
+	\def\aphi{10}
+	\def\R{2}
+
+	\pgfmathparse{\R*cos(\aphi)}\let\az\pgfmathresult
+	\pgfmathparse{\R*sin(\aphi)}\let\d\pgfmathresult
+	\pgfmathparse{\R*sqrt(cos(\aphi))/sqrt(2)}\let\r\pgfmathresult
+	\pgfmathparse{45-\aphi/2}\let\abeta\pgfmathresult
+
+	\pgfmathparse{\az/(2*\r}\let\sinbeta\pgfmathresult
+	\pgfmathparse{sqrt(1-\sinbeta^2))}\let\cosbeta\pgfmathresult
+
+	\pgfmathparse{\r*\cosbeta-\d}\let\bx\pgfmathresult
+	\pgfmathparse{\r*\sinbeta}\let\bz\pgfmathresult
+
+	\pgfmathparse{2*\r*\cosbeta-\d}\let\dx\pgfmathresult
+	\pgfmathparse{\bz/(\bx+\d)}\let\tgbeta\pgfmathresult
+
+	\coordinate (A) at (0,0,\az);
+	\coordinate (B) at (\bx,0,\bz);
+	\coordinate (C) at (-\d,0,0);
+	\coordinate (D) at (\dx,0,\az);
+	
+	\fill[MyPoints] (A) circle (1pt);
+	\fill[MyPoints] (B) circle (1pt);
+	\fill[MyPoints] (C) circle (1pt);
+	\fill[MyPoints] (D) circle (1pt);
+
+	\fill[magenta!15,draw=magenta!10,very thick,opacity=0.5]
+     (C) % elliptical section
+		\foreach \t in {1,2,...,360}
+			{--({-cos(\t)*(\bx+\d)+\bx},{sin(\t)*(\bx+\d)},{-\tgbeta*cos(\t)+\bz})}--cycle;
+	
+	\draw[thick] (A) -- (C) (A) -- (D) (C) -- (D);
+
+	\draw[thick,->] (0,0,0) -- (0,0,2*\r) node [above] {$z$};
+	\draw[thick,->] (-1,0,0) -- (\R,0,0) node [right] {$x$};
+	\draw[thick,->] (0,0,0) -- (0,\R,0) node [below] {$y$};
+
+
+\end{tikzpicture}
+
+\end{document}
