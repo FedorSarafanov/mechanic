@@ -1,0 +1,141 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев -- №20} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m2/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    m1/.style={draw=black!30, rectangle,draw,thin, fill=blue!2, minimum width=0.7cm,minimum height=0.7cm},
+    plane/.style={draw=black!30, very thick, fill=blue!5, line width=1pt},
+    % base/.style={draw=black!70, very thick, fill=blue!4, line width=2pt},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    acceleration/.style={>=open triangle 60,draw=blue,fill=blue},
+    inforce/.style={force,double equal sign distance=2pt},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }
+]
+
+\draw[scale=0.5,domain=0:2,smooth,variable=\x,blue] plot ({\x},{-\x*\x});
+\draw[scale=0.5,domain=-2:2,smooth,variable=\x,blue] plot ({\x+4},{-0.8-0.8*\x*\x});
+\draw[scale=0.5,domain=-2:2,smooth,variable=\x,blue] plot ({\x+8},{-1.6-0.6*\x*\x});
+\draw[scale=0.5,domain=-2:2,smooth,variable=\x,blue] plot ({\x+12},{-2.4-0.4*\x*\x});
+\draw[dashed,scale=0.5,domain=-2:2,smooth,variable=\x,blue] plot ({\x+16},{-3.2-0.2*\x*\x});
+
+\draw[axis, ->] (0,-2) -- ++(10,0) node[right] {$+x$};
+\draw[axis, ->] (0,-2) -- ++(0,3) node[right] {$+y$};
+\draw[axis] (0,-2) -- ++(-0.5,0);
+\draw[axis] (0,0) coordinate (0) -- ++(-0.5,0);
+
+\draw[<->] (-0.5,-2) -- node[left] {$h$} ++ (0,2);
+\draw[force,->] (0) -- ++(0.5,0) node[right] {$\vec{v}_0$};
+
+\draw[acceleration, ->] (4,1) -- node[right] {$\vec{g}$} (4,0);
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+
+\begin{gather*}
+    \intertext{Найдем верт. составляющую скорости шарика и его смещение относительно начала координат в момент первого падения:}
+    v_y=-gt\\
+    y=h-\frac{gt^2}{2}\\
+    h=\frac{gt_0^2}{2}\\
+    t_0=\sqrt{\frac{2h}{g}}\\
+    \Delta{}x_0=vt_0\\
+    \intertext{Скорость (по модулю) в момент его падения:}
+    v_{y_0}=gt_0\\
+    \intertext{Скорость в момент его первого подъема:}
+    v_{y_1}=\alpha{}gt_0\\
+    \intertext{Так как верт. составляющая скорости шарика в верхней точке нулевая, найдем время подъема (время периода двое больше):}
+    v(t)=v_{y_1}-gt_p\\
+    t_1=2t_p=2\alpha{t_0}\\
+    \intertext{Так как горизонтальная скорость постоянна, найдем смещение шарика за один период:}
+    \Delta{}x_1=vt_1=2\alpha{vt_0}\\
+    \intertext{Аналогично далее:}
+    \Delta{}x_n=2\alpha^nvt_0\\
+    \intertext{Так как все смещения положительны, найдем расстояние на оси $x$ от места броска как сумму всех смещений:}
+    x=\Delta{x_0}+\Delta{x_1}+\Delta{x_2}+\ldots+\Delta{x_n}\\
+    x=vt_0+2\alpha{vt_0}+2\alpha^2{vt_0}+\ldots+2\alpha^n{v_0t}\\
+    x=vt_0+2vt_0(\alpha+\alpha^2+\ldots+\alpha^n)\\
+    \intertext{Воспользуемся свойством бесконечной геометрической прогрессии, учитывая, что её знаменатель $\alpha<1$:}
+    x=vt_0(1+2\frac{1}{1-\alpha})=vt_0(\frac{1-\alpha}{1-\alpha}+\frac{2}{1-\alpha})=vt_0\frac{1+\alpha}{1-\alpha}=v\sqrt{\frac{2h}{g}}\cdot\frac{1+\alpha}{1-\alpha}
+\end{gather*}
+
+\end{document}
