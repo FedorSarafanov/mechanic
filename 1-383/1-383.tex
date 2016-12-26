@@ -3,7 +3,7 @@
 \usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
 
 \usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
-\fancyhead[L]{Иродов -- №1.382}
+\fancyhead[L]{Иродов -- №1.383}
 \fancyfoot{}
 
 %Команда \beforetext для текста слева от формулы
@@ -11,20 +11,7 @@
 \tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, }}
 
 \begin{document}
-\begin{figure}[H]
-    \centering
-\begin{tikzpicture}
-    \draw[axis,->] (0,0) -- (5,0) node[right, black] {$x$};
-    \draw[force,->] (0,1) -- node[above, black] {$\vec{v}_1$} ++(2,0);
-    \draw[force,->] (5,1) -- node[above, black] {$\vec{v}_2$} ++(-2,0);
 
-\end{tikzpicture}
-\vspace{-1em}
-\end{figure}
-В лабораторной системе отсчета:
-\begin{gather*}
-    v_\text{f}=v_1+v_2=1.25c
-\end{gather*}
 \begin{figure}[H]
     \centering
 \begin{tikzpicture}
@@ -33,15 +20,25 @@
     \draw[axis,->] (0,1) -- ++(0,1) node[right, black] {$K'$};С
     \draw[axis,->] (-1,0) -- ++(0,3) node[right, black] {$K$};
 
-    \draw[force,->] (0,1) -- node[above, black] {$\vec{v}_1$} ++(2,0);
-    \draw[force,->] (5,1) -- node[above, black] {$\vec{v}_2$} ++(-2,0);
+    \draw[force,->] (1,1) -- node[above, black] {$\vec{v}$} ++(1,0);
+    \draw[force,->] (4,1.2) -- node[above, black] {$-\vec{v}$} ++(-1,0);
+
+    \draw[line width=2pt] (0,1) -- ++(1,0);
+    \draw[line width=2pt] (5,1.2) -- ++(-1,0);
 
 \end{tikzpicture}
 \vspace{-1em}
 \end{figure}
-Введем СО, связанную с первой частицей. Тогда относительно неё скорость второй частицы $-v_2$, и по релятивистскому закону сложения скоростей: 
+Введем систему отсчета $K'$, связанную с первым стержнем. Тогда относительно него скорость второй частицы $-v_2$, и по релятивистскому закону сложения скоростей: 
 \begin{gather*} 
-    v'_{f_\text{отн}}=\frac{-v_2-v_1}{1+v_1v_2/c^2}=-\frac{v_1+v_2}{1+v_1v_2/c^2}=-0.91c
+    v'=\frac{-v-v}{1+v^2/c^2}=-\frac{2v}{1+v^2/c^2}
 \end{gather*}
-
+Но тогда можно записать релятивистское сокращение длины движущегося стержня:
+\begin{gather*} 
+    l=l_0\sqrt{1-v'^2/c^2}\\
+    l=l_0\sqrt{1-\frac{4v^2}{c^2(1+v^2/c^2)^2}}=
+    l_0\sqrt{1-\frac{4v^2c^2}{(c^2+v^2)^2}}=\\
+    =l_0\sqrt{\frac{c^4+2c^2v^2+v^2}{(c^2+v^2)^2}-\frac{4v^2c^2}{(c^2+v^2)^2}}=\\=
+    l_0\frac{c^2-v^2}{c^2+v^2}
+\end{gather*}
 \end{document}
