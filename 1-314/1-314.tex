@@ -1,0 +1,95 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.314}
+\fancyfoot{}
+
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, }}
+
+\begin{document}
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+    % \begin{scope}[opacity=0.4]
+    % \node[cargo] (I) at (2,0) {} node[above of=I, yshift=-1.3em] {};
+    % \draw[draw=black!80,decoration={aspect=0.3, segment length=1mm, amplitude=2mm,coil},decorate] (0,0) -- node[above, black, pos=0.5, yshift=1em] {} (I); 
+    % \draw[] (4,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$l$};
+        
+    % \end{scope}
+   \draw[interface,fill=white!40, draw=black] (0,0.1) rectangle ++(5,-0.2);
+   \draw[interface,fill=magenta!30, draw=black] (3,0.1) rectangle ++(2,-0.2);
+
+    % \node[cargo] (b) at (4,0) {} node[above of=b, yshift=-1.3em] {$m$};
+    % \draw[draw=black!80,decoration={aspect=0.3, segment length=1.5mm, amplitude=2mm,coil},decorate] (0,0) -- node[above, black, pos=0.5, yshift=1em] {$k$} (b); 
+    \draw[] (0,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$0$};
+    \draw[] (3,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$x$};
+    \draw[] (5,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$\frac{l}2$};
+
+
+    \draw[axis,->] (0,-1) -- ++(6,0) node[right, black] {$x$};
+    \draw[fill=black] (0,0) circle (0.1);
+
+    \draw[force,->] (3,0) -- ++(-0.5,0) node[above, yshift=0.5em, black] {$\vec{f}_e$};
+    \draw[inforce,->] (3,0) -- ++(0.5,0) node[above, yshift=0.5em, black] {$\vec{F}$};
+
+    \node[left] at (-0.4,-0.4) {$\bigotimes\vec\omega$}; 
+
+
+\end{tikzpicture}
+\vspace{-1em}
+\end{figure}
+Введем силу $F$ как силу, которая прикладывается к данному сечению частью стержня справа (сумма центробежных сил энерции каждого элементарного кусочка такой части стержня)
+\begin{gather*}
+    % 0=\vec{f}_{e}+\vec{F}\\
+    % \text{x: } f_{e_x}=-F_x\\
+    F=\int dF\\
+    dF=dm\omega^2x=S\rho\omega^2x\,dx\\
+    F=S\rho\omega^2\int_x^{\frac{l}2} x\,dx=
+    S\rho\omega^2 \left(
+        \frac{l^2}{8}-\frac{x^2}{2}
+    \right)
+\end{gather*}
+Очевидно, что $F$ максимальна в точке $x=0$.
+\\
+\begin{wrapfigure}{l}{0.5\linewidth}
+\centering
+
+    \begin{tikzpicture}[scale=0.6]
+          \draw[axis,->] (-4,0) -- (4,0) node[right, black] {$x$};
+          \draw[axis,->] (0,0) -- (0,5) node[above, black] {$\sigma_{n}$};
+          
+          \draw[axis] (0,4) -- ++(4,0) node[right, black] {$\rho\omega^2
+        \frac{l^2}{8} $};
+
+          \draw[] (0,0.2) -- ++(0,-0.4) node[below, black] {$0$};
+          \draw[] (3,0.2) -- ++(0,-0.4) node[below, black] {$\frac{l}{2}$};
+          \draw[] (-3,0.2) -- ++(0,-0.4) node[below, black] {$\frac{l}{2}$};
+
+          \draw[scale=1,domain=-2:2,smooth,variable=\x, magenta]  plot ({1.5*\x},{1*(4-\x*\x)});
+    \end{tikzpicture}
+\caption{Зависимость $\sigma_{n}(x)$}
+\label{fig:myfig}
+\end{wrapfigure}
+\begin{gather*}
+    \sigma_n=\frac{F}{S}=
+    \rho\omega^2 \left(
+        \frac{l^2}{8}-\frac{x^2}{2}
+    \right)
+\end{gather*}
+Тогда нормальное напряжение максимально тоже в точке $x=0$:
+\begin{gather*}
+    \sigma_{max}=
+    \rho\omega^2
+        \frac{l^2}{8}  
+\end{gather*}
+И отсюда
+\begin{gather*}
+    \nu=\frac\omega{2\pi}=\frac 1{2\pi}\cdot\sqrt\frac{8\sigma_{max}}{\rho l^2}
+    =\frac 1{l\pi}\cdot\sqrt\frac{2\sigma_{max}}{\rho}
+\end{gather*}
+
+\end{document}

@@ -1,47 +1,14 @@
-\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.} 
-\fancyhead[C]{Механика}
-\fancyhead[L]{Яковлев -- №293} 
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев -- №293}
 \fancyfoot{}
 
-\makeatletter
-\newif\if@gather@prefix 
-\preto\place@tag@gather{% 
-  \if@gather@prefix\iftagsleft@ 
-    \kern-\gdisplaywidth@ 
-    \rlap{\gather@prefix}% 
-    \kern\gdisplaywidth@ 
-  \fi\fi 
-} 
-\appto\place@tag@gather{% 
-  \if@gather@prefix\iftagsleft@\else 
-    \kern-\displaywidth 
-    \rlap{\gather@prefix}% 
-    \kern\displaywidth 
-  \fi\fi 
-  \global\@gather@prefixfalse 
-} 
-\preto\place@tag{% 
-  \if@gather@prefix\iftagsleft@ 
-    \kern-\gdisplaywidth@ 
-    \rlap{\gather@prefix}% 
-    \kern\displaywidth@ 
-  \fi\fi 
-} 
-\appto\place@tag{% 
-  \if@gather@prefix\iftagsleft@\else 
-    \kern-\displaywidth 
-    \rlap{\gather@prefix}% 
-    \kern\displaywidth 
-  \fi\fi 
-  \global\@gather@prefixfalse 
-} 
-\newcommand*{\beforetext}[1]{% 
-  \ifmeasuring@\else
-  \gdef\gather@prefix{#1}% 
-  \global\@gather@prefixtrue 
-  \fi
-} 
-\makeatother
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, }, }
 \begin{document}
 \def\iangle{30} % Angle of the inclined plane
 
@@ -51,24 +18,7 @@
 
 \begin{figure}[H]
     \centering
-\begin{tikzpicture}[
-    force/.style={>=latex,draw=blue,fill=blue},
-    axis/.style={densely dashed,gray,font=\small},
-    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
-    m/.style={rectangle,draw=black,fill=lightgray,minimum size=0.3cm,thin},
-    plane/.style={draw=black,fill=blue!10},
-    string/.style={draw=black, thick},
-    pulley/.style={thick},
-    acceleration/.style={>=open triangle 60,draw=blue,fill=blue},
-    inforce/.style={force,double equal sign distance=2pt},
-    interface/.style={
-        pattern = north east lines,
-        draw    = none,
-        pattern color=gray!60,          
-    },
-    cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
-]
-
+\begin{tikzpicture}
 \matrix[column sep=0.3cm] {
     \begin{scope}[]
         \xdef\r{1.5cm}
