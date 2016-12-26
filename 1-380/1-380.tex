@@ -1,0 +1,61 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.380}
+\fancyfoot{}
+
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, }}
+
+\begin{document}
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+    \draw[axis,->] (0,0) -- (5,0) node[right, black] {$x$};
+    \draw[axis,->] (0,0) -- (0,5) node[above, black] {$ct$};
+    \draw[step=.5,axis,xshift=0cm,yshift=0cm] (0,0) grid (4,4);
+
+    \def\step{0.07}
+    \draw[white] (-2.4,0);
+   \foreach \i in {0,1,...,8} {
+        \draw [very thin] (\i/2,\step) -- (\i/2,-\step)  node [below] {$\i$};
+    }
+    \foreach \i in {0,1,...,8} {
+        \draw [very thin] (\step,\i/2) -- (-\step,\i/2)  node [left] {$\i$};
+    }   
+
+    \draw[fill=black] (1,0.5) circle (2pt) node[above,xshift=7pt] {$A$};       
+    \draw[fill=black] (2.5,3) circle (2pt) node[above,xshift=7pt] {$B$};       
+    \draw[fill=black] (3.5,2) circle (2pt) node[above,xshift=7pt] {$C$};       
+          % \draw[axis] (0,4) -- ++(4,0) node[right, black] {$\rho\omega^2
+        % \frac{l^2}{8} $};
+
+          % \draw[] (0,0.2) -- ++(0,-0.4) node[below, black] {$0$};
+          % \draw[] (3,0.2) -- ++(0,-0.4) node[below, black] {$\frac{l}{2}$};
+          % \draw[] (-3,0.2) -- ++(0,-0.4) node[below, black] {$\frac{l}{2}$};
+
+          % \draw[scale=1,domain=-2:2,smooth,variable=\x, magenta]  plot ({1.5*\x},{1*(4-\x*\x)});
+
+
+\end{tikzpicture}
+\vspace{-1em}
+\end{figure}
+Воспользуемся инвариантностью интервала, учитывая, что разность координат в штрихованной системе равна нулю:
+\begin{gather*}
+    s^2=c^2(t_B-t_A)^2-(x_B-x_A)^2=c^2(t'_B-t'_A)^2\\
+    (6-1)^2-(5-2)^2=c^2\Delta{t'}^2\\
+    \Delta{t'}=\frac{\sqrt{25-9}}{c}\\
+    \Delta{t'}=
+    1.33\cdot10^{-8}\approx13\cdot10^{-9}\text{ с} = 13\text{ нс }
+\end{gather*}
+Аналогично. только теперь в штрихованной системе равна нулю разность времен:
+\begin{gather*} 
+    s^2=c^2(t_C-t_A)^2-(x_C-x_A)^2=-(x'_C-x'_A)^2\\
+    (4-1)^2-(7-2)^2=-\Delta{x'}^2\\
+    \Delta{x'}={\sqrt{25-9}}=4\text{ м }\\
+\end{gather*}
+
+\end{document}
