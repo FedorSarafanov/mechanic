@@ -1,0 +1,168 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.} 
+\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев -- №293} 
+\fancyfoot{}
+
+\makeatletter
+\newif\if@gather@prefix 
+\preto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\gdisplaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\preto\place@tag{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\newcommand*{\beforetext}[1]{% 
+  \ifmeasuring@\else
+  \gdef\gather@prefix{#1}% 
+  \global\@gather@prefixtrue 
+  \fi
+} 
+\makeatother
+\begin{document}
+\def\iangle{30} % Angle of the inclined plane
+
+\def\down{-90}
+\def\arcr{0.5cm} % Radius of the arc used to indicate angles
+\def\FIN{\vec{F}_{in}^\text{пост}}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    axis/.style={densely dashed,gray,font=\small},
+    M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+    m/.style={rectangle,draw=black,fill=lightgray,minimum size=0.3cm,thin},
+    plane/.style={draw=black,fill=blue!10},
+    string/.style={draw=black, thick},
+    pulley/.style={thick},
+    acceleration/.style={>=open triangle 60,draw=blue,fill=blue},
+    inforce/.style={force,double equal sign distance=2pt},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+]
+
+\matrix[column sep=0.3cm] {
+    \begin{scope}[]
+        \xdef\r{1.5cm}
+        \xdef\rp{3pt}
+        \node [shape=circle,draw] (c) at (0,0) [minimum size=\r*2] {};
+        \draw [axis, ->] (0,0) -- (\iangle:\r+2cm) node[anchor=south] {$+y$};
+
+
+        \draw [axis, ->]  ($(\iangle:\r)!2cm!90:(0,0)$) --($(\iangle:\r)!2cm!270:(0,0)$)  node[anchor=south] {$+x$};
+
+        \draw [axis, ->]  (0,-\r) -- (0,2*\r)  node[anchor=south] {ось};
+        \draw [axis, ->]  (-\r,0) -- (1.5*\r,0)  node[below, xshift=1em] {экватор};
+        \draw [force, ->] (0,\r) -- (0,\r+2em) node[left] {$\vec{\omega}$};
+        \coordinate (o) at (\iangle:\r);
+
+        \draw[force,->] (o) -- ++(\iangle:0.5cm) node[above] {$\vec{v}_0$}; 
+        {[axis,<-] 
+            \draw[solid,shorten >=0.5pt] (\iangle:\arcr) arc(\iangle:0:\arcr);
+            \node at (0.5*\iangle:1.4*\arcr) {$\phi$};
+
+            \draw[solid] (0,0) -- (\iangle:\r) node[left,xshift=-3pt]{$+z$};
+
+            \draw[solid, fill=white] (\iangle:\r) circle (\rp+0.8pt) node[cross=\rp,rotate=0]{};
+        }
+
+
+    \end{scope}
+&
+    \begin{scope}[rotate=0]
+        {[axis,->]
+            \draw (0,0) coordinate (0) -- (0,2) node[anchor=south] {$+y$};
+            \draw (0,0) -- ++(3.2,0) node[above] {$+z$};
+            
+            \draw[scale=0.5,domain=-2:2,smooth,variable=\x] plot ({1.5*\x+3},{-0.7*\x*\x+2.8});
+
+            \draw[solid,shorten >=0.5pt, ] (0:0.5)
+                arc(0:61:0.5);
+            \node at (30:0.7) {$\alpha$};
+        }
+
+        {[force,->]
+            \draw (0,0) -- ++(61:1.5) node[above] {$\vec{v}_0$};
+            \draw  (0,0) --(90:0.5) node [above, left] {$\vec{\omega}_\parallel$};
+
+            \draw[solid, fill=white] (0,0) node[below,yshift=-3pt]{$\vec{\omega}_\perp$} circle (\rp+0.8pt) node[cross=\rp,rotate=0]{};
+        }
+    \end{scope}
+&
+    \begin{scope}[]   
+        {[axis,->]
+            \draw (0,0) -- (0,2) node[anchor=south] {$+y$};
+            \draw (1.5,0) -- ++(-2.5,0) node[above] {$+x$};
+        }
+        {[force,->]
+            \draw  (0,0) --(90:1.3) node [above, right] {$\vec{v_0}$};
+            \draw  (0,0) --(90:0.5) node [above, right] {$\vec{\omega}_\parallel$};
+            \draw  (0,0) --(0:1) node [below] {$\vec{v_0}$};
+
+            \draw  (0,0) --(180:0.5) node [below] {$\vec{\omega}_\perp$};
+
+        }
+    \end{scope}
+\\
+};
+\end{tikzpicture}
+\end{figure}
+
+Рассмотрим задачу приближенно, исходя из основного движения по оси $y$.
+\begin{gather}
+    \beforetext{Запишем аналог II з. Н.:}%
+    m\vec{a}=m\vec{g}+\vec{F}^\text{кор}_\text{in}+\vec{F}^\text{цб}_\text{in}\\
+    \beforetext{Т.к. $\vec{F}^\text{цб}_\text{in}$ мало:}%
+    m\vec{a}=m\vec{g}+\vec{F}^\text{кор}_\text{in}\\
+    \intertext{
+        Изменение траектории полета в плоскости $zy$, вызванное силой Кориолиса 
+        \begin{equation}
+            F_{in_{zy}}^\text{кор}=2mv_0\omega_\perp,
+        \end{equation}
+         учитывать не будем (отсюда горизонтальная составляющая скорости -- постоянна)
+    }
+    \beforetext{Проекция на y:} ma'_y=-mg\\
+    \beforetext{Опуская интегрирование:} v'_y(t)=v'_{0y}-gt\\
+    \beforetext{Тогда условие остановки:} t_{stop}=\frac{v'_{0y}}{g}\Longrightarrow t_\text{движ}=\frac{2v'_{0y}}{g}\\
+    {\omega_\perp}={\omega}\cdot\cos\phi, \quad
+    {\omega_\parallel}={\omega}\cdot\sin\phi\\
+    \beforetext{Проекция на x:} ma^\text{кор}_x=2m|[\vec{v}'\times\vec{\omega_\perp}]|\\
+    \beforetext{Тогда} a^\text{кор}_x\approx-2\omega_\parallel{v_0\cos\alpha}
+%
+\end{gather}
+Так как ускорение, обеспеченное силой Кориолиса, постоянно по модулю и направлению, опуская интегрирование, получаем:
+\begin{gather}
+    {x}=\frac{{a^\text{кор}_x}t^2}{2} \rightarrow \Delta{x}=x(t=t_\text{движ})=-4\frac{\omega v_0^3}{g^2}\sin\phi\cos\alpha\sin^2\alpha\approx-71\text{ m}
+%
+\end{gather}
+где знак минус говорит о том, что снаряд отклонится на юг.
+
+\end{document}
