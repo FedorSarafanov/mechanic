@@ -32,7 +32,7 @@
 }
 \begin{document}
 
-\begin{wrapfigure}[12]{l}{0.4\textwidth}
+\begin{wrapfigure}[16]{l}{0.4\textwidth}
     % \centering
 \begin{tikzpicture}
     \def\rr{0.4}
@@ -90,8 +90,7 @@
 
 \end{tikzpicture}
 \end{wrapfigure}
-
-Следует из невесомости нитей:
+\hfill
 \begin{gather*}
     T_1=T_2\\
     T_3=T_4\\
@@ -110,56 +109,23 @@ II-й закон для невесомых блоков:
 \\
 II-й закон для грузов:
 \begin{gather*}
-    % m_0\vec{a}_0=\vec{T}_1=-\vec{T}_2=\vec{T}_3=-\vec{T}_4=\vec{T}_5+\vec{T}_6=-\vec{T}_7+(-\vec{T}_8)\\
-    % m_1\vec{a_1}=m_1\vec{g}+\vec{T}_7\\
     m_0a_{0x}=2T\\
-    m_1a'_{1x}=m_1g-T\\
-    % m_2\vec{a_2}=m_2\vec{g}+\vec{T}_8\\
-    m_2a'_{2x}=m_2g-T
-    % m_0a_0=m_1(g-a'_1)+m_2(g-a'_2)=m_1(g-a'_1)+m_2(g+a'_1)
+    m_1a_{1x}=m_1a_0+m_1a'_{1x}=m_1g-T\\
+    m_2a_{2x}=m_2a_0+m_2a'_{2x}=m_2g-T
 \end{gather*}
-Еще
+Из нерастяжимости нитей
 \begin{gather*}
     a'_{2x}=-a'_{1x}
 \end{gather*}
 Тогда
 \begin{gather*}
-    % m_0\vec{a}_0=\vec{T}_1=-\vec{T}_2=\vec{T}_3=-\vec{T}_4=\vec{T}_5+\vec{T}_6=-\vec{T}_7+(-\vec{T}_8)\\
-    % m_1\vec{a_1}=m_1\vec{g}+\vec{T}_7\\
-    g-T/m_1=T/m_2-g\\
-    2g=T/m_2+T/m_1=T\frac{m_1+m_2}{m_1m_2}\\
-    T=2g\frac{m_1m_2}{m_1+m_2}\\
-    m_0a_{0x}=2T\\
-    a_{0x}=4g\frac{m_1m_2}{m_0(m_1+m_2)}\\
-    a'_{1x}=g-2g\frac{m_1m_2}{m_1(m_1+m_2)}\\
-    % =g\frac{m_1^2-4m_1m_2}{m_1(m_1-m_2)}
-    a_{1x}=\frac{2T}{m_0}+g-\frac{T}{m_1}=\frac{2Tm_1+gm_0m_1-Tm_0}{m_0m_1}
-    % 4g\frac{m_1m_2}{m_0(m_1-m_2)}+g-2g\frac{m_1m_2}{m_1(m_1-m_2)}
+    m_1a'_{1x}=m_1g-T-m_1\frac{2T}{m_0}\\
+    -m_2a'_{1x}=m_2g-T-m_2\frac{2T}{m_0}\\
+    -\frac{m_1}{m_2}=\frac{m_0m_1g-Tm_0-m_12T}{m_0m_2g-Tm_0-m_22T}\\
+    m_0m_1m_2g-m_0m_1T-m_1m_22T=-m_0m_1m_2g+m_0m_2T+m_1m_22T\\
+    T=g\frac{2m_0m_1m_2}{4m_1m_2+m_0m_1+m_0m_2}\\
+    a_{1x}=g-\frac{T}{m_1}=\frac{m_0(m_1-m_2)+4m_1m_2}{m_0(m_1+m_2)+4m_1m_2}
 \end{gather*}
-% \begin{align*}
-% \end{align*}
-
-% \textbf{Случай $I$.} Рассмотрим движение с торможением без поворота:
-% \begin{equation*}
-%     \begin{aligned}[c]
-% 		m\vec{a}=\vec{f}_R\\
-% 		\text{x: }ma=-mg\mu\\
-% 		\int_{v_0}^{v(t)}dv=\int_0^t -g\mu dt\\
-% 		v(t)=v_0-\mu{gt}\\
-% 		\int_{0}^{x}dx=\int_0^t [v_0-\mu{gt}] dt\\
-% 		x(t)=v_0{t}-\mu{g}\frac{t^2}{2}
-%     \end{aligned}
-%         \qquad\qquad
-%     \begin{aligned}[c]
-%     \text{Условие остановки $v=0$ при $t=t^*$:}\\
-%     v_\text{ост}=0=v_0-g\mu{}t^*\\
-%     t^*=\frac{v_0}{g\mu}\\
-%     \text{Тогда пройденное до остановки $R$:}\\
-%     R=v_0\cdot{t^*}-\mu{g}\frac{{t^*}^2}{2}\\
-%     R=\frac{v_0^2}{2g\mu}
-%     \end{aligned}
-% \end{equation*}
-
 
 \end{document}
 
