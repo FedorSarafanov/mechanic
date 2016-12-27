@@ -21,20 +21,22 @@
         
     % \end{scope}
    \draw[interface,fill=white!40, draw=black] (0,0.1) rectangle ++(5,-0.2);
-   \draw[interface,fill=magenta!30, draw=black] (3,0.1) rectangle ++(2,-0.2);
+   \draw[interface,fill=magenta!30, draw=black] (3,0.1) rectangle ++(0.5,-0.2);
 
     % \node[cargo] (b) at (4,0) {} node[above of=b, yshift=-1.3em] {$m$};
     % \draw[draw=black!80,decoration={aspect=0.3, segment length=1.5mm, amplitude=2mm,coil},decorate] (0,0) -- node[above, black, pos=0.5, yshift=1em] {$k$} (b); 
     \draw[] (0,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$0$};
     \draw[] (3,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$x$};
+    \draw[] (3.5,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {\tiny$x+dx$};
     \draw[] (5,-1.1) -- ++(0,0.2) node[below, yshift=-5pt, black] {$\frac{l}2$};
 
 
     \draw[axis,->] (0,-1) -- ++(6,0) node[right, black] {$x$};
     \draw[fill=black] (0,0) circle (0.1);
 
-    \draw[force,->] (3,0) -- ++(-0.5,0) node[above, yshift=0.5em, black] {$\vec{f}_e$};
-    \draw[inforce,->] (3,0) -- ++(0.5,0) node[above, yshift=0.5em, black] {$\vec{F}$};
+    % \draw[force,->] (3,0) -- ++(-0.5,0) node[above, yshift=0.5em, black] {$\vec{f}_e$};
+    \draw[force,->] (3.5,0) -- ++(0.5,0) node[above, yshift=0.5em, xshift=1em, black] {$\vec{F}(x+dx)$};
+    \draw[force,->] (3,0) -- ++(-0.5,0) node[above, yshift=0.5em, xshift=-1em, black] {$\vec{F}(x)$};
 
     \node[left] at (-0.4,-0.4) {$\bigotimes\vec\omega$}; 
 
@@ -42,11 +44,11 @@
 \end{tikzpicture}
 \vspace{-1em}
 \end{figure}
-Введем силу $F$ как силу, которая прикладывается к данному сечению частью стержня справа (сумма центробежных сил энерции каждого элементарного кусочка такой части стержня)
+Запишем второй закон Ньютона для участка стержня (в проеции на $x$):
 \begin{gather*}
-    % 0=\vec{f}_{e}+\vec{F}\\
-    % \text{x: } f_{e_x}=-F_x\\
-    F=\int dF\\
+    a_x=0\Rightarrow a=a_\tau=\omega^2R\\
+    dm\cdot a_n=F(x+dx)-F(x)=dF\\
+    % F=\int dF\\
     dF=dm\omega^2x=S\rho\omega^2x\,dx\\
     F=S\rho\omega^2\int_x^{\frac{l}2} x\,dx=
     S\rho\omega^2 \left(
