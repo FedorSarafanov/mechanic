@@ -1,0 +1,354 @@
+\documentclass[a5paper,10pt]{article}
+ 
+% \usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm,wrapfig} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев -- №91} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    arrows.meta,%
+    % arrows.spaced,%
+}
+
+\tikzset{
+    % MyPersp/.style={scale=1.8,x={(1.1cm,-0cm)},y={(0.5cm,1cm)}, z={(0cm,0.8cm)}},
+ % MyPersp/.style={scale=1.5,x={(0cm,0cm)},y={(1cm,0cm)}, z={(0cm,1cm)}}, 
+ % MyPersp/.style={scale=1.5,x={(1cm,0cm)},y={(0cm,1cm)}, z={(0cm,0cm)}}, 
+    % MyPoints/.style={fill=black,draw=black},
+    force/.style={>=latex,draw=blue,fill=blue},
+    % angular/.style={-{Stealth[open, angle=30:5pt,line width=1pt]}, draw=magenta},
+    angular/.style={-{Latex[length=3mm, line width=0.4pt,open,magenta, fill=white]}, draw=magenta},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    },
+    acceleration/.style={>=open triangle 60,draw=blue,fill=blue},
+    inforce/.style={force,double equal sign distance=2pt},
+}
+
+
+\begin{document}
+
+\parbox[t][4.3cm]{\textwidth}{
+\begin{wrapfigure}[6]{l}{0.5\linewidth}
+\centering
+    \begin{tikzpicture}
+    \begin{scope}[scale=1]
+        \draw (0.5,0) circle (0.28);
+        \draw (2.5,0) circle (0.28);
+        \draw[fill=white] (0,0) rectangle (3,0.3);
+        \draw[line width=2pt] (2.5,0.3) -- ++(0,2) -- ++(-1,0) ++(0,1pt) coordinate (o);
+
+        \draw[fill=black] (o) -- ++(-90:1.5cm) coordinate (b) circle (2pt); 
+
+        \draw[axis] (o) -- ++ (0,-3);
+
+        \draw[interface] (-1,-0.3) rectangle ++(5,-0.3);
+        \draw[thick] (-1,-0.3) -- ++(5,0);
+
+        \draw[force,->] (b) -- ++(0,-1) node[below, yshift=-1.2em] {$m\vec{g}$};
+        \draw[force,->] (b) -- ++(0,1) node[left] {$\vec{T}$};
+        \draw[acceleration,->] (-1,2.25) -- node[left] {$\vec{g}$} ++(0,-1);
+
+    \end{scope}
+    \end{tikzpicture}
+\end{wrapfigure}
+
+
+    \textbf{I.}
+    \begin{equation*}
+     \begin{aligned}[c]
+         m\vec{a}=m\vec{g}+\vec{T}\\
+         \text{y: }0=mg-T\\
+         mg=T\\
+         \alpha=0
+     \end{aligned}        
+    \end{equation*}
+}
+
+\parbox[t][6cm]{\textwidth}{
+\begin{wrapfigure}[6]{r}{0.6\linewidth}
+\centering
+    \begin{tikzpicture}
+    \begin{scope}[scale=1]
+        \draw (0.5,0) circle (0.28);
+
+        \draw[acceleration,->] (1,3) -- node[above] {$\vec{a}$} ++ (1,0);
+        \draw[axis,->] (-1,3) --  ++ (5,0) node[right] {$+x$}; 
+        \draw[axis,->] (-1,3) --  ++ (0,-2.55) node[below] {$+y$}; 
+
+        \draw (2.5,0) circle (0.28);
+        \draw[fill=white] (0,0) rectangle (3,0.3);
+        \draw[line width=2pt] (2.5,0.3) -- ++(0,2) -- ++(-1,0) ++(0,1pt) coordinate (o);
+
+        \draw[fill=black] (o) -- ++(-120:1.5cm) coordinate (b) circle (2pt); 
+
+        \draw[axis] (o) -- ++ (0,-3);
+
+        \draw[interface] (-1,-0.3) rectangle ++(5,-0.3);
+        \draw[thick] (-1,-0.3) -- ++(5,0);
+
+        \draw[force,->] (b) -- ++(0,-1) node[below, yshift=-1.2em] {$m\vec{g}$};
+        \draw[force,->] (b) -- ++(60:1) node[left] {$\vec{T}$};
+
+           \draw[solid,shorten >=0.5pt, ] (o) ++ (-90:1)
+                arc(-90:-120:1);
+            \node at ($(o) + (-104:1.2)$) {$\alpha$};
+        \draw[acceleration,->] (-0.5,2.55) -- node[left] {$\vec{g}$} ++(0,-1);
+
+    \end{scope}
+    \end{tikzpicture}
+\end{wrapfigure}
+    \textbf{II.}
+    \begin{equation*}
+     \begin{aligned}[c]
+         m\vec{a}=m\vec{g}+\vec{T}\\
+         \text{x: }ma_x=T\sin\alpha\\
+         \text{y: }0=mg-T\cos\alpha\\
+         \tg\alpha=\frac{ma}{mg}\\
+         \alpha=\arctg\frac{a}{g}\\
+         T=\frac{ma_x}{\sin\alpha}=\\
+         =\frac{ma_x}{a_x}\sqrt{a^2+g^2}=m\sqrt{a^2+g^2}
+     \end{aligned}        
+    \end{equation*}
+}
+
+\parbox[t][7cm]{\textwidth}{
+\begin{wrapfigure}[6]{r}{0.6\linewidth}
+\centering
+    \begin{tikzpicture}
+    \begin{scope}[scale=1, rotate=-30]
+        \draw (0.5,0) circle (0.28);
+
+        % \draw[acceleration,->] (1,3) -- node[above] {$\vec{a}$} ++ (1,0);
+        \draw[axis,->] (-1,3) --  ++ (3,0) node[right] {$+x$}; 
+        \draw[axis,->] (-1,3) --  ++ (0,-2.55) node[below] {$+y$}; 
+
+        \draw (2.5,0) circle (0.28);
+        \draw[fill=white] (0,0) rectangle (3,0.3);
+        \draw[line width=2pt] (2.5,0.3) -- ++(0,2) -- ++(-1,0) ++(0,1pt) coordinate (o);
+
+        \draw[fill=black] (o) -- ++(-90:1.5cm) coordinate (b) circle (2pt); 
+
+        \draw[axis] (o) -- ++ (0,-3);
+
+        % \draw[interface] (-1,-0.3) rectangle ++(5,-0.3);
+        \draw[interface] (-1,-0.3) -- (4,-0.3) --  ++(-150:0.6) -- (-1,-0.6) -- cycle;
+        \draw[thick] (-1,-0.3) -- ++(5,0);
+
+        \draw[force,->] (b) -- ++(90:1) node[above,left] {$\vec{T}$};
+
+
+    \end{scope}
+           \draw[solid,shorten >=0.5pt, ] (o) ++ (-90:1)
+                arc(-90:-120:1);
+            \node at ($(o) + (-104:1.2)$) {$\alpha$};
+        \draw[axis] (o) -- ++ (0,-3.6);
+
+        \draw[force,->] (b)  -- node[right, pos=0.4] {$m\vec{g}$} ++(0,-1);
+        \draw[interface] (-1,-2.27) rectangle ++(4.31,-0.3);
+        \draw[thick] (-1,-2.27) -- ++(4.31,0);
+        \draw[acceleration,->] (-1,3.25) -- node[left] {$\vec{g}$} ++(0,-1);
+
+    \end{tikzpicture}
+\end{wrapfigure}
+    \textbf{III.}
+    \begin{gather*}
+        \text{М - масса системы}\\
+           M\vec{a}=M\vec{g}\\
+        \text{x: }a_x=g\sin\phi\\
+         m\vec{a}=m\vec{g}+\vec{T}\\
+         \text{x: }ma_x=mg\sin\phi+T_x\\
+         \text{y: }0=mg\cos\phi-T_y\\
+        \Downarrow\\
+         T_x=0\Rightarrow T=T_y=mg\cos\phi\\
+         \alpha=-\phi     
+    \end{gather*}
+}
+
+
+\parbox[t][9cm]{\textwidth}{
+\begin{wrapfigure}[6]{r}{0.6\linewidth}
+\centering
+    \begin{tikzpicture}
+    \begin{scope}[scale=1, rotate=30]
+        \draw (0.5,0) circle (0.28);
+
+        \draw[acceleration,->] (1,3) -- node[above] {$\vec{b}$} ++ (1,0);
+        \draw[axis,->] (-1,3) --  ++ (5,0) node[right] {$+x$}; 
+        \draw[axis,<-] (-1,4) node[above] {$+y$} --  ++ (0,-3.55) ; 
+
+        \draw (2.5,0) circle (0.28);
+        \draw[fill=white] (0,0) rectangle (3,0.3);
+        \draw[line width=2pt] (2.5,0.3) -- ++(0,2) -- ++(-1,0) ++(0,1pt) coordinate (o);
+
+        \draw[fill=black] (o) -- ++(-150:1.5cm) coordinate (b) circle (2pt); 
+
+        \draw[axis] (o) -- ++ (0,-3);
+
+        \draw[interface, pattern = north west lines,] (-1,-0.3) rectangle ++(5,-0.3);
+        % \draw[interface, pattern=vertical lines] (-1,-0.3) -- (4,-0.3) --  ++(-150:0.6) -- (-1,-0.6) -- cycle;
+        \draw[thick] (-1,-0.3) -- ++(5,0);
+
+        \draw[force,->] (b) -- ++(30:1) node[above,left] {$\vec{T}$};
+
+
+    \end{scope}
+           \draw[solid,shorten >=0.5pt, ] (o) ++ (-90:1)
+                arc(-90:-120:1);
+            \node at ($(o) + (-104:1.2)$) {$\alpha$};
+
+           \draw[solid,shorten >=0.5pt, ] (o) ++ (-60:1.2)
+                arc(-60:-90:1.2);
+            \node at ($(o) + (-75:1.4)$) {$\phi$};
+
+        \draw[axis] (o) -- ++ (0,-3.6);
+
+        \draw[force,->] (b)  -- node[left, pos=0.4] {$m\vec{g}$} ++(0,-1);
+        \draw[fill=white, draw=white] (-0.7,-0.78) rectangle ++(4.31,-0.3);
+        \draw[interface, pattern = north west lines,] (-0.7,-0.78) rectangle ++(4.31,-0.3);
+        \draw[thick] (-0.7,-0.78) -- ++(4.31,0);
+        \draw[acceleration,->] (3,3.55) -- node[left] {$\vec{g}$} ++(0,-1);
+
+    \end{tikzpicture}
+\end{wrapfigure}
+    \textbf{IV.}
+    \begin{gather*}
+        m\vec{b}=m\vec{g}+\vec{T}\\
+        \text{x: } mb=-mg\sin\phi+T\sin(\alpha+\phi)\\   
+        \text{y: }0=-mg\cos\phi+T\cos(\alpha+\phi)\\   
+        T=mg\frac{\cos\phi}{\cos(\alpha+\phi)}\\
+        mb=-mg\sin\phi+mg\cos\phi\tg(\alpha+\phi)\\
+        \frac{b}{g\cos\phi}+\tg\phi=\tg(\alpha+\phi)=\frac{\tg\alpha+\tg\phi}{1-\tg\alpha\tg\phi}\\
+        \tg\alpha+\tg\phi=\frac{b}{g\cos\phi}-\frac{b\tg\alpha\tg\phi}{g\cos\phi}+\tg\phi-\tg^2\phi\tg\alpha\\
+        \tg\alpha(1+\tg^2\phi+\frac{b\tg\phi}{g\cos\phi})=\frac{b}{g\cos\phi}\\
+        \tg\alpha=\frac{\frac{b}{g}\cos\phi}{1+\frac{b}{g}\sin\phi}, \qquad
+        T=\sqrt{(mg)^2+(mb)^2-2m^2bg\cos{(\frac{\pi}{2}+\phi)}}=\\=m\sqrt{g^2+b^2+2bg\sin\phi}
+    \end{gather*}
+}
+
+\parbox[t][7cm]{\textwidth}{
+\begin{wrapfigure}[6]{r}{0.4\linewidth}
+\vspace{-3em}
+\centering
+    \begin{tikzpicture}
+    \begin{scope}[xscale=1, rotate=-30]
+        \draw (0.5,0) circle (0.28);
+
+        \draw[acceleration,->] (1,3) -- node[above] {$\vec{b}$} ++ (1,0);
+        \draw[axis,->] (-1,2.7) --  ++ (3,0) node[right] {$+x$}; 
+        \draw[axis,<-] (-1,4) node[above] {$+y$} --  ++ (0,-3.55) ; 
+
+        \draw (2.5,0) circle (0.28);
+        \draw[fill=white] (0,0) rectangle (3,0.3);
+        \draw[line width=2pt] (2.5,0.3) -- ++(0,2) -- ++(-1,0) ++(0,1pt) coordinate (o);
+
+        \draw[fill=black] (o) -- ++(-120:1.5cm) coordinate (b) circle (2pt); 
+
+        \draw[axis] (o) -- ++ (0,-3);
+
+        \draw[interface, pattern = north west lines,] (-1,-0.3) rectangle ++(5,-0.3);
+        % \draw[interface, pattern=vertical lines] (-1,-0.3) -- (4,-0.3) --  ++(-150:0.6) -- (-1,-0.6) -- cycle;
+        \draw[thick] (-1,-0.3) -- ++(5,0);
+
+        \draw[force,->] (b) -- ++(60:1) node[above] {$\vec{T}$};
+
+
+    \end{scope}
+           \draw[solid,shorten >=0.5pt, ] (o) ++ (-90:1)
+                arc(-90:-120:1);
+            \node at ($(o) + (-104:1.2)$) {$\phi$};
+
+           \draw[solid,shorten >=0.5pt, ] (o) ++ (-120:0.7)
+                arc(-120:-150:0.7);
+            \node at ($(o) + (-135:1)$) {$\alpha$};
+
+        \draw[axis] (o) -- ++ (0,-3.6);
+
+        \draw[force,->] (b)  -- node[left, pos=0.4] {$m\vec{g}$} ++(0,-1);
+        % \draw[fill=white, draw=white] (-0.7,-0.78) rectangle ++(4.31,-0.3);
+        \draw[interface] (-1,-2.27) rectangle ++(4.31,-0.3);
+        \draw[thick] (-1,-2.27) -- ++(4.31,0);
+        \draw[acceleration,->] (-1,3.55) -- node[left] {$\vec{g}$} ++(0,-1);
+    \end{tikzpicture}
+\end{wrapfigure}
+    \textbf{V.}
+    \begin{gather*}
+        m\vec{b}=m\vec{g}+\vec{T}\\
+        \text{x: } mb=mg\sin\phi+T\sin\alpha\\   
+        \text{y: }0=-mg\cos\phi+T\cos\alpha\\   
+        T=mg\frac{\cos\phi}{\cos\alpha}\\
+        mb=mg\sin\phi+mg\cos\phi\tg\alpha\\
+        \frac{b}{g\cos\phi}-\tg\phi=\tg\alpha=\frac{b-g\sin\phi}{g\cos\phi}\\
+        \tg(\alpha+\phi)=\frac{\tg\phi+\frac{b}{g\cos\phi}-\tg\phi}{1-\tg\phi\frac{b}{g\cos\phi}+\tg^2\phi}=\\=
+        \frac{\frac{b}{g}\cos\phi}{1-\frac{b}{g}\sin\phi},\\
+        T=\sqrt{(mg)^2+(mb)^2-2m^2bg\cos{(\frac{\pi}{2}-\phi})}=m\sqrt{g^2+b^2-2bg\sin\phi}
+    \end{gather*}
+}
+
+
+\end{document}
