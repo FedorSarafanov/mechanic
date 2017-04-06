@@ -1,0 +1,87 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев -- №239}
+\fancyfoot{}
+
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, }}
+
+\begin{document}
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+    % \draw (-1,3) node [draw,minimum width=1cm,minimum height=2cm, fill=white, rotate=0] {};
+
+    % \draw (1,1) node [draw, axis,minimum width=1cm,minimum height=2cm, fill=white, rotate=0] {};
+
+    \draw[axis,->] (-3,4) -- ++(6,0) node[right] {$+x$};
+    \draw[interface] (-5,0) rectangle (5,-0.5);
+    \draw[thick] (-5,0) -- (5,0);
+
+    \draw[fill=magenta!10, draw=magenta] (-2,0) coordinate (Ic) -- ++(0,3)  -- (2.5,0) coordinate (IIc) -- cycle;
+
+    \draw[fill=magenta!20, draw=magenta] (-2,3) coordinate (I) -- ++(1.5,0) coordinate (II) -- ++(0,-1) -- cycle;
+
+    \draw[axis] (I) -- ++(0,0.5); 
+    \draw[axis] (II) -- ++(0,0.5); 
+    \draw[<->] (I)+(0,0.25) -- node [above] {$b$} ($(II)+(0,0.25)$); 
+
+    \draw[axis] (Ic) -- ++(0,-0.8); 
+    \draw[axis] (IIc) -- ++(0,-0.8); 
+    \draw[<->] (Ic)+(0,-0.6) -- node [below] {$a$} ($(IIc)+(0,-0.6)$); 
+
+    % \draw[axis] (-1,3.5) node {$\times$} -- ++ (5,0);
+    % \draw[axis] (1,1.5) node {$\times$} -- ++ (2,0);
+    % \draw[axis] (1,2)  -- ++ (-3.5,0);
+
+    % \draw[<->] (3.5,0) -- node[right] {$x_p^\text{нач}$} ++(0,3.5);
+    % \draw[<->] (2.5,0) -- node[right] {$x_p^\text{кон}$} ++(0,1.5);
+    % \draw[<->] (-2,0) -- node[right] {$l$} ++(0,2);
+
+    % \draw[fill=black] (-1,2) circle (2pt);
+    % \draw[fill=black] (1,2) circle (2pt);
+\end{tikzpicture}
+% \vspace{-1em}
+\end{figure}
+
+\begin{equation}
+    F^\text{внеш}_x=0\Rightarrow\quad v_{cx}=const=0\Rightarrow\quad \Delta{x}_c=0
+\end{equation}
+
+Рассмотрим движение центра масс системы <<m-M>> по горизонтали.
+
+Из векторных соображений следует:
+
+\begin{equation}
+    \Delta\vec{R}_c=\frac{\sum_N m_i\cdot\Delta\vec{r}_i}{m_c}
+\end{equation}
+
+Очевидно, что скатившись вниз, малый клин передвинется относительно большого на $(a-b)$, а относительно ЛСО -- на $(a-b+\Delta{x})$, где $\Delta{x}$ -- смещение в ЛСО большого клина.
+
+\begin{equation}
+    \Delta{x}_c=\frac{m(a-b+\Delta{x})+M\Delta{x}}{m+M}=0
+\end{equation}
+
+Отсюда
+
+\begin{equation}
+    m(a-b)+\Delta{x}(m+M)=0
+\end{equation}
+
+И наконец
+
+\begin{equation}
+    \Delta{x}=-\frac{m(a-b)}{m+M}
+\end{equation}
+
+Значит, большой клин сдвинется влево, и по модулю перемещение будет
+
+\begin{equation}
+    x=\frac{m}{m+M}(a-b)
+\end{equation}
+
+\end{document}

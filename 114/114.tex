@@ -177,24 +177,24 @@
     \xdef\km{\frac{k}{m}}\xdef\mk{\frac{m}{k}}\xdef\mgk{\frac{mg}{k}}%
     \begin{aligned}[c]
         m\vec{a}&=m\vec{g}-k\vec{v}\\
-        \text{x: } ma&=mg-kv\\
+        \text{x: } ma_x&=mg-kv_x\\
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
-        \frac{dv}{dt}=g-\km{}v\\
-        \frac{dv}{g-\km{}v}=dt\\
+        \frac{dv_x}{dt}=g-\km{}v_x\\
+        \frac{dv_x}{g-\km{}v_x}=dt\\
     \end{aligned}
 \end{equation*}
-Сделаем замену переменной $c=g-\km{}v$ под интегралом, соотвественно новые пределы будут $c[v=0]=g$ и $c[v=v(t)]=g-\km{}v(t)$, а дифференциал $dv=-\mk{}dc$. Тогда можем найти $v(t)$:
+Сделаем замену переменной $c=g-\km{}v_x$ под интегралом, соотвественно новые пределы будут $c[v_x=0]=g$ и $c[v_x=v_x(t)]=g-\km{}v_x(t)$, а дифференциал $dv_x=-\mk{}dc$. Тогда можем найти $v_x(t)$:
 \begin{equation*}
     \begin{aligned}[c]
-        \int_0^{t}dt=-\mk\int_g^{g-\km{}v(t)}\frac{dc}{c}\\
-        t=-\mk{\ln{(1-\frac{kv(t)}{mg})}}\\
+        \int_0^{t}dt=-\mk\int_g^{g-\km{}v_x(t)}\frac{dc}{c}\\
+        t=-\mk{\ln{(1-\frac{kv_x(t)}{mg})}}\\
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
-        1-\frac{kv(t)}{mg}=e^{-\km{t}}\\
-        v(t)=\mgk(1-e^{-\km{t}})\\
+        1-\frac{kv_x(t)}{mg}=e^{-\km{t}}\\
+        v_x(t)=\mgk(1-e^{-\km{t}})\\
     \end{aligned}
 \end{equation*}
 Проинтегрировав еще раз, найдем $x(t)$:

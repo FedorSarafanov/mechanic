@@ -1,0 +1,70 @@
+\documentclass[a5paper,10pt]{article}
+
+\input{../templates/head.tex}
+\wrote{Пластинка}
+
+\begin{document}
+
+\begin{tikzpict}
+	\draw[interface] (-3,2) coordinate (lb) rectangle ++ (6,0.5);
+	\draw[thick] (lb) -- ++(6,0);
+	\draw[magenta, fill=magenta!10] (0,0) circle (2cm);
+	\draw[magenta, fill=magenta] (0,2) circle (2pt);
+
+	% \draw (0,-2.5) node[blue]{$\bigotimes$} node[right] {$\vec{v}$};
+	\draw[axis] (-3,0) -- (3,0) node [right] {$+x$};
+	\draw (0,0) node[magenta, scale=1.35]{$\times$};
+
+	\begin{scope}[yshift=-2cm, xshift=0cm]
+		\lineann[4cm]{90}{4}{$l$};
+	\end{scope}	
+
+	\begin{scope}[yshift=0cm, xshift=0cm]
+		\lineann[3.25cm]{-90}{2}{$R$};
+	\end{scope}		
+
+	\draw[magenta, fill=magenta!100] (1,0) -- ++(0, 1.73) coordinate (o) -- ++ (-0.1,0)  coordinate (I) -- ++ (0,-1.73)  coordinate (II) -- cycle;
+
+	\draw[axis,->] (4,-1) -- ++(0,3.2) node[above] {$+y$};
+
+	\hrLabel{4}{0}{$0$};
+	\hrLabel{4}{1.73}{$y(x)$};
+	\draw[axis] (o) -- ++ (3.2,0);
+	\draw[blue,<-] (0.9, -0.1) -- ++ (-0.3,0);
+	\draw[blue,<-] (1, -0.1) -- ++ (0.3,0);
+	\draw[blue] ($(0.9, -0.1)!0.5!(1, -0.1)$) node[below, yshift=-0.3em] {$dx$};
+
+
+\end{tikzpict}
+
+Найдем момент инерции тонкого диска относительно оси, проходящей через его диаметр, разбиением на вертикальные прямоугольники.
+
+Момент инерции прямоугольника шириной $dx$, высотой $y$:
+\begin{equation}
+	dI=\rho dx \int_0^y y^2 dy=\rho dx \cdot \frac{y^3}{3}
+\end{equation}
+
+Высота такого прямоугольника зависит от $x$:
+\begin{equation}
+	y=\sqrt{R^2-x^2}
+\end{equation}
+Найдем момент инерции диска:
+\begin{gather}
+	I_d=\rho\frac{4}{3}\int_0^{R}(R^2-x^2)^\frac{3}{2} dx=
+	\rho\frac{\pi R^4}{4}=\frac{mR^2}{4}
+\end{gather}
+
+Момент относительно оси, параллельной данной и проходящей через точку подвеса, выразим через теорему Гюйгенса-Штейнера:
+
+\begin{equation}
+	I_o=\frac{mR^2}{4}+mR^2=\frac{5}{4}mR^2
+\end{equation}
+
+Тогда найдем период колебаний физического маятника
+\begin{equation}
+	T=2\pi\sqrt{\frac{I_o}{mgR}}=
+	2\pi\sqrt{\frac{5}{4}\frac{mR^2}{mgR}}=
+	\pi\sqrt{\frac{5}{2}\frac{l}{g}}
+\end{equation}
+
+\end{document}

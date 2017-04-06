@@ -1,0 +1,96 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+\irodov{1.309}
+
+\begin{document}
+
+    %     \draw pic["$\Theta_1$",draw=magenta,->,angle eccentricity=1.5,angle radius=0.5cm] {angle=a--b--c};                 
+    % \end{scope}
+    % &
+    % \begin{scope}[rotate=14]    
+    %     \draw[force,->] (0,0) coordinate (a) -- 
+    %         node[midway,fill=white!20, opacity=0.9]  
+    %             {$2\vec{v}_c$} 
+    %         (4,0);
+\begin{tikzpict}
+\matrix[column sep=2cm] {
+
+	\draw[interface] (-0.5,1) rectangle (-0.1,1.5) (0.1,1.5) rectangle (0.5,1);
+
+	\draw[interface] (-0.5,-1) rectangle (-0.1,-1.5) (0.1,-1.5) rectangle (0.5,-1);
+
+	\draw[axis,magenta] (0,-1.5) -- (0,1.5);
+	\draw[magenta,->] 
+		(0,1.75) -- ++(0,0.5) 
+		node[above] {$\vec\omega$};
+	\draw[magenta,->]	(0.5,1.75) -- ++ (0,0.5)
+		node[above] {$\vec{N}$} 
+		;
+
+	\draw[fill=magenta, magenta] (-1,-0.15) rectangle (1,0.15);
+
+	\fill[magenta] (0,-1.25) coordinate (1) circle (2pt) node[below, yshift=-0.5em] {$O$};
+
+	\fill[magenta] (0,1.25) coordinate (2) circle (2pt);
+
+	\draw[->, thick, blue] (1) -- node[caption] {$\vec{l}$} (2);
+	\draw[->, thick, blue] (2) -- node[caption] {$\vec{F}$} ++(-2,0);  
+
+	\draw (1,1.25) node {$\bigodot$} node[right, xshift=0.5em] {$\vec{M}$};
+    &
+    \begin{scope}
+	\draw[magenta,->]	(0,0) coordinate (o) -- ++ (0,1.5) coordinate (i)
+		node[above, black] {$\vec{N}(t)$};
+
+	\draw[magenta,->]	(0,0) -- ++ (-2.25,1.5) coordinate (ii)
+		node[above, black] {$\vec{N}(t+dt)$};		
+
+	\draw[magenta,->] (i) --node[caption] {$d\vec{N}$} (ii);	
+
+	\draw[magenta,->] (i)++(0,1) --node[caption] {$\vec{M}$} ++(-2,0);	
+
+	\draw pic["$d\phi$",draw=magenta,->,angle eccentricity=1.5,angle radius=0.5cm] {angle=i--o--ii};    	
+
+	\draw (-1,-1) node {$d\vec{N}=\vec{N}d\phi$};
+    \end{scope}    
+    \\
+};
+	
+		
+\end{tikzpict}
+Уравнение вынужденных гармонических колебаний можно записать в следующем виде:
+\begin{equation}
+	\phi(t)=\phi_0\sin{\left(\frac{2\pi}{T}t\right)}
+\end{equation}
+Дифференцируя, получим уравнение $\Omega(t)$, где $\Omega$ -- угловая скорость вынужденных колебаний:
+\begin{equation}
+	\Omega(t)=\frac{d\phi}{dt}=\phi_0\frac{2\pi}{T}\cos{\left(\frac{2\pi}{T}t\right)}
+\end{equation}
+
+С одной стороны, 
+\begin{equation}
+	I\omega_z={N}_z
+\end{equation}
+
+С другой,
+\begin{equation}
+	{M}=\frac{d{N_z}}{dt}=\frac{1}{dt}{N_z}\cdot d\phi ={N_z}\Omega
+\end{equation}
+Но
+\begin{equation}
+	M=Fl
+\end{equation}
+Отсюда
+\begin{equation}
+	F(t)=\frac{N_z\Omega(t)}{l}=\frac{I\omega\Omega(t)}{l}
+\end{equation}
+Отметим, что сила максимальна при максимальной скорости вынужденных колебаний, которая из-за ограниченности косинуса принимает максимальное значение $\Omega_{max}=\frac{\phi_0 2\pi}{T}$.
+
+Тогда
+\begin{equation}
+	F_{max}=
+	\frac{mR^2}{2l}\cdot\omega\cdot\frac{\phi_0 2\pi}{T}=
+	\frac{\phi_0 \pi}{lT}mR^2\omega
+\end{equation}
+\end{document}

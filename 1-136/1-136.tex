@@ -1,0 +1,81 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+% \usepackage{poisson}
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.136}
+\fancyfoot{}
+
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, },   pics/carc/.style args={#1:#2:#3}{code={\draw[pic actions] (#1:#3) arc(#1:#2:#3); } }} 
+
+\pgfdeclarepatternformonly{my crosshatch dots}{\pgfqpoint{-1pt}{-1pt}}{\pgfqpoint{5pt}{5pt}}{\pgfqpoint{1.5pt}{1.5pt}}%
+{
+    \pgfpathcircle{\pgfqpoint{0pt}{0pt}}{.2pt}
+    \pgfpathcircle{\pgfqpoint{3pt}{3pt}}{.2pt}
+    \pgfusepath{fill}
+}
+
+\begin{document}
+
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+
+    \draw[interface] (0,-0.25) rectangle (5,0);
+    \draw[thick] (0,0) -- (5,0);
+
+    \draw (1,.15) circle (0.15) circle(1pt) -- ++(.35,0) circle (0.15) circle(1pt);
+    \draw (3,.15) circle (0.15) circle(1pt) -- ++(.35,0) circle (0.15) circle(1pt);
+
+    \draw (0.5,.3) rectangle ++(3.35,.30);
+
+    \draw[force,->] (3.85,.45) -- ++(1,0) node[right] {$\vec{F}$};
+    
+    \begin{scope}[yshift=-0.9cm, xshift=-3em]
+        
+    \draw[fill=white!5, color=white] (3.70,1.52) rectangle (3.80, 1);
+    \draw[draw=none, pattern=my crosshatch dots] (4.5,1.5) arc (0:180:0.75) -- cycle;
+
+    \draw[draw=none, pattern=my crosshatch dots] (3.7,1.5) rectangle ++(0.1,-0.5);
+    \end{scope}
+
+    \draw [axis,->] (0,0) -- (6,0) node[right] {$+x$};
+\end{tikzpicture}
+\end{figure}
+
+Запишем зависимость массы от времени:
+\begin{equation}
+    m(t)=m_0-\mu t
+\end{equation}
+Тогда в проеции на $x$ II з.Н.:
+\begin{equation}
+    m(t)\cdot a_x=F
+\end{equation}
+\begin{equation}
+    \frac{dv_x}{dt}=\frac{F}{m_0-\mu t}
+\end{equation}
+Произведем разделение переменных:
+\begin{equation}
+     \frac{1}{F}dv_x=\frac{dt}{m_0-\mu t}
+\end{equation}
+Занесем функцию $m(t)$ под дифференциал: 
+\begin{equation}
+     \frac{1}{F}dv_x=-\frac{1}{\mu}\frac{d(m_0-\mu t)}{m_0-\mu t}
+\end{equation}
+Найдем решение дифференциального уравнения.
+\begin{equation}
+    -\frac{\mu}{F}\int_{0}^{v_x(t)}dv_x=\int_{0}^{t}\frac{d(m_0-\mu t)}{m_0-\mu t}
+\end{equation}
+После подстановки пределов интегрирования:
+\begin{equation}
+    v_x(t)=-\frac{F}{\mu}\ln\frac{m_0-\mu t}{m_0}
+\end{equation}
+Перепишем окончательный ответ:
+\begin{equation}
+    a_x=\frac{F}{m_0-\mu t}, \qquad v_x=\frac{F}{\mu}\ln\frac{m_0}{m_0-\mu t}
+\end{equation}
+
+\end{document}

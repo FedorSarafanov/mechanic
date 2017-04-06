@@ -132,24 +132,24 @@
     \xdef\km{\frac{k}{m}}\xdef\mk{\frac{m}{k}}\xdef\mgk{\frac{mg}{k}}%
     \begin{aligned}[c]
         m\vec{a}&=-k\vec{v}\\
-        \text{x: } ma&=-kv\\
+        \text{x: } ma_x&=-kv_x\\
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
-        \frac{dv}{dt}=-\km{}v\\
-        -\mk\frac{dv}{v}=dt\\
+        \frac{dv_x}{dt}=-\km{}v_x\\
+        -\mk\frac{dv_x}{v_x}=dt\\
     \end{aligned}
 \end{equation*}
-Можем найти $v(t)$:
+Можем найти $v_x(t)$:
 \begin{equation*}
     \begin{aligned}[c]
-        \int_0^{t}dt=-\mk\int_{v_0}^{v(t)}\frac{dv}{v}\\
-        t=-\mk{\ln{(\frac{v(t)}{v_0})}}\\
+        \int_0^{t}dt=-\mk\int_{v_0}^{v_x(t)}\frac{dv_x}{v_x}\\
+        t=-\mk{\ln{(\frac{v_x(t)}{v_0})}}\\
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
-        \frac{v(t)}{v_0}=e^{-\km{t}}\\
-        v(t)=v_0e^{-\km{t}}\\
+        \frac{v_x(t)}{v_0}=e^{-\km{t}}\\
+        v_x(t)=v_0e^{-\km{t}}\\
     \end{aligned}
 \end{equation*}
 Заметим, что скорость равна нулю при $t\rightarrow\infty$.
@@ -161,11 +161,11 @@
 Можем выразить функцию времени через функцию пути:
 \begin{gather*}
     e^{-\km{t}}=1-\frac{kS}{v_0m}\\
-    v(S)=v_0e^{-\km{t}}=v_0-\frac{kS}{m}
+    v_x(S)=v_0e^{-\km{t}}=v_0-\frac{kS}{m}
 \end{gather*}
 Тогда можем найти полный путь до остановки, т.к. в момент остановки $v=0$:
 \begin{gather*}
-    v(S)=0\\
+    v_x(S)=0\\
     \frac{kS}{m}=v_0\\
     S=\frac{mv_0}{k}  
 \end{gather*}

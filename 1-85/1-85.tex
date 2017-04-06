@@ -138,22 +138,22 @@
     \xdef\km{\frac{k}{m}}\xdef\mk{\frac{m}{k}}\xdef\mgk{\frac{mg}{k}}%
     \begin{aligned}[c]
         m\vec{a}&=-kv^2\frac{\vec{v}}{v}\\
-        \text{x: } ma&=-kv^2\\
+        \text{x: } ma_x&=-kv^2_x\\
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
-        \frac{dv}{dt}=-\km{}v^2\\
-        -\mk\frac{dv}{v^2}=dt\\
+        \frac{dv_x}{dt}=-\km{}v^2_x\\
+        -\mk\frac{dv_x}{v^2_x}=dt\\
     \end{aligned}
 \end{equation*}
-Можем найти $v(t)$ и $x(t)$:
+Можем найти $v_x(t)$ и $x(t)$:
 \begin{equation*}
     \begin{aligned}[c]
-        \int_0^{t}dt=-\mk\int_{v_0}^{v}\frac{dv}{v^2}\\
-        t=\mk\frac{1}{v}\bigg|_{v_0}^{v}=\mk\left(\frac{1}{v}- \frac{1}{v_0}\right)\\
-        \frac{m}{kv}=t+\frac{m}{kv_0}\\
-        \frac{1}{v}=\km{t}+\frac{1}{v_0}\\
-        v=\frac{v_0}{\frac{kv_0}{m}t+1}
+        \int_0^{t}dt=-\mk\int_{v_0}^{v_x}\frac{dv_x}{v^2_x}\\
+        t=\mk\frac{1}{v_x}\bigg|_{v_0}^{v_x}=\mk\left(\frac{1}{v_x}- \frac{1}{v_0}\right)\\
+        \frac{m}{kv_x}=t+\frac{m}{kv_0}\\
+        \frac{1}{v_x}=\km{t}+\frac{1}{v_0}\\
+        v_x=\frac{v_0}{\frac{kv_0}{m}t+1}
     \end{aligned}
         \qquad\qquad
     \begin{aligned}[c]
@@ -163,10 +163,10 @@
         \mk=h/\ln\frac{v_0}{v}
     \end{aligned}
 \end{equation*}
-Заметим, что время можно выразить через найденные $\mk$ и $v$, $v_0$:
+Заметим, что время можно выразить через найденные $\mk$ и $v_x$, $v_0$:
 \begin{gather*}
-        t=\mk\left(\frac{1}{v}- \frac{1}{v_0}\right)=\mk\frac{v_0-v}{v_0v}\\
-        t=\frac{h\cdot(v_0-v)}{\ln\frac{v_0}{v}\cdot{v_0}\cdot{v}}
+        t=\mk\left(\frac{1}{v_x}- \frac{1}{v_0}\right)=\mk\frac{v_0-v_x}{v_0v_x}\\
+        t=\frac{h\cdot(v_0-v_x)}{\ln\frac{v_0}{v_x}\cdot{v_0}\cdot{v_x}}
 \end{gather*}
 
 

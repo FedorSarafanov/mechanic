@@ -1,0 +1,156 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.177} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    cargo/.style={
+        rectangle,
+        fill=magenta!40,
+        draw=black!50,
+        inner sep=2.5mm,
+    },
+    spring/.style={
+        decoration={
+            aspect=0.3, 
+            segment length=.8mm, 
+            amplitude=2mm,
+            coil},
+        decorate,
+        draw=magenta!25
+    }
+]
+        \draw[axis,->] (-1,0.5) node[left]{$W_\text{п}=0$} -- ++ (7,0) node[right]{$+x$};
+        % \draw[interface] (-0.25,-0.25) rectangle ++(-0.25,0.7);
+        \draw[interface] (-0.5,-0) rectangle ++(6,-0.25);
+        \draw[thick] (-0.5, -0) -- ++(6,0);
+
+        \draw[fill=magenta!10] (0,0) -- (0,0.5) -- (2,0.5) arc (-90:0:1cm) -- (3.5,1.5) -- (4.5,0.4) -- (4.5,0) -- cycle;
+
+        \draw[fill=magenta!30] (0.25,0.5) rectangle ++(0.5,0.5) node[above, xshift=-0.6em] {$m$};
+
+        \draw[force,->] (0.5,0.72) --++(1,0) node[right] {$\vec{v}_0$};
+
+        \draw (3.5,0.5) node {$M$};
+
+
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+
+Все силы консервативные, трения нет. Пусть скорость платформы \textbf{в момент $\tau$ достижения грузом наивысшей точки} вылета груза - $u$. 
+
+Так как трения после вылета груза нет, горизонтальные скорости груза и платформы будут равны от момента вылета груза вплоть до падения оного.
+Запишем ЗСИ для начального импульса и импульса в момент $\tau$:
+\begin{equation}
+    m\vec{v_0}=M\vec{u}+m\vec{u}
+\end{equation}
+В проекции на $x$:
+\begin{equation}
+    m{v_0}=(m+M)u
+\end{equation}
+Отсюда
+\begin{equation}
+    u=v_0\frac{m}{m+M}
+\end{equation}
+Далее запишем ЗСМЭ:
+\begin{equation}
+    \frac{mv_0^2}{2}=\frac{Mu^2}{2}+\frac{mu^2}{2}+mgh
+\end{equation}
+Отсюда
+\begin{equation}
+    mgh=\frac{1}{2}\left[mv_0^2-(m+M)u^2\right]
+\end{equation}
+Подставляя $u$:
+\begin{equation}
+    mgh=\frac{mv_0^2}{2}\left[1-(m+M)\frac{m}{(m+M)^2}\right]
+\end{equation}
+И можем записать окончательный ответ
+\begin{equation}
+    h=\frac{v_0^2}{2g}\cdot\frac{M}{m+M}
+\end{equation}
+% \begin{equation}
+% \label{v20}
+% \frac{m_2v_{20}^2}{2}=\frac{\varkappa x^2}{2}
+% \end{equation}
+
+% Когда пружина распрямится, скорость $m_2$ будет $v_{20}$, а $m_1$ -- равна нулю.
+
+% Тогда запишем:
+% \begin{equation}
+%     \label{vc}
+%     \vec{v}_c=\frac{m_1\cdot0+m_2\vec{v}_{20}}{m_1+m_2}
+% \end{equation}
+% Выразим из (\ref{v20}) $v_{20}$ и подставим в (\ref{vc}), перейдя к модулям векторов (можно обойтись без проекций, так как в уравнении (\ref{vc}) связаны два вектора сугубо положительным множителем):
+% \begin{equation}
+%     v_c=\sqrt\frac{\varkappa x^2}{m_2}\cdot \frac{m_2}{m_1+m_2}
+% \end{equation}
+% Тогда можем окончательно записать ответ:
+% \begin{equation}
+%     v_c=\frac{x\sqrt{\varkappa \cdot m_2}}{m_1+m_2}
+% \end{equation}
+
+\end{document}

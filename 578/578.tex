@@ -114,29 +114,29 @@
 % \vspace{-2em}
 \end{figure}
 
-Груз еще будет покоится на доске, когда его вес станет равен нулю, но начнет начнет подскакивать, когда после этого амплитуда станет больше на сколь угодно малую величину.
+Груз еще будет покоится на доске, когда его вес станет равен нулю, но начнет подскакивать, когда после этого амплитуда станет больше на сколь угодно малую величину.
 
-Доска совершает гармонические колебания по закону
+Доска совершает колебания по закону
 \begin{equation*}
-     a=\frac{d^2x}{dt^2}=\omega^2x=\frac{4\pi^2}{T^2}x
+     a=\frac{d^2x}{dt^2}=-\omega^2x=-\frac{4\pi^2}{T^2}x
  \end{equation*} 
 
 Запишем второй закон Ньютона для груза:
 \begin{equation*}
 	\begin{aligned}[c]
 		m\vec{a}&=m\vec{g}+\vec{N}\\
-        \text{x: }ma&=mg-N=mg-P\\
+        \text{x: }ma_x&=mg-N=mg-P\\
 	\end{aligned}
 		\qquad\Longrightarrow\qquad
 	\begin{aligned}[c]
-		P&=m(g-a)\\
-        P&=m(g-\frac{4\pi^2}{T^2}x)
+		P&=m(g-a_x)\\
+        P&=m(g+\frac{4\pi^2}{T^2}x)
 	\end{aligned}
 \end{equation*}
 Тогда $P=0$ тогда, когда 
 \begin{gather*}
-    {}m(g-\frac{4\pi^2}{T^2}x)\leq{0}\\
-    g\leq{\frac{4\pi^2}{T^2}x}
+    {}m(g+\frac{4\pi^2}{T^2}x)\leq{0}\\
+    g\leq-{\frac{4\pi^2}{T^2}x}
 \end{gather*}
 Так как $A$ здесь и есть максимальное $|x|$, то 
 \begin{gather*}

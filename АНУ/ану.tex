@@ -1,0 +1,182 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Задача под запись - <<АНУ>>} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+\usepackage[outline]{contour}
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    cargo/.style={
+        rectangle,
+        fill=magenta!40,
+        draw=black!50,
+        inner sep=2.5mm,
+    },
+    spring/.style={
+        decoration={
+            aspect=0.3, 
+            segment length=.8mm, 
+            amplitude=2mm,
+            coil},
+        decorate,
+        draw=magenta!25
+    },
+    interface1/.style={draw=gray!60,
+        % The border decoration is a path replacing decorator. 
+        % For the interface style we want to draw the original path.
+        % The postaction option is therefore used to ensure that the
+        % border decoration is drawn *after* the original path.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},    
+    % scale=0.95
+]
+\def\angle{41}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw[force,->] (-3,0) -- ++(1,0) node[right]{$\vec{v}_0$};
+    \contourlength{1mm};
+
+    % \draw[thick] (0,0) --  ++(0,-3);
+    \draw[thick,->] (0,-1.5) -- node[left,xshift=-5pt] {$\vec{l}/2$} ++(0,1.15);
+    \draw[thick,->] (0,-1.5) -- node[left,xshift=-5pt] {$-\vec{l}/2$} ++(0,-1.15);
+    % \draw[thick,->] (0,-1.325) -- node[right, xshift=5pt] {$\vec{l}/2$} ++(0,-1.325);
+
+    % \draw[thick,->] (0,0) -- node[right, below] {$\vec{r}$} ++(-2.8,-2.69);
+
+    % \draw[interface] (-3,0) rectangle ++(6,0.5);
+    % \draw[line width=0.4mm] (-3,0) -- ++(6,0);
+    % \draw[fill=magenta] (0,0) circle (3pt) node[above, yshift=3pt] {\contour{white}{$O$}};
+    \draw[thick] (0,0) -- (0,-3);
+
+    \draw (0,-1.5) node[scale=1.5, magenta] {$\times$} node[right, xshift=3pt, yshift=-1pt] {ц.м.};
+    
+    \draw[fill=magenta] (-3,0) circle (0.35) node {\contour{white}{$m_1$}};
+    \draw[fill=magenta] (0,-3) circle (0.35) node {\contour{white}{$m_2$}};
+    \draw[fill=magenta] (0,0) circle (0.35) node {\contour{white}{$m_3$}};
+
+
+    \draw[axis,->] (-3,-4) -- ++(6,0) node[right] {$+x$};
+
+    \draw (2,0) node[blue] {$\bigotimes$} node[right, xshift=.5em] {$\vec{g}$};
+    \draw (2,-2) node[magenta] {$\bigotimes$} node[right, xshift=.5em, magenta] {$\vec{N}_c^*$};
+    % \draw[force,->] (0,0) -- (-1,0) node[left, below]{$\vec{f}$};
+
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+\begin{equation*}
+    m_1=m_2=m_3\equiv m
+\end{equation*}
+% \begin{equation}
+%     \vec{M}_0=[\vec{0}\,\times\,\vec{f}]=0 \quad \Longrightarrow \vec{N}=\text{const}
+% \end{equation}
+ЗСМИ:
+\begin{equation}
+    \label{eq1}
+    [\vec{r}\,\times\,{m\vec{v}_0}]
+    \equiv [\vec{l}\,\times\,{m\vec{v}_0}]=
+    [\vec{0}\,\times\,{m\vec{u}_3}]+
+    [\vec{l}\,\times\,{(m+m)\vec{u}_3}]
+    % \frac{1}{2}[\vec{l}\,\times\,{m\vec{u}_3}]
+\end{equation}
+ЗСМИ в проекции на ось, проходящую через $m_2$ перпендикулярно столу:
+\begin{equation}
+    \label{eq:zsmi}
+    l\cdot mv_0 = 
+                l\cdot 2m\cdot u_{3x}
+                \Rightarrow
+                u_{3x}=\frac{v_0}{2}
+\end{equation}
+ЗСИ в проекции на $x$:
+\begin{equation}
+    mv_0=
+        2m\cdot u_{3x}+mu_{2x}
+        \Rightarrow
+        u_{2}=0 
+\end{equation}
+\begin{equation}
+    v_{cx}=
+            \frac{2mu_{3x}+
+            m\cdot0}{2m}=
+            \frac{v_0}{2}
+\end{equation}
+\begin{equation}
+    u_{3x}^*=
+        u_{3x}-v_{cx}=
+        0
+\end{equation}
+\begin{equation}
+    u_{2x}^*=
+            u_{2x}-v_{cx}=
+            -\frac{v_0}{2}
+\end{equation}
+Отсюда
+\begin{equation}
+    \vec{N}_c^*=
+        \left[\frac{\vec{l}}{2} \,\times\, 2m\cdot \vec{u}_{3}^*\right]+
+        \left[-\frac{\vec{l}}{2} \,\times\, m\cdot \vec{u}_{2}^*\right]
+        \equiv
+        \frac{1}{2}\left[m\cdot \vec{u}_{2}^* \,\times\, \vec{l}\,\right]
+\end{equation}
+
+\end{document}

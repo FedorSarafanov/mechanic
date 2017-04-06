@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.12.3)  24 DEC 2016 13:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.12.3)  23 FEB 2017 18:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -748,7 +748,7 @@ File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
 Here is how much of TeX's memory you used:
  17393 strings out of 493013
  331012 string characters out of 6139317
- 397736 words of memory out of 5000000
+ 398736 words of memory out of 5000000
  20516 multiletter control sequences out of 15000+600000
  11758 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -762,7 +762,7 @@ mr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/s
 hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/pu
 blic/cm-super/sfrm1000.pfb>
-Output written on 1-163.pdf (1 page, 93509 bytes).
+Output written on 1-163.pdf (1 page, 93709 bytes).
 PDF statistics:
  54 PDF objects out of 1000 (max. 8388607)
  35 compressed objects within 1 object stream

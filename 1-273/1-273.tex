@@ -1,0 +1,53 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+% \irodov{1.273}
+\fancyhead{}
+\fancyhead[R]{Механика}  
+\fancyhead[L]{Иродов -- №1.273}
+\fancyfoot{} 
+\fancyfoot[C]{\thepage}
+\begin{document}
+
+\begin{tikzpict}
+	\draw[interface] (-2,0) rectangle ++ (4,0.5);
+	\draw[] (-2,0) -- ++(4,0);
+
+	\draw[line width=5pt, black!30] (0,0) -- (0,-1);
+
+	\draw[thick] (0,-1) circle (2pt) node[left, xshift=-0.5em] {$O$} -- ++ (-60:4);
+
+	\draw[axis,->] (0,-1) -- ++ (-60:5) node[below] {$+l$};	
+
+	\draw[line width=5pt] (0,-1) ++ (-60:1.9) coordinate (1) ++ (-60:-0.1) -- ++ (-60:0.2);	
+	\draw[axis,->] (0,-1) -- ++ (-90:4) node[below] {$+z$};
+
+	\draw[axis,->] (0,-1)++(-60:4) -- ++ (30:2) node[right] {$+\tau$};
+
+	\draw[force,->] (1) -- ++(120:1) node [right] {$d\vec{T}$};
+	\draw[inforce,->] (1) -- ++(1,0) node [right] {$d\vec{F}_{in}$};
+	\draw[force,->] (1) -- ++(0,-1) node [below] {$dm\vec{g}$};
+
+
+
+\draw[line width=5pt] (0,-1) ++ (-60:1.9) coordinate (1) ++ (-60:-0.1) -- ++ (-60:0.2);		
+\end{tikzpict}
+
+Условие равновесия: сумма всех действующих на стержень сил и сумма их моментов должны быть равны 0. Тогда для участка стержня $dm$ в проекции на ось $\tau$:
+\begin{equation}
+	dm\cdot g \cdot \sin\alpha=dm\cdot l\sin\alpha\cdot \omega^2 \cos\alpha
+\end{equation}
+Выберем такую точку отсчета $O$, чтобы относительно неё момент силы $T$ был равен нулю:
+\begin{equation}
+	[\vec{r},dm\vec{g}]+[\vec{r},dm\omega^2\vec{r}_\perp]=0
+\end{equation}
+Проинтегрируем с учетом $dm=dl\cdot \rho$:
+\begin{equation}
+	g\sin\alpha \int\limits_0^L dl = 
+		\omega^2\sin\alpha\cos\alpha \int\limits_0^L l dl
+\end{equation}
+Отсюда
+\begin{equation}
+	\cos\alpha=\frac{gL}{\omega^2\cdot\frac{L^2}{2}}
+\end{equation}
+\end{document}

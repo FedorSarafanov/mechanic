@@ -1,0 +1,101 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+
+\irodov{1.298}
+
+\begin{document}
+
+\begin{tikzpict}
+	\clip (-6,-1) rectangle (6,4.25);
+
+	\draw (0,0) circle (2cm);
+	\fill[magenta] (0,0) circle (2pt) coordinate (c);
+	\fill[magenta] (0,3) circle (2pt) coordinate (o);
+	\draw (0,3) circle (1cm);
+
+	\draw[axis] (0,0) circle (3cm);
+	\draw[axis] (0,0) -- (0,5);
+
+	\draw (0,0)  ++(150:3) coordinate (oo) circle(1cm);
+	\draw[axis,-<] (0,0) -- ++(150:5)node[left] {$-n$};
+	\draw[axis] (0,0) -- (0,5);
+	\draw[axis] (oo) -- ++(0,3.5);
+	\draw[axis] (oo) -- ++(0,-3.5) coordinate (phi);
+	\draw[force,->] (0,0) ++(150:2) -- ++ (150:1.5)node[above] {$\vec{N}$};
+
+	\draw[force,->] (0,0) ++(150:3) -- ++ (240:1.5)node[below] {$\vec{v}$};
+
+	\draw[force,->] (oo) -- ++ (0,-1.5) node[below] {$m\vec{g}$};
+	\fill[magenta] (oo) circle (2pt);
+
+
+	\draw pic["$\phi$",draw=magenta,<-,angle eccentricity=1.5,angle radius=.5cm] {angle=phi--oo--c};   
+	
+	\draw pic["$\phi$",draw=magenta,<-,angle 
+	eccentricity=1.5,angle radius=0.5cm] {angle=o--c--oo};   
+
+	\lineann[6]{90}{1.5}{$h^*=h_0\cdot\cos\phi$}
+	\lineann[-5]{90}{3}{$h_0=r+R$}
+
+	\contourlength{2mm}
+	\draw (2,0) node[] {\contour{white}{$W_\text{п}=0$}};
+\end{tikzpict}
+Начальная энергия
+\begin{equation}
+	W_0=mgh_0=mg(r+R)
+\end{equation}
+Условие отрыва -- $N=0$. Запишем второй закон Ньютона в проекции на радиальную ось $n$:
+\begin{equation}
+	ma_n=\frac{mv^2}{r+R}=mg\cos\phi-N
+\end{equation}
+Отсюда
+\begin{equation}
+	\cos\phi=\frac{v^2}{g(r+R)}, 
+		\qquad
+	h^*=\frac{v^2}{g}
+\end{equation}
+Полная энергия в момент отрыва
+\begin{equation}
+	W=mgh^*+\frac{mv^2}{2}+\frac{I\omega^2}{2}
+\end{equation}
+Так как движение происходит без проскальзывания, то все время до отрыва
+\begin{equation}
+	v=\omega r
+\end{equation}
+Тогда
+\begin{equation}
+	mg(r+R)=mg(r+R)\frac{\omega^2r^2}{g}+\frac{m\omega^2r^2}{2}+\frac{I\omega^2}{2}
+\end{equation}
+\begin{equation}
+	\omega^2=\frac{g(r+R)}{mr^2+\frac{mr^2}{2}+\frac{2}{10}mr^2}
+\end{equation}
+Откуда, наконец, выражается $\omega$  в момент отрыва:
+\begin{equation}
+	\omega=\sqrt{\frac{10g(r+R)}{17r^2}}
+\end{equation}
+% Из условия непроскальзывания найдем момент окончания такового:
+% \begin{equation}
+% 	v(t^*)=\omega(t^*)\cdot R
+% \end{equation}
+% \begin{equation}
+% 	v_0-kg\cdot t^*={2kg}\cdot t^*
+% \end{equation}
+% \begin{equation}
+% 	t^*=\frac{2}{3}v_0
+% \end{equation}
+% Сила трения - диссипативная, и количество теплоты, выделяющееся при её действии, равно по модулю её работе. 
+
+% Тогда
+% \begin{equation}
+% 	Q=|A_f|=|\Delta W_k|=\frac{mv_0^2}{2}-\left(\frac{mv^2}{2}+\frac{I\omega^2}{2}\right)
+% \end{equation}
+% \begin{gather}
+% 	Q=\frac{mv_0^2}{2}-\left(\frac{mv^2}{2}+\frac{Iv^2}{2R^2}\right)=\\=
+% 	\frac{mv_0^2}{2}-\frac{mv_0^2}{2}\cdot\frac{4}{9}-\frac{mR^2}{2}\frac{v_0^2}{2R^2}\frac{4}{9}=\frac{mv_0^2}{6}
+% \end{gather}
+% А отношение теплоты к начальной энергии
+% \begin{equation}
+% 	\eta=\frac{Q}{W_0}=\frac{mv_0^2}{6}\cdot\frac{2}{mv_0^2}=\frac13
+% \end{equation}
+\end{document}

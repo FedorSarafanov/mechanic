@@ -1,0 +1,144 @@
+\documentclass[a5paper,10pt]{article}
+ 
+% \usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+\usepackage[printwatermark]{xwatermark}
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+% \usepackage{xcolor}
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев -- №196} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+% \newwatermark*[allpages,color =magenta,angle=45,scale=2,xpos=0,ypos=0]{Проверено Дашей}
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    cargo/.style={
+        rectangle,
+        fill=magenta!40,
+        draw=black!50,
+        inner sep=2.5mm,
+    },
+    spring/.style={
+        decoration={
+            aspect=0.3, 
+            segment length=.8mm, 
+            amplitude=2mm,
+            coil},
+        decorate,
+        draw=magenta!70
+    }
+]
+
+    \begin{scope}[xscale=-1]
+        \node[] (b) at (-0.35,0) {};
+        \node[] (d) at (7,0) {};
+        % \node[above, yshift=1em] at (b) {$m_1$};
+
+        \node[] (c) at (4,0) {};
+        \node[above, yshift=1em] at (c) {$M$};
+        \node[above, yshift=1em] at (d) {$m$};
+
+        % \draw[interface] (0,2.5) rectangle ++(-0.25,-5);
+        \draw[spring, decoration={segment length=1.7mm}] (b) -- node[above, yshift=1em, xshift=-0.25em, black] {$k$} (c); 
+
+        \draw[interface] (-0.25,-0.25) rectangle ++(-0.25,0.7);
+        \draw[interface] (-0.5,-0.25) rectangle ++(8,-0.25);
+        \draw[thick] (-0.25, -0.25) coordinate (left) -- ++(0,0.7) (left) -- ++(7.75,0);
+
+        \draw[axis, <-] (-0.25,-0.7) node[right] {$+x$} -- ++(7.5,0) ;
+
+        \draw (2.25,-0.8) -- ++ (0,0.2) node [below, yshift=-0.5em] {$x$};
+
+        \draw (4,-0.8) -- ++ (0,0.2) node [below, yshift=-0.5em] {$0$};       
+        \draw[force,->] (d.west) -- ++(-1,0) node[right] {$\vec{v}_{m}$};
+
+        \draw[fill=magenta] (c) circle (0.25);
+        \draw[fill=magenta] (d) circle (0.25);
+    \end{scope}
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+
+Обозначим скорости до удара $\vec{v}_m\equiv\vec{v}$ и $\vec{v}_M\equiv0$, сразу после удара - $\vec{u}_m$ и $\vec{u}_M$.
+Масса легкого шара -- $m$, тяжелого -- $M$, $m<M$.
+
+Можно упростить решение задачи, воспользовавшись выведенными формулами для упругого удара:
+\begin{equation}
+    \vec{u}_{m}=\frac{2m\vec{v}_{M}+(m-M)\vec{v}_{m}}{m+M}\equiv
+    \vec{v}_m\frac{m-M}{m+M}
+\end{equation}
+Так как по условию $m<M$, то множитель в уравнении выше сугобо отрицателен, т.е. \textbf{скорость легкого шара после удара направлена влево}.
+
+Будем считать известной формулу коэффициента передачи энергии. Начальная энергия легкого шара $\frac{mv_m^2}{2}$. Тяжелому шару он передаст энергию
+\begin{equation}
+    \frac{4\varkappa}{(1+\varkappa)^2}\cdot \frac{mv_m^2}{2}, \text{ где } \varkappa=\frac{m}{M}
+\end{equation}
+
+Максимальное отклонение тяжелого шара будет тогда, когда вся его кинетическая энергия уйдет на сжатие пружины:
+\begin{equation}
+    \frac{4\varkappa}{(1+\varkappa)^2}\cdot \frac{mv_m^2}{2}=\frac{kA^2}{2}
+\end{equation}
+Отсюда
+\begin{equation}
+    A^2=\frac{4m\cdot mv_m^2}{M(1+m/M)^2\cdot k}
+\end{equation}
+\begin{equation}
+    A=2\sqrt\frac{m^2v_m^2}{kM}\frac{M}{m+M}=2\sqrt\frac{M}{k}\frac{mv_m}{m+M}
+\end{equation}
+\end{document}

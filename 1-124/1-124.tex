@@ -1,0 +1,115 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.124}
+\fancyfoot{}
+
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, }}
+
+\begin{document}
+\begin{figure}[H]
+    \centering
+    \vspace{-2em}
+\begin{tikzpicture}
+
+    \draw[fill=black] (-4,-2) coordinate (I) circle (1pt);
+    \draw[fill=black] (0,0) coordinate   (II) circle (1pt);
+    \draw[fill=black] (4,-2) coordinate  (III) circle (0pt);
+    \draw[interface] (-6,-2) rectangle ($(III)+(2,-0.5)$);
+    \draw[thick] (-6,-2) -- ($(III)+(2,0)$);
+    \draw[scale=2, opacity=0.5, domain=-2:0,smooth,variable=\x,blue] plot ({\x},{-\x*\x/4});
+    \draw[scale=2, opacity=0.3, domain=0:2,smooth,variable=\x,blue, dashed] plot ({\x},{-\x*\x/4});
+
+
+
+
+    \draw[force,->, thick] (I) -- ++(45:1.2) node[above] {$\vec{v}_0$};
+    % \draw[force,->, thick] (III) -- ++(-45:1.2) node[below] {$\vec{v}_c$};
+
+    \draw[force,->, thick] (II) -- ++(45:0.8) node[above] {$\vec{v}_{2-0}$};
+    \draw[force,->, thick] (II) -- ++(-90:0.8) node[below] {$\vec{v}_{1-0}$};
+    \draw[force,->, thick] (II) -- ++(-90:0.8) node[below] {$\vec{v}_{1-0}$};
+    \draw[force,->, thick] (II) -- ++(0:1) node[right] {$\vec{v}_{c}$};
+
+    \draw[solid,shorten >=0.5pt] (I)++(0.5cm,0) arc(0:45:0.5cm);
+    \node[color=black] at ($(I)+(45/2:0.7)$) {$\alpha$};
+
+    \draw[fill=black] (I) circle (1pt);
+    \draw[fill=black] (II) circle (1pt);
+
+    \draw[axis,->] (-4,1) -- ++(0,-2) node[below]{$+y$};
+    \draw[axis,->] (-4,1) -- ++(2,0) node[right]{$+x$};
+    % \draw[fill=black] (III) circle (1pt);
+
+\end{tikzpicture}
+\vspace{-1em}
+\end{figure}
+% В лабораторной системе отсчета:
+Найдем скорость первого осколка в момент разрыва $v_{1-0\,y}$. Так как нам известна его скорость в нижней точке (а наберет он при падении, очевидно, дополнительную скорость $v_0\sin\alpha$)
+\vspace{-0.5em}
+\begin{gather*}
+    v_{1-0\,y}=v_{1\,y}-v_0\sin\alpha
+\end{gather*}
+В верхней точке в момент взрыва можем рассмотреть движение центра масс системы (двигается так, будто взрыва не было):
+\begin{gather*}
+    \vec{v}_c=\frac{\sum_{i=1}^N m \vec{v}_i}{2m}\\
+    2\vec{v}_c=\vec{v}_{1-0}+\vec{v}_{2-0}
+\end{gather*}
+Запишем вектора в виде вектор-столбцов и выразим вектор $\vec{v}_{2-0}$:
+% \begin{gather*}
+% \vec{v}_c=\begin{bmatrix}
+%     v_0\cos\alpha\\
+%     0
+% \end{bmatrix}, \quad
+% \vec{v}_{1-0}=\begin{bmatrix}
+%     0\\
+%     v_{1y}-v_0\sin\alpha
+% \end{bmatrix}\\
+% \end{gather*}
+% Тогда легко выразить вектор $\vec{v}_{2-0}$:
+\vspace{-0.5em}
+\begin{gather*}
+    \vec{v}_{2-0}=2\vec{v}_c-\vec{v}_{1-0}
+    \begin{bmatrix}
+        v_{2x}\\
+        v_{2y}
+    \end{bmatrix}=
+    2\begin{bmatrix}
+        v_0\cos\alpha\\
+        0
+    \end{bmatrix}-
+    \begin{bmatrix}
+        0\\
+        v_{1y}-v_0\sin\alpha
+    \end{bmatrix}
+\end{gather*}
+Отсюда
+\vspace{-0.5em}
+\begin{gather*}
+    \left\{\begin{aligned}
+        v_{2-0x}=2v_0\cos\alpha\\
+        v_{2y}=v_0\sin\alpha-v_{1y}\\
+    \end{aligned}\right.
+    % \Rightarrow
+    % v=\sqrt{(v_{2x})^2+(v_{2y})^2}\\
+    % v=\sqrt{4v_0^2\cos^2\alpha+v_0^2\sin^2\alpha-
+    % 2v_0v_{1y}\sin\alpha+v_{1y}^2}\approx0.14 \text{ км/с}\\
+\end{gather*}
+Горизонтальная составляющая скорости не поменяется. А вот вертикальная при возвращении на высоту взрыва поменяет знак, а при падении на землю увеличится на $v_0\sin\alpha$, значит, в момент падения
+\vspace{-0.5em}
+\begin{gather*}
+    \left\{\begin{aligned}
+        v_{2-0x}&=2v_0\cos\alpha\\
+        v_{2y}&=-(v_0\sin\alpha-v_{1y})+v_0\sin\alpha=-v_{1y}\\
+    \end{aligned}\right.
+    \Rightarrow
+    v=\sqrt{(v_{2x})^2+(v_{2y})^2}\\
+    v=\sqrt{4v_0^2\cos^2\alpha+v_{1y}^2}\approx0.17 \text{ км/с}\\    
+\end{gather*}
+Все сказанное про дополнительные скорости верно в отсутствие сопротивления среды, является качественным сокращенным описанием, следующим из уравнений движения в свободном падении.
+
+\end{document}

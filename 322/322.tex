@@ -1,0 +1,53 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+\yakovlev{322}
+
+\begin{document}
+
+\begin{tikzpict}
+	\draw (-2,0) -- ++ (4,0);
+	\fill[magenta] (0,0) coordinate(0) node[magenta] {$\bigodot$} node[below, yshift=-0.5em] {$O, z$};
+
+	\draw[->] (0) -- ++ (130:2) circle (2pt) coordinate (c);
+	\draw[axis] (0) -- ++ (90:2) coordinate (b);
+
+	\draw[inforce,->] (c) -- ++ (-1,0) node[left] {$\vec{F}_{in}=-m\vec{a}_0$};
+
+	\draw (1,1) node {$\bigodot$} node[right, xshift=0.5em] {$\vec{M}$};
+	\draw pic["$\phi$",draw=magenta,->,angle eccentricity=1.2,angle radius=1.4cm] {angle=b--0--c};  
+
+	\draw[magenta,->] (0) -- node[caption] {$\vec{l}$} ++ (130:2);
+
+\end{tikzpict}
+Рассмотрим НИСО автомобиля. В ней на центр масс дверцы действует сила инерции, по модулю $F_{in}=ma_0$.
+
+Момент этой силы $\vec{M}$ поворачивает дверцу к автомобилю:
+\begin{equation}
+	M_z(\phi)=ma_0\cdot l \sin(\frac\pi2-\phi)=ma_0\cdot l \cos\phi
+\end{equation}
+Запишем уравнение моментов:
+\begin{equation}
+	I\frac{d\omega_z}{dt}=ma_0\cdot l \cos\phi
+\end{equation}
+Проинтегрируем с учетом того, что $dt=d\phi/\omega_z$:
+\begin{equation}
+	I\int\limits_0^\omega\omega_z{d\omega_z}=ma_0\cdot l \int\limits_0^\phi\cos\phi d\phi
+\end{equation}
+\begin{equation}
+	I\omega^2=2ma_0\cdot l \sin\phi
+\end{equation}
+Отсюда
+\begin{equation}
+	\frac{d\phi}{dt}=\sqrt{\frac{2ma_0l}{I}\sin\phi}
+\end{equation}
+С учетом граничных условий $t(\phi=0)=0, t(\phi=\frac\pi2)=T$:
+\begin{equation}
+	T=\sqrt{\frac{I}{2ma_0l}}\cdot\int\limits_0^{\frac\pi2}
+	\frac{d\phi}{\sqrt{\sin{\phi}}}
+\end{equation}
+Очевидно, в начальный момент сила натяжения $mg$. Значит, чтобы уравновесить весы, нужно с левой чашки убрать
+\begin{equation}
+	m_1=\frac{m}{1+I/mr^2}
+\end{equation}
+\end{document}

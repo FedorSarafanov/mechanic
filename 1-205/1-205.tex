@@ -121,7 +121,13 @@
         \foreach \t in {1,2,...,360}
             {--({-cos(\t)*(\bx+\d)+\bx},{sin(\t)*(\bx+\d)},{-\tgbeta*cos(\t)+\bz})}--cycle;
     
-    \draw[->, >=latex] (A) -- node [black,pos=0.5,left] {$\vec{r}_1$} (C);
+    \draw[force,->] (C) -- node [black,pos=0.5,left] {$\vec{T}_1$} 
+    ($.5*(C)+.5*(A)$);
+
+    \draw[force,->] (D) -- node [black,pos=0.5,above] {$\vec{T}_2$} 
+    ($.5*(D)+.5*(A)$);
+
+    \draw [->, >=latex] (A) -- node [black,pos=0.5,above] {$\vec{r}_2$} (C);
     \draw[->, >=latex] (A) -- node [black,pos=0.5,above] {$\vec{r}_2$} (D);
 
     \draw[MyPoints]  (A) node [above] {$O$} circle (0.5pt);
@@ -174,7 +180,7 @@
 Запишем моменты сил, действующих на шарик, в проеции на $x$.
 \begin{equation*}
     \begin{aligned}[c]
-        [\vec{M}]_x=[\vec{r}_1]_x\times [m\vec{g}]_x\\
+        [\vec{M}]_x=[\vec{r}_1]_x\times [m\vec{g}+\vec{T}]_x\\
         \frac{dN_x}{dt}=0
     \end{aligned}
         \qquad\Longrightarrow\qquad

@@ -1,0 +1,160 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Яковлев -- №247}
+\fancyfoot{}
+
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, },   pics/carc/.style args={#1:#2:#3}{code={\draw[pic actions] (#1:#3) arc(#1:#2:#3); } }} 
+\begin{document}
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+    % \begin{scope}[scale=0.5]
+
+    % \draw[fill=black!2] (-0.5,10) -- (-0.5,0) -- (0.5,0) -- (0.5,10) -- (0.3,10.5) -- (0.3,11) -- (0,11.5) -- (-0.3,11) -- (-0.3,10.5) -- (-0.5,10) -- cycle;
+
+    % \draw (0,3) node[draw=none, rectangle, align=left, inner sep=0.5ex, scale=1.4] (d) { П\\Р\\О\\Т\\О\\Н };        
+    % \end{scope}
+    \draw[dotted] (0,-1) -- ++(0,2) pic[xshift=2cm, yshift=-1cm]{carc=0:180:2};
+    \fill[black] (0,0) coordinate (I) circle (2pt) node [right] {$m_0$};
+    \fill[black] (4,0) coordinate (II) circle (2pt) node [left] {$m^*$};
+
+    \draw[force,->] (I) -- ++(0,1) node [above] {$\vec{v}_0$};
+    \draw[force,->] (II) -- ++(0,-1) node [below] {$-\vec{v}_0$};
+    \draw[force,->] (I) -- ++(-1,0) node [left] {$\vec{u}_1$};
+    \draw[axis,->] (0,2.5) -- ++(4.5,0) node[right] {$+y$};
+\end{tikzpicture}
+% \vspace{-1em}
+\end{figure}
+
+Рассмотрим вариант движения по окружности с постоянной скоростью. Запишем уравнение Мещерского:
+\begin{equation}
+    m \frac{d\vec{v}}{dt}=-\frac{dm_1}{dt}{\vec{u}_1}+\frac{dm_2}{dt}{\vec{u}_2}
+\end{equation}
+Учитывая, что $dm_1=-dm$ и к ракете ничего не прилипает, перепишем уравнение Мещерского:
+\begin{equation}
+    m \frac{d\vec{v}}{dt}=\frac{dm}{dt}{\vec{u}_1}
+\end{equation}
+Спроецируем на ось $y$:
+\begin{equation}
+    m \frac{d{v}_y}{dt}=-\frac{dm}{dt}{{u}_1}    
+\end{equation}
+Учитывая, что $dv_y=v_0\cdot d\alpha$, решим дифференциальное уравнение:
+\begin{equation}
+    -\frac{1}{u_1}\cdot{d{v}_y}=\frac{dm}{m}
+\end{equation}
+\begin{equation}
+    % -\frac{m}{u_1}\cdot{d{v}_y}=
+    -\frac{v_0}{u_1}\cdot\int_0^\pi{d\alpha}=\int_{m_0}^{m^*}\frac{dm}{m}
+\end{equation}
+\begin{equation}
+    -\frac{\pi v_0}{u_1}=\ln\frac{m^*}{m_0}
+\end{equation}
+Откуда, потенцируя, найдем массу после разворота:
+\begin{equation}
+    m^*=m_0\cdot e^{-\frac{\pi v_0}{u_1}}
+\end{equation}
+Значит, расход топлива на разворот ракеты был:
+\begin{equation}
+    \label{eq:dm1}
+    \Delta m = m^*-m_0 = m_0(1-e^{-\frac{\pi v_0}{u_1}})
+\end{equation}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[rotate=90]
+        \draw[axis,->] (0,0) -- ++(0,6.5) node[below] {$+x$};
+        \fill[black] (0,0) coordinate (I) circle (2pt) node [below] {$m_0$};
+        \draw[force,->] (I) -- ++(0,2) node [below] {$\vec{v}_0$};
+        \draw[force,->] (I) -- ++(0,1) node [below] {$\vec{u}_1$};
+
+        \draw[opacity=0.5, fill=black] (0,3.5) circle (2pt) node[below] {$m^*$};
+
+        \begin{scope}[xshift=1cm]
+            \draw[axis,->] (0,4.5) -- ++(0,-8) node[above] {$+x$};
+            \draw[fill=black] (0,3.5) coordinate (I)  circle (2pt) node[above] {$m^*$};
+            \fill[opacity=0.5, fill=black] (0,0) coordinate (II) circle (2pt) node [above] {$m^{**}$};
+            \draw[force,->] (II) -- ++(0,-2) node [above] {$\vec{v}_0$};
+            \draw[force,->] (I) -- ++(0,1) node [above] {$\vec{u}_1$};
+
+        \end{scope}
+    \end{tikzpicture}
+% \vspace{-1em}
+\end{figure}
+
+Поэтапно рассмотрим вариант без разворота. Отдельно решим отрезок торможения и отрезок разгона. Ось $x$ введем так, чтобы она все время была сонаправлена с вектором скорости ракеты. 
+
+Запишем уравнение Мещерского в проекции на $x$ на торможении:
+\begin{equation}
+    m \frac{d{v}_x}{dt}=\frac{dm}{dt}{{u}_1}    
+\end{equation}
+Решим дифференциальное уравнение:
+\begin{equation}
+    \frac{1}{u_1}\cdot\int_{v_0}^0{d{v}_x}=\int_{m_0}^{m^*}\frac{dm}{m}
+\end{equation}
+\begin{equation}
+    m^*=m_0\cdot e^{-\frac{v_0}{u_1}}
+\end{equation}
+
+Запишем уравнение Мещерского в проекции на $x$ на  разгоне:
+\begin{equation}
+    m \frac{d{v}_x}{dt}=-\frac{dm}{dt}{{u}_1}    
+\end{equation}
+Решим дифференциальное уравнение:
+\begin{equation}
+    -\frac{1}{u_1}\cdot\int_{0}^{v_0}{d{v}_x}=\int_{m_0}^{m^*}\frac{dm}{m}
+\end{equation}
+\begin{equation}
+    m^{**}=m^*\cdot e^{-\frac{v_0}{u_1}}
+\end{equation}
+Отсюда
+\begin{equation}
+    m^{**}=m_0 \cdot e^{-\frac{2v_0}{u_1}}
+\end{equation}
+Значит, расход топлива на маневр ракеты был:
+\begin{equation}
+    \label{eq:dm2}
+    \Delta m = m^**-m_0 = m_0(1-e^{-\frac{2 v_0}{u_1}})
+\end{equation}
+
+Сравнивая расходы топлива на разворот по дуге (\ref{eq:dm1}) и торможением-разгоном (\ref{eq:dm2}), легко убедиться, что отличие заключается только в множителе степени $e$: $\pi\to2$, и расход топлива при последнем способе меньше.
+% \begin{equation}
+%     F^\text{внеш}_x=0\Rightarrow\quad v_{cx}=const=0\Rightarrow\quad \Delta{x}_c=0
+% \end{equation}
+
+% Рассмотрим движение центра масс системы <<m-M>> по горизонтали.
+
+% Из векторных соображений следует:
+
+% \begin{equation}
+%     \Delta\vec{R}_c=\frac{\sum_N m_i\cdot\Delta\vec{r}_i}{m_c}
+% \end{equation}
+
+% Очевидно, что скатившись вниз, малый клин передвинется относительно большого на $(a-b)$, а относительно ЛСО -- на $(a-b+\Delta{x})$, где $\Delta{x}$ -- смещение в ЛСО большого клина.
+
+% \begin{equation}
+%     \Delta{x}_c=\frac{m(a-b+\Delta{x})+M\Delta{x}}{m+M}=0
+% \end{equation}
+
+% Отсюда
+
+% \begin{equation}
+%     m(a-b)+\Delta{x}(m+M)=0
+% \end{equation}
+
+% И наконец
+
+% \begin{equation}
+%     \Delta{x}=-\frac{m(a-b)}{m+M}
+% \end{equation}
+
+% Значит, большой клин сдвинется влево, и по модулю перемещение будет
+
+% \begin{equation}
+%     x=\frac{m}{m+M}(a-b)
+% \end{equation}
+
+\end{document}

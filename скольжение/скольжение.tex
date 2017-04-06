@@ -1,0 +1,96 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+
+\wrote{Скольжение}
+
+\begin{document}
+
+\begin{tikzpict}
+	\draw[interface] (-2,0) rectangle ++ (3,-0.5);
+	\draw[interface, pattern color=magenta, pattern=north west lines] (1,0) rectangle ++ (6,-0.5);
+	\draw[] (-2,0) -- ++(5,0);
+
+	% \draw[interface] (3,-0.5) rectangle ++ (0.5,5);
+	% \draw[] (3,0) -- ++(0,4.5);
+
+	\draw[] (1,2) coordinate (o) circle (2) node[magenta, scale=1.5] {$\bigotimes$} node[above, yshift=0.8em] {$+z$};
+
+	% \draw (o) pic[<-, magenta,]{carc=100:180:1cm};
+
+	\coordinate (1) at (3,2);
+	\coordinate (2) at (1,0);
+
+	\draw[force, thick, ->] (2) -- ++ (-1.5,0) node[above] {$\vec{f}\,\,\,$};
+
+	\draw[force, thick, ->] (o) -- ++ (0,-0.65) node[left] {$m\vec{g}$};
+	\draw[force, thick, ->] (o) -- ++ (3,0) node[right] {$\vec{v}_0$};
+	\draw[force, thick, ->] (2) -- ++ (0,0.65) node[left] {$\vec{N}$};
+
+
+	\draw[axis,->] (2,0) -- ++ (6,0) node[right] {$+x$};
+	% \draw[axis,->] (3,0) -- ++ (0,5) node[right] {$+y$};
+
+
+
+
+
+	\draw[fill=white, draw=none] (1,2) coordinate (o) circle (2.7mm);
+	\draw[] (1,2) coordinate (o) circle (2) node[magenta, scale=1.5] {$\bigotimes$};	
+
+	\draw[] (-2,2) node[magenta, scale=1.5] {$\bigotimes$} node[right, xshift=0.5em] {$\vec{M}_f$};	
+
+\end{tikzpict}
+При скольжении сила трения скольжения постоянна:
+\begin{equation}
+	f_x=-kN=-kmg
+\end{equation}
+Запишем второй закон Ньютона в проекции на ось $x$:
+\begin{equation}
+	ma_x=-kmg
+\end{equation}
+\begin{equation}
+	\int\limits_{v_0}^{v(t)}dv=-\int\limits_{0}^{t} kg\, dt
+\end{equation}
+\begin{equation}
+	v(t)=v_0-kg\cdot t
+\end{equation}
+Запишем уравнение моментов в проекции на ось $z$:
+\begin{equation}
+	I\gamma_z=kmg\cdot R
+\end{equation}
+\begin{equation}
+	\int\limits_{0}^{\omega_z(t)}dv=\int\limits_{0}^{t} \frac{kmgR}{I}\, dt
+\end{equation}
+\begin{equation}
+	\omega_z(t)=\frac{kmgR}{I}\cdot t=\frac{2kg}{R}\cdot t
+\end{equation}
+Из условия непроскальзывания найдем момент окончания такового:
+\begin{equation}
+
+	v(t^*)=\omega(t^*)\cdot R
+\end{equation}
+\begin{equation}
+	v_0-kg\cdot t^*={2kg}\cdot t^*
+\end{equation}
+\begin{equation}
+	t^*=\frac{v_0}{3kg}
+\end{equation}
+\begin{equation}
+	v=v(t^*)=\frac{2}{3}v_0
+\end{equation}
+Сила трения - диссипативная, и количество теплоты, выделяющееся при её действии, равно по модулю её работе. 
+
+Тогда
+\begin{equation}
+	Q=|A_f|=|\Delta W_k|=\frac{mv_0^2}{2}-\left(\frac{mv^2}{2}+\frac{I\omega^2}{2}\right)
+\end{equation}
+\begin{gather}
+	Q=\frac{mv_0^2}{2}-\left(\frac{mv^2}{2}+\frac{Iv^2}{2R^2}\right)=\\=
+	\frac{mv_0^2}{2}-\frac{mv_0^2}{2}\cdot\frac{4}{9}-\frac{mR^2}{2}\frac{v_0^2}{2R^2}\frac{4}{9}=\frac{mv_0^2}{6}
+\end{gather}
+А отношение теплоты к начальной энергии
+\begin{equation}
+	\eta=\frac{Q}{W_0}=\frac{mv_0^2}{6}\cdot\frac{2}{mv_0^2}=\frac13
+\end{equation}
+\end{document}

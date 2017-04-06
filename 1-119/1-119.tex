@@ -1,0 +1,81 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{cmap,graphicx,etoolbox,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz}
+
+\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through, shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.}\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.119}
+\fancyfoot{}
+
+%Команда \beforetext для текста слева от формулы
+\makeatletter \newif\if@gather@prefix \preto\place@tag@gather{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\gdisplaywidth@ \fi\fi } \appto\place@tag@gather{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \preto\place@tag{\if@gather@prefix\iftagsleft@ \kern-\gdisplaywidth@ \rlap{\gather@prefix} \kern\displaywidth@ \fi\fi } \appto\place@tag{\if@gather@prefix\iftagsleft@\else \kern-\displaywidth \rlap{\gather@prefix} \kern\displaywidth \fi\fi \global\@gather@prefixfalse } \newcommand*{\beforetext}[1]{\ifmeasuring@\else \gdef\gather@prefix{#1} \global\@gather@prefixtrue \fi } \makeatother 
+\tikzset{force/.style={>=latex,draw=blue,fill=blue}, axis/.style={densely dashed,gray,font=\small}, acceleration/.style={>=open triangle 60,draw=blue,fill=blue}, inforce/.style={force,double equal sign distance=2pt}, interface/.style={pattern = north east lines, draw    = none, pattern color=gray!60, }, cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},    cargo/.style={rectangle, fill=black!70, inner sep=2.5mm, }}
+
+\begin{document}
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+
+    \draw[interface] (-1,0.7) rectangle (1,1);
+    \draw[thick] (-1,0.7) -- (1,0.7);
+    \draw (0,0.7) -- (0,0);
+    \draw[axis,->] (0,0.7) -- ++(0,-4) node[below] {$+x$};
+
+    \draw (0,0) circle (0.5);
+    \draw[fill=black] (0,0) circle (1pt);
+
+    \draw (-0.5,0) -- ++ (0,-1);
+    \draw (0.5,0) -- ++ (0,-1);
+    \draw[fill=white] (0.5,0) ++ (0,-1) node[draw,minimum width=0.5cm,minimum height=0.5cm, fill=white] {$M$};
+
+    \draw[fill=white] (-0.5,0) ++ (0,-2) node[draw,minimum width=2cm,minimum height=0.5cm, fill=white, rotate=90] {$M-m$};
+
+    \draw[fill=white] (-0.5,0) ++ (-0.5,-2) node[draw,minimum width=1cm,minimum height=0.5cm, fill=white, rotate=90] {$m$};
+
+
+
+\end{tikzpicture}
+% \vspace{-1em}
+\end{figure}
+
+Рассмотрим движение центра масс системы <<человек-лестница-груз>>.
+
+Из векторных соображений следует:
+
+\begin{equation}
+    \Delta\vec{R}_c=\frac{\sum_N m_i\cdot\Delta\vec{r}_i}{m_c}
+\end{equation}
+
+Тогда
+
+\begin{equation}
+    \Delta\vec{R}_c=\frac{m\cdot\Delta\vec{r}_\text{ч}+(M-m)\cdot\Delta\vec{r}_\text{л}+M\cdot\Delta\vec{r}_\text{г}}{2M}
+\end{equation}
+
+При этом очевидно, что так как известно перемещение человека относительно лестницы $\vec{l}$, то
+
+\begin{equation}
+    \Delta\vec{r}_\text{ч}=\Delta\vec{r}_\text{л}+\vec{l}
+\end{equation}
+
+Отсюда
+
+\begin{equation}
+    \Delta\vec{R}_c=\frac
+    {m\cdot\vec{l}+M\cdot\Delta\vec{r}_\text{л}+M\cdot\Delta\vec{r}_\text{г}}
+    {2M}
+\end{equation}
+
+Причем видно, что так как перемещение идет по вертикали, то нормы векторов перемещений лестницы и груза равны:
+
+\begin{equation}
+    \Delta\vec{r}_\text{л}=-\Delta\vec{r}_\text{г}
+\end{equation}
+
+И отсюда
+
+\begin{equation}
+    \Delta\vec{R}_c=\frac
+    {m\cdot\vec{l}}{2M}
+\end{equation}
+
+\end{document}

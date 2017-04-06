@@ -1,0 +1,170 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Задача под запись - <<АУУ-2>>} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+\usepackage[outline]{contour}
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    cargo/.style={
+        rectangle,
+        fill=magenta!40,
+        draw=black!50,
+        inner sep=2.5mm,
+    },
+    spring/.style={
+        decoration={
+            aspect=0.3, 
+            segment length=.8mm, 
+            amplitude=2mm,
+            coil},
+        decorate,
+        draw=magenta!25
+    },
+    interface1/.style={draw=gray!60,
+        % The border decoration is a path replacing decorator. 
+        % For the interface style we want to draw the original path.
+        % The postaction option is therefore used to ensure that the
+        % border decoration is drawn *after* the original path.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},    
+    scale=0.95
+]
+\def\angle{41}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw[force,->] (-3,-3) -- ++(1,0) node[right]{$\vec{v}_0$};
+    \contourlength{1mm};
+
+    \draw[thick] (0,0) --  ++(0,-3);
+    \draw[thick,->] (0,0) -- node[right,xshift=5pt] {$\vec{l}/2$} ++(0,-1.165);
+    \draw[thick,->] (0,-1.325) -- node[right, xshift=5pt] {$\vec{l}/2$} ++(0,-1.325);
+
+    \draw[thick,->] (0,0) -- node[right, below] {$\vec{r}$} ++(-2.8,-2.69);
+
+    \draw[interface] (-3,0) rectangle ++(6,0.5);
+    \draw[line width=0.4mm] (-3,0) -- ++(6,0);
+    \draw[fill=magenta] (0,0) circle (3pt) node[above, yshift=3pt] {\contour{white}{$O$}};
+    
+    \draw[fill=magenta] (0,-3) circle (0.35) node {\contour{white}{$m_1$}};
+    \draw[fill=magenta] (-3,-3) circle (0.35) node {\contour{white}{$m_2$}};
+    \draw[fill=magenta] (0,-1.5) circle (0.35) node {\contour{white}{$m_3$}};
+
+    \draw[axis,->] (-3,-4) -- ++(6,0) node[right] {$+x$};
+
+    \draw[force,->] (0,0) -- (-1,0) node[left, below]{$\vec{f}$};
+
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+\begin{equation*}
+    m_1=m_2=m_3\equiv m
+\end{equation*}
+\begin{equation}
+    \vec{M}_0=[\vec{0}\,\times\,\vec{f}]=0 \quad \Longrightarrow \vec{N}=\text{const}
+\end{equation}
+Тогда можно записать закон сохранения момента импульса до удара и сразу после него:
+\begin{equation}
+    \label{eq1}
+    [\vec{r}\,\times\,{m\vec{v}_0}]
+    \equiv [\vec{l}\,\times\,{m\vec{v}_0}]=
+    [\vec{l}\,\times\,{m\vec{u}_1}]+
+    [\vec{l}\,\times\,{m\vec{u}_2}]+
+    \frac{1}{2}[\vec{l}\,\times\,{m\vec{u}_3}]
+\end{equation}
+
+В проекции на ось $z$ -- к нам:
+\begin{equation}
+    \label{eq:zsmi}
+    l\cdot mv_0 = 
+                l\cdot mu_{1x}+
+                l\cdot mu_{2x}+
+                \frac{1}{2}l\cdot mu_{3x}
+\end{equation}
+% Равенство будет выполнятся и векторно, т.е. выполняется ЗСИ - легко проверить, приведя общие слагаемые в (\ref{eq1}). Отсюда, в частности, следует $u\equiv|u_x|$.
+Так как $\omega_1=\omega_3$, то 
+\begin{equation}
+    \label{eq:omega}
+    \frac{u_{3x}}{l/2}=\frac{u_{1x}}{l}
+    \Longrightarrow
+    u_1=2u_3
+\end{equation}
+
+При АУУ сохраняется $W_k$, отсюда
+\begin{equation}
+    \label{eq:zsme}
+    mv_0^2=mu_1^2+
+           mu_2^2+
+           mu_3^2
+\end{equation}
+Решением системы (\ref{eq:zsmi},\ref{eq:zsme},\ref{eq:omega}), имеющим физический смысл, будет $\vec{u_{2}}=-\frac{2}{7}\vec{v}_0$, $\vec{u_{1}}=\frac{6}{7}\vec{v}_0$, $\vec{u_{3}}=\frac{3}{7}\vec{v}_0$.
+\begin{equation}
+    \Delta p_x=m(u_1+u_2+u_3)-mv_0=m[v_0(\frac{2}{7}+\frac{6}{7}+\frac{3}{7})-v_0\frac{7}{7}]=\frac{4}{7}mv_0
+\end{equation}
+По определению, $ F=m\frac{dv}{dt}$ ($\vec{F}dt=d\vec{p}$).
+
+Аналогично предыдущей задаче,
+\begin{equation}
+    f_{\text{ср}_x}=-\frac{4}{7}\cdot\frac{mv_0}{\tau}
+\end{equation}
+\end{document}

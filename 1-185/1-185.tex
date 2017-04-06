@@ -1,0 +1,169 @@
+\documentclass[a5paper,10pt]{article}
+ 
+% \usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+% \usepackage[outline]{contour}
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+\fancyhead[L]{Иродов -- №1.185} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+    decorations.pathreplacing,%
+    decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    quotes,%
+    angles,%
+    babel
+    % arrows.spaced,%
+}
+
+\begin{document}
+\def\pIn{\vec{p}_{1\text{н}}}
+\def\pIIn{\vec{p}_{2\text{н}}}
+\def\mpIn{{p}_{1\text{н}}}
+\def\mpIIn{{p}_{2\text{н}}}
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    cargo/.style={
+        rectangle,
+        fill=magenta!40,
+        draw=black!50,
+        inner sep=2.5mm,
+    },
+    spring/.style={
+        decoration={
+            aspect=0.3, 
+            segment length=.8mm, 
+            amplitude=2mm,
+            coil},
+        decorate,
+        draw=magenta!70
+    }
+]
+
+        \draw[force,->] (0,0) coordinate (a) -- 
+            node[midway,fill=white!20, opacity=0.9]  
+                {$(m_1+m_2)\vec{v}_c$} 
+            (4,0);
+
+        \draw[force,->] (0,0)  -- 
+            node[midway,fill=white!20, opacity=0.9]  
+                {$\pIn$} 
+            (2,2) coordinate (b);
+
+        \draw[force,->] (b)  -- 
+            node[midway,fill=white!20, opacity=0.9]  
+                {$\pIIn$} 
+            (4,0) coordinate (c);       
+
+        \draw pic["$\Phi$",draw=magenta,->,angle eccentricity=1.5,angle radius=0.5cm] {angle=a--b--c};                 
+
+\end{tikzpicture}
+\end{figure}
+
+
+
+По определению,
+\begin{equation}
+    \vec{v}_c=\vec{v}_1\frac{m_1}{m_1+m_2} 
+    \Longrightarrow
+    \vec{v}_c\parallel\vec{v}_1
+\end{equation}
+По условию
+\begin{equation}
+    \angle(\vec{u}_1,\vec{v}_1)=
+    \angle(\vec{u}_2,\vec{v}_1)=
+    \frac{1}{2}\Theta
+\end{equation}
+Откуда следует
+\begin{equation}
+    \angle(\pIn,\vec{v}_c)=
+    \angle(\pIIn,\vec{v}_c)=
+    \frac{1}{2}\Theta 
+\end{equation}
+Из равенства углов следует, что $\mpIn=\mpIIn$. Обозначим $\Phi=\pi-\Theta$.
+
+При ударе выполняется ЗСЭ, откуда
+\begin{equation}
+    m_1v_1^2=
+    m_1u_1^2+
+    m_2u_2^2
+\end{equation}
+Запишем в другом виде:
+\begin{equation}
+    \frac{m_2}{m_1}u_2^2=v_1^2-u_1^2
+\end{equation}
+\begin{equation}
+    \mpIn=\mpIIn
+        \Longrightarrow
+    u_2=\frac{m_1}{m_2}u_1
+\end{equation}
+Запишем теорему косинусов:
+\begin{equation}
+    (m_1+m_2)^2v_c^2=\mpIn^2+\mpIIn^2-2\mpIn\mpIIn\cos\Phi
+\end{equation}
+\begin{equation}
+    m_1^2v_1^2=m_1^2u_1^2+m_2^2u_2^2-2m_1u_1 \cdot m_2u_2 \cdot \cos\Phi\bigg|\times\frac{1}{m_1^2}
+\end{equation}
+\begin{equation}
+    v_1^2-u_1^2=\frac{m^2_2}{m^2_1}u_2^2-2u_1u_2\frac{m_2}{m_1}\cos\Phi
+\end{equation}
+\begin{equation}
+    \frac{m_2}{m_1}u_2^2=\frac{m^2_2}{m^2_1}u_2^2-2\frac{m^2_2}{m^2_1}u_2^2\cos\Phi
+\end{equation}
+\begin{equation}
+    \frac{m_1}{m_2}=1-2\cos\Phi=1-2\cos(\pi-\Theta)=1+2\cos\Theta
+\end{equation}
+\begin{equation}
+    \frac{m_1}{m_2}=1+2\cos60^\circ=1+2\cdot\frac{1}{2}=2
+\end{equation}
+\end{document}

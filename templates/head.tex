@@ -1,0 +1,151 @@
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage
+	{
+		amssymb,
+		% misccorr,
+		amsfonts,
+		amsmath,
+		amsthm,
+		wrapfig,
+		makecell,
+		multirow,
+		indentfirst,
+		ulem,
+		graphicx,
+		geometry,
+		fancyhdr,
+		subcaption,
+		float,
+		tikz,
+		csvsimple,
+		color,
+	}  
+
+\usepackage[outline]{contour}
+\usepackage[mode=buildnew]{standalone}
+
+
+\geometry
+	{
+		left=1cm,
+		right=1cm,
+		top=2cm,
+		bottom=1cm,
+		bindingoffset=0cm,
+	}
+
+\linespread{1.3} 
+\frenchspacing 
+
+
+\usetikzlibrary{scopes}
+\usetikzlibrary
+	{
+		decorations.pathreplacing,
+		decorations.pathmorphing,
+		patterns,
+		calc,
+		scopes,
+		arrows,
+		through,
+		shapes.misc,
+		arrows.meta,
+	}
+
+
+\tikzset{
+	force/.style=	{
+		>=latex,
+		draw=blue,
+		fill=blue,
+				 	}, 
+	%				 	
+	axis/.style=	{
+		densely dashed,
+		gray,
+		font=\small,
+					},
+	%
+	acceleration/.style={
+		>=open triangle 60,
+		draw=blue,
+		fill=blue,
+					},
+	%
+	inforce/.style=	{
+		force,
+		double equal sign distance=2pt,
+					},
+	%
+	interface/.style={
+		pattern = north east lines, 
+		draw    = none, 
+		pattern color=gray!60,
+					},
+	cross/.style=	{
+		cross out, 
+		draw=black, 
+		minimum size=2*(#1-\pgflinewidth), 
+		inner sep=0pt, outer sep=0pt,
+					},
+	%
+	cargo/.style=	{
+		rectangle, 
+		fill=black!70, 
+		inner sep=2.5mm,
+					},
+	%
+	}
+
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[R]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[C]{Механика}
+% \fancyhead[L]{Задача под запись - <<АУУ-2>>} 
+\fancyfoot{} %футер будет пустой
+
+\newcommand{\irodov}[1]{\fancyhead[L]{Иродов -- №#1}}
+\newcommand{\yakovlev}[1]{\fancyhead[L]{Яковлев -- №#1}}
+\newcommand{\wrote}[1]{\fancyhead[L]{Под запись -- <<#1>>}}
+
+\newenvironment{tikzpict}
+    {
+	    \begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}
+    }
+    { 
+		\end{tikzpicture}
+		% \caption{caption}
+		% \label{fig:label}
+		\end{figure}
+    }
+
+\newcommand{\vbLabel}[3]{\draw ($(#1,#2)+(0,5pt)$) -- ($(#1,#2)-(0,5pt)$) node[below]{#3}}
+\newcommand{\vaLabel}[3]{\draw ($(#1,#2)+(0,5pt)$) node[above]{#3} -- ($(#1,#2)-(0,5pt)$) }
+
+\newcommand{\hrLabel}[3]{\draw ($(#1,#2)+(5pt,0)$) -- ($(#1,#2)-(5pt,0)$) node[right, xshift=1em]{#3}}
+\newcommand{\hlLabel}[3]{\draw ($(#1,#2)+(5pt,0)$) node[left, xshift=-1em]{#3} -- ($(#1,#2)-(5pt,0)$) }
+
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt, ]
+        \draw[dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[fill=white, scale=0.8] {#4} (b);
+    \end{scope}
+}

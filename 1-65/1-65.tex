@@ -96,8 +96,8 @@
 \end{gather}
 Учитывая, что нить и блок идеальная  (отсюда $|\T|=|\t|$, $a_m=a_M$), запишем проекции на $x$: 
 \begin{gather}
-	\label{eq1}Ma=T+{f_R}_x-Mg\sin(\alpha)\\
-	\label{eq2}ma=mg-T
+	\label{eq1}Ma_x=T+{f_R}_x-Mg\sin(\alpha)\\
+	\label{eq2}ma_x=mg-T
 \end{gather}
 И проекция на $y$:
 \begin{gather}
@@ -105,14 +105,15 @@
 \end{gather}
 Решив систему (\ref{eq1}), (\ref{eq2}), (\ref{eq3}) относительно $a$, получаем
 \begin{gather}
-	\label{eq4}a=g\frac{(1-(\sin{\alpha}-\frac{{f_R}_x}{Mg})\frac{M}{m})}{\frac{M}{m}+1}
+	\label{eq4}
+    a_x=g\frac{(1-(\sin{\alpha}-\frac{{f_R}_x}{Mg})\frac{M}{m})}{\frac{M}{m}+1}
 \end{gather}
-Если грузы катятся вправо, то $a>0$ и ${f_R}_x=Mg\mu\cos\alpha$. Тогда
+Если грузы ускоряются вправо, то $a_x>0$ и ${f_R}_x=Mg\mu\cos\alpha$. Тогда
 \begin{gather}
-	a>0, \hspace{1em}\text{если}\hspace{1em} \frac{m}{M}>\mu\cos{\alpha}+\sin{\alpha}
+	a_x>0, \hspace{1em}\text{если}\hspace{1em} \frac{m}{M}>\mu\cos{\alpha}+\sin{\alpha}
 \end{gather}
-Если влево, то $a<0$ и ${f_R}_x=-Mg\mu\cos\alpha$
+Если влево, то $a_x<0$ и ${f_R}_x=-Mg\mu\cos\alpha$
 \begin{equation}
-        a<0, \hspace{1em}\text{если}\hspace{1em} \frac{m}{M}<-\mu\cos{\alpha}+\sin{\alpha}
+        a_x<0, \hspace{1em}\text{если}\hspace{1em} \frac{m}{M}<-\mu\cos{\alpha}+\sin{\alpha}
 \end{equation}
 \end{document}

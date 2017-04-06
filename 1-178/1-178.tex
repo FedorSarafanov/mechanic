@@ -1,0 +1,136 @@
+\documentclass[a5paper,10pt]{article}
+ 
+\usepackage{extsizes}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{graphicx} % для вставки картинок
+\graphicspath{{img/}}
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\linespread{1.3} % полуторный интервал
+% \renewcommand{\rmdefault}{ftm} % Times New Roman (не работает)
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=1cm,right=1cm,top=2cm,bottom=1cm,bindingoffset=0cm}
+\usepackage{titlesec}
+\usepackage{float}
+% \definecolor{black}{rgb}{0,0,0}
+% \usepackage[colorlinks, unicode, pagecolor=black]{hyperref}
+% \usepackage[unicode]{hyperref} %ссылки
+\usepackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\fancyhead{} %очистим хидер на всякий случай
+\fancyhead[LE,RO]{Сарафанов Ф.Г.} %номер страницы слева сверху на четных и справа на нечетных
+\fancyhead[CO, CE]{Механика}
+\fancyhead[LO,RE]{Иродов -- №1.178} 
+\fancyfoot{} %футер будет пустой
+% \fancyfoot[CO,CE]{\thepage}
+\renewcommand{\labelenumii}{\theenumii)}
+
+
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[
+    force/.style={>=latex,draw=blue,fill=blue},
+    % axis/.style={densely dashed,gray,font=\small},
+    axis/.style={densely dashed,black!60,font=\small},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    cargo/.style={
+        rectangle,
+        fill=magenta!40,
+        draw=black!50,
+        inner sep=2.5mm,
+    },
+    spring/.style={
+        decoration={
+            aspect=0.3, 
+            segment length=.8mm, 
+            amplitude=2mm,
+            coil},
+        decorate,
+        draw=magenta!25
+    },
+    interface1/.style={draw=gray!60,
+        % The border decoration is a path replacing decorator. 
+        % For the interface style we want to draw the original path.
+        % The postaction option is therefore used to ensure that the
+        % border decoration is drawn *after* the original path.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+                    amplitude=0.3cm,segment length=2mm}}},    
+]
+\def\angle{41}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw[thick, interface1] (5,-0.25) -- ++(4,0);
+    % \draw[thick,] (5,0) arc (-90:270:1.5cm);
+    \draw[thick, interface1] (0,3) coordinate (a) .. controls (3,3) and (2.6,0) .. (5,0);
+    \draw[axis,<->] (0,0) -- node[left,black] {$h$} (a);
+    % \draw[axis,<->] (7,0) -- ++(0,1.5);
+    \draw[axis,->] (0,0) --  ++(9,0) node[right] {$+x$};
+    \draw[draw=black!30, fill=magenta!20] (5,0) rectangle node[above, yshift=0.5em] {$M$} ++(3,-0.25);
+    
+
+    \draw[fill=magenta] (0,3) circle (2pt) node [above]{$m$};
+
+
+\end{tikzpicture}
+% \vspace{-2em}
+\end{figure}
+Спустившись с горки (силы трения с нею нет), груз будет обладать кинетической энергией, которая найдется из ЗСМЭ:
+\begin{equation}
+    \frac{mv^2}{2}=mgh \quad\Longrightarrow \quad v^2=2gh
+\end{equation}
+Рассмотрим систему <<$m,M$>>. В проекции на ось $x$ внешние силы отсутствуют, сила трения -- внутренняя -- импульса не изменит, запишем ЗСИ в проекции на $x$: 
+\begin{equation}
+    mv=(M+m)u
+\end{equation}
+Откуда
+\begin{equation}
+    u=v\frac{m}{m+M}
+\end{equation}
+Тогда найдем работу силы трения по теореме о изменении кинетической энергии (между точкой конца спуска и произвольной точкой после остановки шайбы):
+\begin{equation}
+    A_\text{тр}=\Delta W_k=\frac{(M+m)u^2}{2}-\frac{mv^2}{2}
+\end{equation}
+Подставим $u$:
+\begin{equation}
+    A_\text{тр}=\frac{mv^2}{2}\left(\frac{m}{m+M}-1\right)
+\end{equation}
+И окончательно, подставляя $v^2$
+\begin{equation}
+    A_\text{тр}=-\frac{mM}{m+m}gh
+\end{equation}
+
+
+\end{document}

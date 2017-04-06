@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1482435158 "578.tex" "578.pdf" "578" 1482435158
+["pdflatex"] 1487864211 "578.tex" "578.pdf" "578" 1487864235
   "/home/lab/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0500.tfm" 1480795210 3252 bc0f8cc163ba94bbce20e59f671a255d ""
   "/home/lab/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0700.tfm" 1480795209 3256 b15a2ce2310c0038b96c5235b038f0eb ""
   "/home/lab/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0900.tfm" 1480795087 3244 8db84377f89b8850acd19c9879de82e7 ""
@@ -22,6 +22,7 @@
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm" 1479649815 1116 25a7bf822c58caf309a702ef79f4afbb ""
   "/usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm" 1479649814 520 4889cce2180234b97cad636b6039c722 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1479649808 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1479649808 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb" 1479649808 36094 798f80770b3b148ceedd006d487db67c ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1479649808 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1479649808 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
@@ -170,11 +171,11 @@
   "/usr/share/texmf-dist/tex/latex/ucs/utf8x.def" 1476971572 8036 21f7ac37aafb6cfeddbb196b8bfd6280 ""
   "/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty" 1479649818 55589 34128738f682d033422ca125f82e5d62 ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1479649825 31669 df537245012f3e5f05bdc55644b7a3df ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1481646681 1850635 a60c4f20d48f215ceb5fab87450932ec ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1483808445 1850635 a60c4f20d48f215ceb5fab87450932ec ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1480784818 7252863 2f1e3432e6d7c5bf74a5578ffece065c ""
-  "578.aux" 1482435158 186 d84bf62585b18c5b92804f4b0a9189f3 ""
-  "578.tex" 1482435157 7446 1fbdd233ea7dae1a4062668a04d307b1 ""
+  "578.aux" 1487864212 186 d84bf62585b18c5b92804f4b0a9189f3 ""
+  "578.tex" 1487864211 7413 f8dfbb16b3061d3d7ccd2728625ad4bf ""
   (generated)
-  "578.aux"
-  "578.log"
   "578.pdf"
+  "578.log"
+  "578.aux"
