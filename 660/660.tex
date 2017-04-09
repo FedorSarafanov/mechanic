@@ -1,0 +1,75 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+
+\yakovlev{660}
+
+\begin{document}
+
+\begin{tikzpict}
+
+	\fill[magenta!10, draw=none] (0,0) rectangle ++(2,3);
+	\fill[magenta!10, draw=none] (0.8,0) rectangle ++(0.4,-0.5);
+	\draw (0,3.2)--(0,0)--(2,0)--(2,3.2);
+
+	\draw[magenta!10] (0.8,0) -- ++(0.4,0);
+
+	\draw[magenta] (1,0.3) circle (2pt) node[above, yshift=0.5em] {$A$};
+	\draw[magenta] (1,-0.3) circle (2pt) node[below, yshift=-0.5em] {$B$};
+
+	\draw[magenta,->] (1.4,0.3) -- ++(0,-0.5) node[below] {$\vec{v}$};
+	\draw[magenta,->] (0.6,-0.3) -- ++(0,-1) node[below] {$\vec{v}_2$};
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+	\lineann[0.5]{90}{3}{$h(t)$}
+
+
+	\draw[axis,->] (-1,-0.5) -- ++(0,4) node[above] {$+h$};
+\end{tikzpict}
+Запишем уравнение Бернулли для для линии тока в точках $A$ (нижняя точка сосуда у отверстия) и $B$ (под отверстием):
+\begin{equation}
+	\label{eq:brn}
+	p_a+\frac{\rho v^2}{2}+\rho gh=p_a+\frac{\rho v_2^2}{2}
+\end{equation}
+Скорость $v_2$ легко найдется из равенства расходов жидкости в сечении $S$ и в сечении $\sigma$:
+\begin{equation}
+	Sv=\sigma v_2 
+		\quad\Rightarrow\quad
+	v_2=v\frac{S}{\sigma}
+\end{equation}
+Тогда можно формулу (\ref{eq:brn}) переписать в следующем виде:
+\begin{equation}
+	2gh=v^2\left[\frac{S^2}{\sigma^2}-1\right]
+\end{equation}
+С другой стороны, $v_h=-\frac{dh}{dt}$. Тогда 
+\begin{equation}
+	-\frac{dh}{dt}=\sqrt{\frac{2gh}{\frac{S^2}{\sigma^2}-1}}
+\end{equation}
+Проинтегрируем, расставив пределы:
+\begin{equation}
+	-\int\limits_H^h(t)\frac{dh}{\sqrt{h}}=\int\limits_0^t\sqrt{\frac{2g}{\frac{S^2}{\sigma^2}-1}}
+\end{equation}
+\begin{equation}
+	2\left(\sqrt{H}-\sqrt{h}\right)=t\sqrt{\frac{2g}{\frac{S^2}{\sigma^2}-1}}
+\end{equation}
+\begin{equation}
+	t=2\left(\sqrt{H}-\sqrt{h}\right)\sqrt{\frac{\frac{S^2}{\sigma^2}-1}{2g}}
+\end{equation}
+Вынесем $\frac{S^2}{\sigma^2}$ за знак корня:
+\begin{equation}
+	t=2\left(\sqrt{H}-\sqrt{h}\right)\frac{S}{\sigma}\sqrt{\frac{1-\frac{\sigma^2}{S^2}}{2g}}
+\end{equation}
+Ввиду малости $\sigma$ второго порядка положим $\frac{\sigma^2}{S^2}\approx0$, тогда
+\begin{equation}
+	t=\left(\sqrt{H}-\sqrt{h}\right)\frac{S}{\sigma}\sqrt{\frac{2}{g}}
+\end{equation}
+Полное время вытекания будет при $h=0$:
+\begin{equation}
+	T=t(h=0)=\frac{S}{\sigma}\sqrt{\frac{2}{g}}
+\end{equation}
+\end{document}

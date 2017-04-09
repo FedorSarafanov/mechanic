@@ -1,0 +1,79 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+
+\yakovlev{404}
+
+\begin{document}
+
+\begin{tikzpict}
+    \contourlength{0.5mm};
+
+	\draw[very thick] (0,-1.5) -- (0,1.5);
+    \draw[magenta] (0,0) node[] {\contour{white}{$\bigodot$}} node[right, xshift=.5em] {$O$};
+
+    \draw[magenta] (0,1) node[] {\contour{white}{$\times$}};
+
+	% \draw[interface] (-2,0) rectangle (2,-0.25);
+	% \draw[thick] (-2,0) -- (2,0);
+
+	% \draw (0,1) circle (1);
+
+
+
+ %    \draw[fill=magenta] (0,0) circle (2pt) node[above, yshift=3pt] {\contour{white}{$B$}};
+    \lineann[1.5]{90}{1}{$x$}
+ 	\begin{scope}[yshift=-1.5cm] 		
+    \lineann[1]{90}{3}{$l$}
+ 	\end{scope}
+
+    \draw[fill=magenta] (2,1) circle (2pt);
+    \draw[->] (2,1) -- ++ (-0.5,0) node[left] {$\vec{v}$};
+
+    \draw (-2.5,0) node[blue] {$\bigotimes$} node[right, xshift=.5em] {$\vec{g}$};
+\end{tikzpict}
+Обозначим скорость шарика перед ударом $v$ (после удара $0$), угловую скорость стержня после удара $\omega$, скорость центра масс стержня $u$.
+
+Момент стержня относительно $O$ считаем известным:
+\begin{equation}
+	I_o=\frac{Ml^2}{12}
+\end{equation}
+Запишем ЗСЭ, а также ЗСИ и ЗСМИ (относительно $O$) в проекции на ось $z$ (через точку $O$ на нас):
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		mv^2&=Mu^2+I\omega^2\\
+		mv&=Mu_x\\
+		mvx&=I\omega_z
+	\end{aligned}
+	\right.
+\end{equation}
+Откуда
+\begin{equation}
+	\omega_z=\frac{mvx}{I}%=mvx\cdot\frac{12}{Ml^2}
+\end{equation}
+\begin{equation}
+	u_x=\frac{mv}{M}
+\end{equation}
+Подставим в формулу ЗСЭ:
+\begin{equation}
+	mv^2=M\frac{m^2v^2}{M^2}+I\frac{m^2v^2x^2}{I^2}
+	\quad\Rightarrow\quad
+	1=\frac{m}{M}+\frac{mx^2}{I}
+\end{equation}
+Откуда после подстановки момента инерции
+\begin{equation}
+	x=l\sqrt{\frac{1}{12}\left(\frac{M}{m}-1\right)}	
+\end{equation}
+Отсюда следует, что $M\geq m$.
+Логично, что $x\leq \frac{l}{2}$. Тогда
+\begin{equation}
+	{\frac{1}{12}\left(\frac{M}{m}-1\right)}\leq\frac14
+	\quad\Rightarrow\quad
+	M\leq4m
+\end{equation}
+Т.е.
+\begin{equation}
+	m\leq M\leq 4m
+\end{equation}
+\end{document}

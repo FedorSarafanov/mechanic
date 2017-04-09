@@ -157,14 +157,54 @@
            mu_2^2+
            mu_3^2
 \end{equation}
-Решением системы (\ref{eq:zsmi},\ref{eq:zsme},\ref{eq:omega}), имеющим физический смысл, будет $\vec{u_{2}}=-\frac{2}{7}\vec{v}_0$, $\vec{u_{1}}=\frac{6}{7}\vec{v}_0$, $\vec{u_{3}}=\frac{3}{7}\vec{v}_0$.
+Из (\ref{eq:zsmi},\ref{eq:zsme},\ref{eq:omega}), приведя подобные:
 \begin{equation}
-    \Delta p_x=m(u_1+u_2+u_3)-mv_0=m[v_0(\frac{2}{7}+\frac{6}{7}+\frac{3}{7})-v_0\frac{7}{7}]=\frac{4}{7}mv_0
+    \left\{\begin{aligned}
+    %%%
+    v_0 &=                 
+                u_{2x}+
+                \frac{5}{2}u_{3x}
+    \\
+    v_0^2 &=
+           u_{2x}^2+
+          5 u_{3x}^2
+    \end{aligned}\right.
 \end{equation}
-По определению, $ F=m\frac{dv}{dt}$ ($\vec{F}dt=d\vec{p}$).
+Решим систему. Возведем первое уравнение в квадрат:
+\begin{equation}
+    v_0^2=u^2_{2x}+5u_{2x}u_{3x}+\frac{25}{4}u^2_{3x} 
+\end{equation}
+\begin{equation}
+    4u^2_{2x}+20u_{2x}u_{3x}+25u^2_{3x}=4u^2_{2x}+20u^2_{3x} 
+\end{equation}
+\begin{equation}
+    20u_{2x}u_{3x}=-5u^2_{3x} 
+    \quad\Rightarrow\quad  
+    u_{2x}=-\frac14u_{3x}
+\end{equation}
+\begin{equation}
+    v_0=-\frac14u_{3x}+\frac{5}{2}u_{3x}
+    \quad\Rightarrow\quad  
+    u_{3x}=\frac49v_0
+\end{equation}
+Тогда  
+\begin{equation}
+    u_{1x}=\frac89v_0, \quad u_{2x}=\frac19v_0
+\end{equation}
+\begin{equation}
+    \Delta p_x=p_x^\text{кон}-p_x^\text{нач}=mv_0(\frac89+\frac49-\frac19-1)=\frac29mv_0
+\end{equation}
+\begin{equation}
+    f_{\text{ср}_x}=\frac{\Delta p_x}{\Delta t}=\frac{2}{9}\cdot\frac{mv_0}{\tau}
+\end{equation}
+% Решением системы (\ref{eq:zsmi},\ref{eq:zsme},\ref{eq:omega}), имеющим физический смысл, будет $\vec{u_{2}}=-\frac{2}{7}\vec{v}_0$, $\vec{u_{1}}=\frac{6}{7}\vec{v}_0$, $\vec{u_{3}}=\frac{3}{7}\vec{v}_0$.
+% \begin{equation}
+%     \Delta p_x=m(u_1+u_2+u_3)-mv_0=m[v_0(\frac{2}{7}+\frac{6}{7}+\frac{3}{7})-v_0\frac{7}{7}]=\frac{4}{7}mv_0
+% \end{equation}
+% По определению, $ F=m\frac{dv}{dt}$ ($\vec{F}dt=d\vec{p}$).
 
-Аналогично предыдущей задаче,
-\begin{equation}
-    f_{\text{ср}_x}=-\frac{4}{7}\cdot\frac{mv_0}{\tau}
-\end{equation}
+% Аналогично предыдущей задаче,
+% \begin{equation}
+%     f_{\text{ср}_x}=-\frac{4}{7}\cdot\frac{mv_0}{\tau}
+% \end{equation}
 \end{document}

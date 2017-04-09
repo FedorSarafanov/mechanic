@@ -97,8 +97,8 @@
     \contourlength{1mm};
 
     % \draw[thick] (0,0) --  ++(0,-3);
-    \draw[thick,->] (0,-1.5) -- node[left,xshift=-5pt] {$\vec{l}/2$} ++(0,1.15);
-    \draw[thick,->] (0,-1.5) -- node[left,xshift=-5pt] {$-\vec{l}/2$} ++(0,-1.15);
+    \draw[thick,->] (0,-1.5) -- node[left,xshift=-5pt] {$\vec{l}_1$} ++(0,1.15);
+    \draw[thick,->] (0,-1.5) -- node[left,xshift=-5pt] {$\vec{l}_2$} ++(0,-1.15);
     % \draw[thick,->] (0,-1.325) -- node[right, xshift=5pt] {$\vec{l}/2$} ++(0,-1.325);
 
     % \draw[thick,->] (0,0) -- node[right, below] {$\vec{r}$} ++(-2.8,-2.69);
@@ -108,7 +108,7 @@
     % \draw[fill=magenta] (0,0) circle (3pt) node[above, yshift=3pt] {\contour{white}{$O$}};
     \draw[thick] (0,0) -- (0,-3);
 
-    \draw (0,-1.5) node[scale=1.5, magenta] {$\times$} node[right, xshift=3pt, yshift=-1pt] {ц.м.};
+    \draw (0,-1.2) node[scale=1.5, magenta] {$\times$} node[right, xshift=3pt, yshift=-1pt] {ц.м.};
     
     \draw[fill=magenta] (-3,0) circle (0.35) node {\contour{white}{$m_1$}};
     \draw[fill=magenta] (0,-3) circle (0.35) node {\contour{white}{$m_2$}};
@@ -116,6 +116,7 @@
 
 
     \draw[axis,->] (-3,-4) -- ++(6,0) node[right] {$+x$};
+    \draw[axis,->] (-1.3,-4) -- ++(0,4) node[right] {$+y$};
 
     \draw (2,0) node[blue] {$\bigotimes$} node[right, xshift=.5em] {$\vec{g}$};
     \draw (2,-2) node[magenta] {$\bigotimes$} node[right, xshift=.5em, magenta] {$\vec{N}_c^*$};
@@ -157,26 +158,43 @@
 \begin{equation}
     v_{cx}=
             \frac{2mu_{3x}+
-            m\cdot0}{2m}=
-            \frac{v_0}{2}
+            m\cdot0}{3m}=
+            \frac{v_0}{3}
 \end{equation}
 \begin{equation}
     u_{3x}^*=
         u_{3x}-v_{cx}=
-        0
+        \frac{v_0}{6}
 \end{equation}
 \begin{equation}
     u_{2x}^*=
             u_{2x}-v_{cx}=
-            -\frac{v_0}{2}
+            -\frac{v_0}{3}
 \end{equation}
 Отсюда
-\begin{equation}
+\begin{gather}
     \vec{N}_c^*=
-        \left[\frac{\vec{l}}{2} \,\times\, 2m\cdot \vec{u}_{3}^*\right]+
-        \left[-\frac{\vec{l}}{2} \,\times\, m\cdot \vec{u}_{2}^*\right]
-        \equiv
-        \frac{1}{2}\left[m\cdot \vec{u}_{2}^* \,\times\, \vec{l}\,\right]
+        \left[{\vec{l}_1} \,\times\, 2m\cdot \vec{u}_{3}^*\right]+
+        \left[{\vec{l}_2} \,\times\, m\cdot \vec{u}_{2}^*\right]
+        % \equiv   
+        % \frac{1}{2}\left[m\cdot \vec{u}_{2}^* \,\times\, \vec{l}\,\right]
+\end{gather}
+Найдем координаты центра масс относительно $m_2$:
+\begin{equation}
+    y_c=\frac{m_2\cdot0+2m\cdot l}{3m}=\frac23l
 \end{equation}
+Отсюда следует, что относительно центра масс
+\begin{equation}
+    \vec{l}_1=\frac13\vec{l}
+\end{equation}
+и
+\begin{equation}
+    \vec{l}_2=-\frac23\vec{l}
+\end{equation}
+\begin{gather}
+    N_{cZ}^*=\frac{l}{3}\cdot2m\cdot\frac16v_0+\left(-\frac{2l}3\right)\cdot m\cdot\left(-\frac13v_0\right)=\\=
+    \frac19lmv_0+\frac29mlv_0=\frac13lmv_0\\
+    \vec{N}_c^*=\vec{k}N_{cZ}^*=\vec{k}\frac13lmv_0
+\end{gather}
 
 \end{document}

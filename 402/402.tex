@@ -1,0 +1,53 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+
+\yakovlev{402}
+
+\begin{document}
+
+\begin{tikzpict}
+
+	\draw[interface] (-2,0) rectangle (2,-0.25);
+	\draw[thick] (-2,0) -- (2,0);
+    \contourlength{1mm};
+
+	\draw (0,1) circle (1);
+
+
+
+    \draw[fill=magenta] (0,0) circle (2pt) node[above, yshift=3pt] {\contour{white}{$B$}};
+
+    \lineann[-1]{90}{1}{$R$}
+
+    \draw[fill=magenta] (-2,1) circle (2pt);
+    \draw[->] (-2,1) -- ++ (0.5,0) node[right] {$\vec{v}_0$};
+
+\end{tikzpict}
+Положим скорость пули перед ударом $v_0$, после удара $u$, угловую скорость шара после окончания проскальзывания $\omega$.
+
+Момент инерции шара считаем известным:
+\begin{equation}
+	I_c=\frac25MR^2
+\end{equation}
+Запишем ЗСМИ в проекции на ось $x$ (через точку $B$ от нас):
+\begin{equation}
+	mv_0R=I_B\omega_x+mu_xR
+\end{equation}
+Согласно теореме Гюйгенса-Штейнера,
+\begin{equation}
+	I_B=I_c+MR^2=\frac75MR^2
+\end{equation}
+Кроме того, при качении без проскальзывания
+\begin{equation}
+	\omega_x=\frac{v_{cx}}{R}
+\end{equation}
+Тогда перепишем первую формулу:
+\begin{equation}
+	mv_0R=\frac75MR^2\cdot\frac{v_{cx}}{R}+mu_xR
+\end{equation}
+Откуда
+\begin{equation}
+	u_x=v_0-\frac75\frac{M}{m}v=80\frac{m}{s}
+\end{equation}
+\end{document}

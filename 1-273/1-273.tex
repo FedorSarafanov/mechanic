@@ -17,37 +17,50 @@
 
 	\draw[thick] (0,-1) circle (2pt) node[left, xshift=-0.5em] {$O$} -- ++ (-60:4);
 
-	\draw[axis,->] (0,-1) -- ++ (-60:5) node[below] {$+l$};	
+	\draw[axis,->] (0,-1) -- ++ (-60:5) node[below] {$+x$};	
 
 	\draw[line width=5pt] (0,-1) ++ (-60:1.9) coordinate (1) ++ (-60:-0.1) -- ++ (-60:0.2);	
-	\draw[axis,->] (0,-1) -- ++ (-90:4) node[below] {$+z$};
+	\draw[axis] (0,-1) -- ++ (-90:4) node[below] {$$};
 
 	\draw[axis,->] (0,-1)++(-60:4) -- ++ (30:2) node[right] {$+\tau$};
 
-	\draw[force,->] (1) -- ++(120:1) node [right] {$d\vec{T}$};
+	\draw[force,->] (1) -- ++(120:1) node [right, xshift=0.25em] {$d\vec{T}$};
 	\draw[inforce,->] (1) -- ++(1,0) node [right] {$d\vec{F}_{in}$};
 	\draw[force,->] (1) -- ++(0,-1) node [below] {$dm\vec{g}$};
+\contourlength{1mm};
+ 	\draw (2,-1) node[magenta] {$\bigotimes$} node[right, xshift=.5em, magenta] {$\vec{M}_{g}$};
+ 	\draw (3.5,-1) node[magenta] {$\bigodot$} node[right, xshift=.5em, magenta] {$\vec{M}_{in}$};
 
+ 	\draw[force,->,magenta] (0,-5) --++(0,1) node[above] {\contour{white}{$\vec{\omega}$}};
+ 	\draw[force,->,magenta] (-0.5,-5) --++(0,1) node[above] {\contour{white}{$\vec{N}$}};
 
+    \coordinate (ooo) at (0,-2);
 
-\draw[line width=5pt] (0,-1) ++ (-60:1.9) coordinate (1) ++ (-60:-0.1) -- ++ (-60:0.2);		
+\draw[line width=5pt] (0,-1) coordinate (o) ++ (-60:1.9) coordinate (oo) ++ (-60:-0.1) -- ++ (-60:0.2);		
+    \draw pic["$\alpha$",draw=magenta,<-,angle eccentricity=1.2,angle radius=1.5cm] {angle=ooo--o--oo}; 
 \end{tikzpict}
+\begin{equation}
+	I\vec\gamma=\vec{M}
+\end{equation}
+Т.к. начальной угловой скорости (поворота стержня) нет, то при $\gamma=0$ стержень будет покоится относительно вращающегося подвеса.
 
-Условие равновесия: сумма всех действующих на стержень сил и сумма их моментов должны быть равны 0. Тогда для участка стержня $dm$ в проекции на ось $\tau$:
+Запишем суммарный момент для участка стержня длиной $dx$, массой $dm=\rho dx$:
 \begin{equation}
-	dm\cdot g \cdot \sin\alpha=dm\cdot l\sin\alpha\cdot \omega^2 \cos\alpha
+	\vec{M}=\int\limits_{(m)}\left[[\vec{r},dm\vec{g}]+[\vec{r},dm\omega^2\vec{r}_\perp]\right]=0
 \end{equation}
-Выберем такую точку отсчета $O$, чтобы относительно неё момент силы $T$ был равен нулю:
+В проекции на ось $z$ (от нас через $O$):
 \begin{equation}
-	[\vec{r},dm\vec{g}]+[\vec{r},dm\omega^2\vec{r}_\perp]=0
+	dm\cdot g\cdot\sin\alpha\cdot x=dm\cdot\omega^2\cdot x^2\cdot\sin\alpha\cos\alpha
 \end{equation}
-Проинтегрируем с учетом $dm=dl\cdot \rho$:
+Проинтегрируем с учетом $dm=dx\cdot \rho$:
 \begin{equation}
-	g\sin\alpha \int\limits_0^L dl = 
-		\omega^2\sin\alpha\cos\alpha \int\limits_0^L l dl
+	g\sin\alpha \int\limits_0^L x dx = 
+		\omega^2\sin\alpha\cos\alpha \int\limits_0^L x^2 dx
 \end{equation}
 Отсюда
 \begin{equation}
-	\cos\alpha=\frac{gL}{\omega^2\cdot\frac{L^2}{2}}
+	g\frac{L^2}{2}=\omega^2\cos\alpha\frac{L^3}{3}
+    \quad\Rightarrow\quad
+	\cos\alpha=\frac{3g}{2\omega^2L}
 \end{equation}
 \end{document}

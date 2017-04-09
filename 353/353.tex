@@ -1,0 +1,55 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/lab/tex/templates}
+\input{\source/head.tex}
+
+\yakovlev{353}
+
+\begin{document}
+
+\begin{tikzpict}
+
+
+	\fill[magenta] (0,0) circle (2pt) node[above, yshift=0.5em] {$O$};
+
+	\draw (0,0)++(-0.2,0.2) rectangle ++ (0.4,-3);
+	\lineann[2]{90}{-2.8}{$L, m$}
+
+	\draw (0,0) -- ++(-40:2) coordinate (g);
+
+	\fill[magenta] (g) circle (5pt) node [right, xshift=0.5em] {$m$};
+	\lineann[2]{-40}{2}{$l$}
+
+	\draw (2,-2) node[blue] {$\bigotimes$} node[right, xshift=.5em] {$\vec{N}$};
+\end{tikzpict}
+Положим скорость шарика перед ударом $v$, (после удара по условию его скорость $u=0$), угловую скорость стержня после удара $\omega$.
+
+Запишем ЗСЭ:
+\begin{equation}
+	\label{eq1}
+	\frac{mv^2}{2}=\frac{I\omega^2}{2}
+\end{equation}
+
+Запишем ЗСМИ в проекции на ось $z$ (от нас через точку $O$):
+\begin{equation}
+	mvl=N_z=I\omega_z
+\end{equation}
+Отсюда %(с учетом $I=\frac{mL^2}{3}$)
+\begin{equation}
+	\omega_z=\frac{mvl}{I}%\frac{3v}{L^2}
+\end{equation}
+Подставим в (\ref{eq1}):
+ \begin{equation}
+	\frac{mv^2}{2}=\frac{Im^2v^2l^2}{2I^2}
+\end{equation}
+\begin{equation}
+	1=\frac{ml^2}{I}
+\end{equation}
+С учетом $I=\frac{mL^2}{3}$
+\begin{equation}
+	\frac{mL^2}{3}=ml^2
+\end{equation}
+И окончательный ответ:
+\begin{equation}
+	l=\frac{L}{\sqrt{3}}
+\end{equation}
+\end{document}
